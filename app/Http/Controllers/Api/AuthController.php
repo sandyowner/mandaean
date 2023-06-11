@@ -34,20 +34,20 @@ class AuthController extends Controller
             $user = User::where('email',$request->email)->first();
             if($user->email_verified_at){
                 // $token = $user->createToken('usertoken')->plainTextToken;
-                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+                $token = $user->createToken('usertoken')->plainTextToken;
 
                 return response([
                     'status'=>true,
                     'message'=>'Signed in',
                     'data'=>$user,
-                    'token'=>$token->token
+                    'token'=>$token
                 ],201);
             }else{
-                $userId = Auth::id();
-                $status = DB::table('oauth_access_tokens')->where('user_id', $userId)->update([
-                    'revoked' => 1,
-                    'expires_at' => date('Y-m-d H:i:s'),
-                ]);
+                // $userId = Auth::id();
+                // $status = DB::table('personal_access_tokens')->where('user_id', $userId)->update([
+                //     'revoked' => 1,
+                //     'expires_at' => date('Y-m-d H:i:s'),
+                // ]);
                 return response([
                     'status'=>false,
                     'message'=>'Your email does not verified.',
@@ -84,7 +84,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'country_code' => $request->country_code,
-            'mobile_no' => $request->mobile_no
+            'mobile_no' => $request->mobile_no,
+            'profile' => 'assets/images/user.png'
         ]);
 
         User::where('id',$user->id)->update(['email_verified_at' => date('Y-m-d H:i:s')]);

@@ -24,4 +24,5 @@ Route::post('login', [AuthController::class,'login']);
 Route::post('signup', [AuthController::class,'singup']);
 Route::middleware('auth:sanctum')->group( function () {
     Route::post('profile', [UserController::class,'profile']);
+    Route::post('update-profile', [UserController::class,'updateProfile']);
 });
