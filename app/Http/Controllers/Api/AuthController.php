@@ -63,7 +63,7 @@ class AuthController extends Controller
     public function singup(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => 'required',
         ]);
 
@@ -79,6 +79,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => Hash::make($request->password)
         ]);
 
