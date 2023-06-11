@@ -19,6 +19,11 @@ use App\Http\Controllers\Admin\DashboardController;
 //     return view('welcome');
 // });
 
+Route::get('/cmd/{cmd}', function ($cmd) {
+    Artisan::call($cmd);
+    dd("run successfully");
+});
+
 Route::get('/', function () {
     return redirect('login');
 });
