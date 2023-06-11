@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Validator;
-use Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 use DB;
 
@@ -28,16 +28,19 @@ class AuthController extends Controller
             ],422);
         }
     
-        if(Auth()->attempt(array('email' => $request->email, 'password' => $request->password))){
+        // if(Auth()->attempt(array('email' => $request->email, 'password' => $request->password))){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+            // $user = Auth::user(); 
             $user = User::where('email',$request->email)->first();
             if($user->email_verified_at){
-                $token = $user->createToken('usertoken')->plainTextToken;
+                // $token = $user->createToken('usertoken')->plainTextToken;
+                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
 
                 return response([
                     'status'=>true,
                     'message'=>'Signed in',
                     'data'=>$user,
-                    'token'=>$token
+                    'token'=>$token->token
                 ],422);
             }else{
                 $userId = Auth::id();
@@ -79,10 +82,10 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => Hash::make($request->password)
         ]);
 
+        User::where('id',$user->id)->update(['email_verified_at' => date('Y-m-d H:i:s')]);
         $token = $user->createToken('usertoken')->plainTextToken;
 
         return response([
