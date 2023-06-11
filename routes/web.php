@@ -23,6 +23,11 @@ Route::get('/cmd/{cmd}', function ($cmd) {
     Artisan::call($cmd);
     dd("run successfully");
 });
+Route::get('composer-update', function () {echo Artisan::call('composer update');});
+Route::get('composer-install', function () {system('composer install');});
+Route::get('clear-cache', function () {echo Artisan::call('cache:clear');});
+Route::get('clear-config', function () {echo Artisan::call('config:clear');});
+Route::get('clear-route', function () {echo Artisan::call('route:clear');});
 
 Route::get('/', function () {
     return redirect('login');
