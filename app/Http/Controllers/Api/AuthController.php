@@ -41,7 +41,7 @@ class AuthController extends Controller
                     'message'=>'Signed in',
                     'data'=>$user,
                     'token'=>$token->token
-                ],422);
+                ],201);
             }else{
                 $userId = Auth::id();
                 $status = DB::table('oauth_access_tokens')->where('user_id', $userId)->update([
@@ -82,7 +82,9 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'country_code' => $request->country_code,
+            'mobile_no' => $request->mobile_no
         ]);
 
         User::where('id',$user->id)->update(['email_verified_at' => date('Y-m-d H:i:s')]);
@@ -93,7 +95,7 @@ class AuthController extends Controller
             'message'=>'Signed up',
             'data'=>$user,
             'token'=>$token
-        ],422);
+        ],201);
 
     }
 }
