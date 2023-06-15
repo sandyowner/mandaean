@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ContainerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,11 @@ use App\Http\Controllers\Api\UserController;
 
 Route::post('login', [AuthController::class,'login']);
 Route::post('signup', [AuthController::class,'singup']);
+Route::post('get-otp', [AuthController::class,'getOTP']);
+Route::post('verify-otp', [AuthController::class,'verifyOTP']);
+Route::post('forgot', [AuthController::class,'forgot']);
+Route::get('countries/insert', [ContainerController::class,'countriesInsert']);
+Route::get('countries', [ContainerController::class,'countries']);
 Route::middleware('auth:sanctum')->group( function () {
     Route::post('profile', [UserController::class,'profile']);
     Route::post('update-profile', [UserController::class,'updateProfile']);
