@@ -113,6 +113,52 @@ class AuthController extends Controller
 
     }
 
+    public function forgot(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status'=>false,
+                'message'=>$error,
+                'data'=>[]
+            ],422);
+        }
+
+        $user = User::where(['email'=>$request->email])->first();
+        if($user){
+            $token = Str::random(30);
+            User::where(['email'=> $request->email])->update([
+                'remember_token' => $token
+            ]);
+            
+            $email = $request->email;
+            $name = $request->name;
+            $template = 'emails.forgot';
+            $subject = 'Forgot Password for Mandaean Account.';
+            $data = [
+                'name' => $name,
+                'email' => $email,
+                'link'=> url('forgot-password').'/'. $token.'?email=' .urlencode($email)
+            ];
+            ___mail_sender($email,$name,$template,$data,$subject);
+
+            return response([
+                'status'=>true,
+                'message'=>'OTP send',
+                'data'=>$user
+            ],201);
+        }else{
+            return response([
+                'status'=>false,
+                'message'=>'User not found.',
+                'data'=>[]
+            ],422);
+        }
+    }
+    
     public function getOTP(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required',
@@ -182,82 +228,40 @@ class AuthController extends Controller
         }
     }
 
-    public function forgot(Request $request){
-        $validator = Validator::make($request->all(), [
-            'email' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $error = $validator->errors()->first();
-            return response([
-                'status'=>false,
-                'message'=>$error,
-                'data'=>[]
-            ],422);
-        }
-
-        $user = User::where(['email'=>$request->email])->first();
+    public function forgotPassword(Request $request, $token){
+        $user = User::where(['email'=>$request->email, 'remember_token'=> $token])->first();
         if($user){
-            // $otp = rand(1111,9999);
-            $otp = '1111';
-
-            User::where('email',$request->email)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
-
-            $email = $request->email;
-            $name = $request->name;
-            $template = 'emails.otp';
-            $subject = 'OTP for Account Verification.';
-            $data = [
-                'name' => $name,
-                'email' => $email,
-                'otp' => $otp
-            ];
-            ___mail_sender($email,$name,$template,$data,$subject);
-
-            return response([
-                'status'=>true,
-                'message'=>'OTP send',
-                'data'=>$user
-            ],201);
+            $data['title'] = 'Forgot';
+            $data['id'] = base64_encode($user->id);
+            $data['email'] = $user->email;
+            return view('front.forgot', $data);
         }else{
-            return response([
-                'status'=>false,
-                'message'=>'User not found.',
-                'data'=>[]
-            ],422);
+            return '<h1>Token is expired or Link not Found</h1>';
         }
     }
 
     public function updatePassword(Request $request){
+
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
-            'password' => 'required'
+            'password'=>'required|min:6|max:15|required_with:confirm_password|same:confirm_password',
+            'confirm_password'=>'required|min:6|max:15',
+        ],
+        [
+            'password.required' => 'Password field is required.',
+            'password.same' => 'Password and confirm password must match.'
+        ]);
+        if ($validator->fails())
+        {
+            return back()->with('error', $validator->errors()->first());
+        }
+
+        $password = Hash::make($request->password);
+        User::where('id', base64_decode($request->id))->update([
+            'password' => $password,
+            'remember_token' => NULL
         ]);
 
-        if ($validator->fails()) {
-            $error = $validator->errors()->first();
-            return response([
-                'status'=>false,
-                'message'=>$error,
-                'data'=>[]
-            ],422);
-        }
-
-        $user = User::where(['email'=>$request->email])->first();
-        if($user){
-            User::where('email',$request->email)->update(['password' => Hash::make($request->password)]);
-            return response([
-                'status'=>true,
-                'message'=>'Password updated.',
-                'data'=>[]
-            ],201);
-        }else{
-            return response([
-                'status'=>false,
-                'message'=>'User does not found.',
-                'data'=>[]
-            ],422);
-        }
+        return '<h1>Password updated successfully.</h1>';
     }
 
     public function verify(Request $request, $token){

@@ -26,7 +26,6 @@ Route::post('login', [AuthController::class,'login']);
 Route::post('forgot', [AuthController::class,'forgot']);
 Route::post('get-otp', [AuthController::class,'getOTP']);
 Route::post('verify-otp', [AuthController::class,'verifyOTP']);
-Route::post('update-password', [AuthController::class,'updatePassword']);
 Route::get('countries/insert', [ContainerController::class,'countriesInsert']);
 Route::get('countries', [ContainerController::class,'countries']);
 Route::middleware('auth:sanctum')->group( function () {
