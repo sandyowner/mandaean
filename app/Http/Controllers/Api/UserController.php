@@ -75,78 +75,12 @@ class UserController extends Controller
         $id = Auth::id();
         $user = User::where(['id'=>$id])->first();
         if($user){
-            // $otp = rand(1111,9999);
-            $otp = '1111';
-
-            User::where('email',$user->email)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
-
-            $email = $user->email;
-            $name = $user->name;
-            $template = 'emails.otp';
-            $subject = 'OTP for Account Deletion.';
-            $data = [
-                'name' => $name,
-                'email' => $email,
-                'otp' => $otp
-            ];
-            ___mail_sender($email,$name,$template,$data,$subject);
-
+            User::where('email',$user->email)->delete();
             return response([
                 'status'=>true,
-                'message'=>'OTP send',
+                'message'=>'Account Deleted.',
                 'data'=>[]
             ],201);
-        }else{
-            return response([
-                'status'=>false,
-                'message'=>'User not found.',
-                'data'=>[]
-            ],422);
-        }
-    }
-
-    public function deleteAccountOTP(Request $request){
-        $id = Auth::id();
-        $validator = Validator::make($request->all(), [
-            'otp' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $error = $validator->errors()->first();
-            return response([
-                'status'=>false,
-                'message'=>$error,
-                'data'=>[]
-            ],422);
-        }
-
-        $user = User::where(['id'=>$id])->first();
-        if($user){
-            $otp = $request->otp;
-            if($user->otp==$otp){
-                $currentTime = date('Y-m-d H:i:s');
-                $timeDiff = getTimeDifference($user->otp_time,$currentTime);
-                if($timeDiff<=10){
-                    User::where('email',$user->email)->delete();
-                    return response([
-                        'status'=>true,
-                        'message'=>'Account Deleted.',
-                        'data'=>[]
-                    ],422);
-                }else{
-                    return response([
-                        'status'=>false,
-                        'message'=>'OTP expired. Please try again.',
-                        'data'=>[]
-                    ],422);
-                }
-            }else{
-                return response([
-                    'status'=>false,
-                    'message'=>'Wrong OTP enter.',
-                    'data'=>[]
-                ],422);
-            }
         }else{
             return response([
                 'status'=>false,
