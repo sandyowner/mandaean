@@ -250,7 +250,7 @@ class AuthController extends Controller
                 'status'=>true,
                 'message'=>'Password updated.',
                 'data'=>[]
-            ],422);
+            ],201);
         }else{
             return response([
                 'status'=>false,
