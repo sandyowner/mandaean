@@ -31,4 +31,6 @@ Route::get('countries', [ContainerController::class,'countries']);
 Route::middleware('auth:sanctum')->group( function () {
     Route::post('profile', [UserController::class,'profile']);
     Route::post('update-profile', [UserController::class,'updateProfile']);
+    Route::post('delete-account', [UserController::class,'deleteAccount']);
+    Route::post('delete-account-otp', [UserController::class,'deleteAccountOTP']);
 });

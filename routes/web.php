@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::get('/', function () {
 
 Route::get('login', [LoginController::class, 'Login']);
 Route::post('login-data', [LoginController::class, 'index']);
+Route::get('verify/{token}', [AuthController::class,'verify']);
 
 Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
 {

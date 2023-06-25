@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Auth;
-use DB;
 
 class AuthController extends Controller
 {
@@ -16,7 +17,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -88,14 +89,26 @@ class AuthController extends Controller
             'profile' => 'assets/images/user.png'
         ]);
 
-        User::where('id',$user->id)->update(['email_verified_at' => date('Y-m-d H:i:s')]);
-        $token = $user->createToken('usertoken')->plainTextToken;
+        $token = Str::random(30);
+        User::where(['email'=> $request->email])->update([
+            'remember_token' => $token
+        ]);
+
+        $email = $request->email;
+        $name = $request->name;
+        $template = 'emails.signup';
+        $subject = 'Account is created on Mandaean';
+        $data = [
+            'name'=>$name,
+            'email'=> $email,
+            'link'=> url('verify').'/'. $token.'?email=' .urlencode($email)
+        ];
+        ___mail_sender($email,$name,$template,$data,$subject);
 
         return response([
             'status'=>true,
             'message'=>'Signed up',
-            'data'=>$user,
-            'token'=>$token
+            'data'=>$user
         ],201);
 
     }
@@ -147,6 +160,7 @@ class AuthController extends Controller
             $currentTime = date('Y-m-d H:i:s');
             $timeDiff = getTimeDifference($user->otp_time,$currentTime);
             if($timeDiff<=10){
+                User::where('email',$request->email)->update(['otp'=>null,'otp_time'=>null]);
                 return response([
                     'status'=>true,
                     'message'=>'OTP verified.',
@@ -166,17 +180,55 @@ class AuthController extends Controller
                 'data'=>[]
             ],422);
         }
-
-
-        User::where('email',$request->email)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
-        return response([
-            'status'=>true,
-            'message'=>'OTP send',
-            'data'=>[]
-        ],201);
     }
 
     public function forgot(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status'=>false,
+                'message'=>$error,
+                'data'=>[]
+            ],422);
+        }
+
+        $user = User::where(['email'=>$request->email])->first();
+        if($user){
+            // $otp = rand(1111,9999);
+            $otp = '1111';
+
+            User::where('email',$request->email)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
+
+            $email = $request->email;
+            $name = $request->name;
+            $template = 'emails.otp';
+            $subject = 'OTP for Account Verification.';
+            $data = [
+                'name' => $name,
+                'email' => $email,
+                'otp' => $otp
+            ];
+            ___mail_sender($email,$name,$template,$data,$subject);
+
+            return response([
+                'status'=>true,
+                'message'=>'OTP send',
+                'data'=>$user
+            ],201);
+        }else{
+            return response([
+                'status'=>false,
+                'message'=>'User not found.',
+                'data'=>[]
+            ],422);
+        }
+    }
+
+    public function updatePassword(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required'
@@ -205,6 +257,23 @@ class AuthController extends Controller
                 'message'=>'User does not found.',
                 'data'=>[]
             ],422);
+        }
+    }
+
+    public function verify(Request $request, $token){
+        $user = User::where('remember_token', $token)->where('email',$request->email)->first();
+        if($user)
+        {
+            if($user->email_verified_at){
+                return '<h1>Your account has been already verified.</h1>';
+            }else{
+                User::where('id',$user->id)->update(['email_verified_at' => date('Y-m-d H:i:s'), 'remember_token' => NULL]);
+                return '<h1>Your account has been verified.</h1>';
+            }
+        }
+        else
+        {
+            return '<h1>Token is expired or Link not Found</h1>';
         }
     }
 }

@@ -13,4 +13,16 @@ function getTimeDifference($from,$to)
     
     return (($years*365*24*60) + ($months*30*24*60) + ($days*24*60) + ($hours*60) + $minutes);
 }
+
+function ___mail_sender($email, $name, $template, $data, $subject)
+{
+    // config(['mail.host' => _getConfigurationByKey('smtp_server_host'), 'mail.port' => _getConfigurationByKey('smtp_port_number'), 'mail.username' => _getConfigurationByKey('smtp_uName'), 'mail.password' => _getConfigurationByKey('smtp_uPass')]);
+    config(['mail.host' => 'smtp.gmail.com', 'mail.port' => '587', 'mail.username' => 'mandaean2023@gmail.com', 'mail.password' => 'xtzpqsjphljnqjlo']);
+    
+    Illuminate\Support\Facades\Mail::send($template, $data, function ($message) use ($email, $name, $subject) {
+        $message->to($email, $name)->subject($subject);
+        $message->from('mandaean2023@gmail.com', 'Mandaean');
+        return 'success';
+    });
+}
 ?>
