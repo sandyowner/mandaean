@@ -59,7 +59,7 @@ class AuthController extends Controller
 
         return response([
             'status'=>false,
-            'message'=>'Login details are not valid',
+            'message'=>'Invalid credentials.',
             'data'=>[]
         ],422);
     }
@@ -86,7 +86,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'country_code' => $request->country_code,
             'mobile_no' => $request->mobile_no,
-            'profile' => 'assets/images/user.png'
+            'profile' => NULL
         ]);
 
         $token = Str::random(30);

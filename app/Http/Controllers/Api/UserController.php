@@ -15,7 +15,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user){
-            $user->profile = url('/').'/'.$user->profile;
+            $user->profile = ($user->profile)?url('/').'/'.$user->profile:NULL;
             return response([
                 'status'=>true,
                 'message'=>'User profile data.',
@@ -62,7 +62,7 @@ class UserController extends Controller
             $user->profile = $destinationPath.''.$file_name;
         }
         $user->save();
-        $user->profile = url('/').'/'.$user->profile;
+        $user->profile = $user->profile?url('/').'/'.$user->profile:NULL;
 
         return response([
             'status'=>true,
