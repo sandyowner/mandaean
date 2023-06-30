@@ -51,7 +51,7 @@ class AuthController extends Controller
                 // ]);
                 return response([
                     'status'=>false,
-                    'message'=>'Your email does not verified.',
+                    'message'=>'Please verify email.',
                     'data'=>[]
                 ],422);
             }
