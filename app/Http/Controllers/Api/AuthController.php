@@ -51,7 +51,7 @@ class AuthController extends Controller
                 // ]);
                 return response([
                     'status'=>false,
-                    'message'=>'Please verify email.',
+                    'message'=>'Please verify your email.',
                     'data'=>[]
                 ],422);
             }
@@ -147,7 +147,7 @@ class AuthController extends Controller
 
             return response([
                 'status'=>true,
-                'message'=>'OTP send',
+                'message'=>'Reset link send on mail.',
                 'data'=>$user
             ],201);
         }else{
