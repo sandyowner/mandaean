@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +45,5 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
 {
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('logout', [LoginController::class, 'logout']);
+    Route::resource('users', UsersController::class);
 });

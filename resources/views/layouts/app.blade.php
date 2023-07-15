@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="{{url('assets/images/favicon.ico')}}" />
   </head>
   <body>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container-scroller">
       <div class="row p-0 m-0 proBanner">
         <div class="col-md-12 p-0 m-0">
@@ -142,11 +143,97 @@
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item {{ (\Request::segment(1)=='users')?'active':'' }}">
+              <a class="nav-link" href="{{url('users')}}">
+                <span class="menu-title">User Management</span>
+                <i class="mdi mdi-account-group menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='information')?'active':'' }}">
+              <a class="nav-link" href="{{url('information')}}">
+                <span class="menu-title">Information Management</span>
+                <i class="mdi mdi-information menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='ritual')?'active':'' }}">
+              <a class="nav-link" href="{{url('ritual')}}">
+                <span class="menu-title">Ritual Management</span>
+                <i class="mdi mdi-hands-pray menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='news')?'active':'' }}">
+              <a class="nav-link" href="{{url('news')}}">
+                <span class="menu-title">Latest News Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='prayer')?'active':'' }}">
+              <a class="nav-link" href="{{url('prayer')}}">
+                <span class="menu-title">Prayer and Hymns Management</span>
+                <i class="mdi mdi-hands-pray menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='books')?'active':'' }}">
+              <a class="nav-link" href="{{url('books')}}">
+                <span class="menu-title">Holy Books Management</span>
+                <i class="mdi mdi-book-multiple menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='feedback')?'active':'' }}">
+              <a class="nav-link" href="{{url('feedback')}}">
+                <span class="menu-title">User Feedback Management</span>
+                <i class="mdi mdi-message-alert menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='advertisement')?'active':'' }}">
+              <a class="nav-link" href="{{url('advertisement')}}">
+                <span class="menu-title">Advertisement Inquiry Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
+              <a class="nav-link" href="{{url('product')}}">
+                <span class="menu-title">Product Inventory Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
+              <a class="nav-link" href="{{url('calender')}}">
+                <span class="menu-title">Calender Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='order')?'active':'' }}">
+              <a class="nav-link" href="{{url('order')}}">
+                <span class="menu-title">Order Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='payment')?'active':'' }}">
+              <a class="nav-link" href="{{url('payment')}}">
+                <span class="menu-title">Donation/Payment Transaction Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='referral')?'active':'' }}">
+              <a class="nav-link" href="{{url('referral')}}">
+                <span class="menu-title">Referral Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='notification')?'active':'' }}">
+              <a class="nav-link" href="{{url('notification')}}">
+                <span class="menu-title">Notification Management</span>
+                <i class="mdi mdi-users menu-icon"></i>
+              </a>
+            </li>
           </ul>
         </nav>
         @yield('content')
       </div>
     </div>
+    <script src="{{url('assets/js/jquery.min.js')}}"></script>
+    <script src="{{url('assets/js/jquery-ui.min.js')}}"></script>
     <script src="{{url('assets/vendors/js/vendor.bundle.base.js')}}"></script>
     <script src="{{url('assets/vendors/chart.js/Chart.min.js')}}"></script>
     <script src="{{url('assets/js/jquery.cookie.js')}}" type="text/javascript"></script>
@@ -155,5 +242,9 @@
     <script src="{{url('assets/js/misc.js')}}"></script>
     <script src="{{url('assets/js/dashboard.js')}}"></script>
     <script src="{{url('assets/js/todolist.js')}}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    @yield('scripts')
   </body>
 </html>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ContainerController;
+use App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,6 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('profile', [UserController::class,'profile']);
     Route::post('update-profile', [UserController::class,'updateProfile']);
     Route::post('delete-account', [UserController::class,'deleteAccount']);
+    Route::get('mandanism-list', [CategoryController::class,'MandanismList']);
+    Route::get('mandanism-detail/{id}', [CategoryController::class,'MandanismDetail']);
 });
