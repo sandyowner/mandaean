@@ -35,4 +35,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('delete-account', [UserController::class,'deleteAccount']);
     Route::get('mandanism-list', [CategoryController::class,'MandanismList']);
     Route::get('mandanism-detail/{id}', [CategoryController::class,'MandanismDetail']);
+    Route::get('latest-news-list', [CategoryController::class,'LatestNewsList']);
+    Route::get('latest-news-detail/{id}', [CategoryController::class,'LatestNewsDetail']);
+    Route::get('holy-book-list', [CategoryController::class,'HolyBookList']);
 });
