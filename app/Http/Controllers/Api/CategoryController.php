@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Mandanism;
 use App\Models\LatestNews;
 use App\Models\HolyBook;
+use App\Models\Ritual;
+use App\Models\Prayer;
 
 class CategoryController extends Controller
 {
@@ -77,5 +79,47 @@ class CategoryController extends Controller
             'data' => $data
         ],201);
     }
+
+    public function RitualsList(Request $request)
+    {
+        $data = Ritual::select('id','title')->where('status','active')->paginate(10);
+
+        return response([
+            'status' => true,
+            'message' => 'Rituals List.',
+            'data' => $data
+        ],201);
+    }
+
+    public function RitualsDetail($id)
+    {
+        $data = Ritual::find($id);
+        return response([
+            'status' => true,
+            'message' => 'Rituals Detail.',
+            'data' => $data
+        ],201);
+    } 
+
+    public function PrayerList(Request $request)
+    {
+        $data = Prayer::select('id','title','subtitle')->where('status','active')->paginate(10);
+
+        return response([
+            'status' => true,
+            'message' => 'Prayer List.',
+            'data' => $data
+        ],201);
+    }
+
+    public function PrayerDetail($id)
+    {
+        $data = Prayer::find($id);
+        return response([
+            'status' => true,
+            'message' => 'Prayer Detail.',
+            'data' => $data
+        ],201);
+    } 
 
 }

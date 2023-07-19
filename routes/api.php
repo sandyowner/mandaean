@@ -38,4 +38,8 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('latest-news-list', [CategoryController::class,'LatestNewsList']);
     Route::get('latest-news-detail/{id}', [CategoryController::class,'LatestNewsDetail']);
     Route::get('holy-book-list', [CategoryController::class,'HolyBookList']);
+    Route::get('rituals-list', [CategoryController::class,'RitualsList']);
+    Route::get('rituals-detail/{id}', [CategoryController::class,'RitualsDetail']);
+    Route::get('prayer-list', [CategoryController::class,'PrayerList']);
+    Route::get('prayer-detail/{id}', [CategoryController::class,'PrayerDetail']);
 });
