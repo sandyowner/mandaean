@@ -44,4 +44,5 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('prayer-list', [CategoryController::class,'PrayerList']);
     Route::get('prayer-detail/{id}', [CategoryController::class,'PrayerDetail']);
     Route::get('product-list', [ProductController::class,'ProductList']);
+    Route::get('product-detail/{id}', [ProductController::class,'ProductDetail']);
 });

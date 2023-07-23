@@ -21,4 +21,16 @@ class ProductController extends Controller
             'data' => $data
         ],201);   
     }
+
+    public function ProductDetail(Request $request, $id){
+        $data = Product::with(['images','colors','sizes', 'brands'])->where('status','active')->find($id);
+        foreach ($data->images as $k => $val) {
+            $val->image = url('/').'/'.$val->image;
+        }
+        return response([
+            'status' => true,
+            'message' => 'Product Detail.',
+            'data' => $data
+        ],201);   
+    }
 }
