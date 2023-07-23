@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ContainerController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +43,5 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('rituals-detail/{id}', [CategoryController::class,'RitualsDetail']);
     Route::get('prayer-list', [CategoryController::class,'PrayerList']);
     Route::get('prayer-detail/{id}', [CategoryController::class,'PrayerDetail']);
+    Route::get('product-list', [ProductController::class,'ProductList']);
 });
