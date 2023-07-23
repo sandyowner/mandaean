@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class HolyBook extends Model
 {
     use HasFactory;
+
+    protected $table = 'holy_books';
+
+    protected $guards = [];
 }

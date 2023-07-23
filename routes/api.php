@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ContainerController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('profile', [UserController::class,'profile']);
     Route::post('update-profile', [UserController::class,'updateProfile']);
     Route::post('delete-account', [UserController::class,'deleteAccount']);
+    
     Route::get('mandanism-list', [CategoryController::class,'MandanismList']);
     Route::get('mandanism-detail/{id}', [CategoryController::class,'MandanismDetail']);
     Route::get('latest-news-list', [CategoryController::class,'LatestNewsList']);
@@ -43,6 +45,9 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('rituals-detail/{id}', [CategoryController::class,'RitualsDetail']);
     Route::get('prayer-list', [CategoryController::class,'PrayerList']);
     Route::get('prayer-detail/{id}', [CategoryController::class,'PrayerDetail']);
+    
     Route::get('product-list', [ProductController::class,'ProductList']);
     Route::get('product-detail/{id}', [ProductController::class,'ProductDetail']);
+
+    Route::post('add-to-cart', [CartController::class, 'addToCart']);
 });
