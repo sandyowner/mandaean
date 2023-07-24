@@ -11,5 +11,5 @@ class Address extends Model
 
     protected $table = 'user_addresses';
 
-    protected $guards = [];
+    protected $fillable = ['user_id','name','mobile_no','first_address','second_address','state','city','postal_code','is_primary'];
 }

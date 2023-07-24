@@ -50,4 +50,5 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('product-detail/{id}', [ProductController::class,'ProductDetail']);
 
     Route::post('add-to-cart', [CartController::class, 'addToCart']);
+    Route::get('get-cart', [CartController::class, 'getCart']);
 });

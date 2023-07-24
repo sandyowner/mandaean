@@ -61,4 +61,36 @@ class CartController extends Controller
             'data'=>$cart
         ],201);
     }
+
+    public function getCart(Request $request){
+        $id = Auth::id();
+        $cart = Cart::with('address')
+            ->with(['detail' => function ($query) {
+                $query->with(['product' => function ($q) {
+                    $q->with('images');
+                }])->with(['color','size']);
+            }])
+            ->withCount('detail as items')
+            ->where(['user_id'=>$id, 'status'=>'active'])
+            ->first();
+
+        if($cart){
+            foreach ($cart->detail as $key => $value) {
+                foreach ($value->product->images as $k => $val) {
+                    $val->image = url('/').'/'.$val->image;
+                }
+            }
+            return response([
+                'status'=>true,
+                'message'=>'Cart Data.',
+                'data'=>$cart
+            ],201);
+        }else{
+            return response([
+                'status'=>false,
+                'message'=>'Cart Empty.',
+                'data'=>[]
+            ],201);
+        }
+    }
 }
