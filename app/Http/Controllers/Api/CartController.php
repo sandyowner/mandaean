@@ -153,4 +153,47 @@ class CartController extends Controller
             'data'=>[]
         ],201);
     }
+
+    public function userAddress(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'mobile_no' => 'required',
+            'first_address' => 'required',
+            'second_address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'postal_code' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status' => false,
+                'message' => $error,
+                'data' => []
+            ],422);
+        }
+
+        $id = Auth::id();
+        Address::where('user_id',$id)->update(['is_primary'=>'no']);
+        $address = Address::updateOrCreate([
+            'user_id'=>$id,
+            'mobile_no'=>$request->mobile_no,
+            'first_address'=>$request->first_address,
+            'second_address'=>$request->second_address,
+            'state'=>$request->state,
+            'city'=>$request->city,
+            'postal_code'=>$request->postal_code
+        ],[
+            'name' => $request->name,
+            'is_primary' => 'yes'
+        ]);
+        
+        Cart::where(['user_id'=>$id,'status'=>'active'])->update(['address_id'=>$address->id]);
+        
+        return response([
+            'status'=>true,
+            'message'=>'Address added.',
+            'data'=>$address
+        ],201);
+    }
 }
