@@ -93,4 +93,65 @@ class CartController extends Controller
             ],201);
         }
     }
+    
+    public function updateItem(Request $request){
+        $validator = Validator::make($request->all(), [
+            'item_id' => 'required',
+            'type' => 'required'
+        ]);
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status' => false,
+                'message' => $error,
+                'data' => []
+            ],422);
+        }
+
+        $id = Auth::id();
+        $cartDetail = CartDetail::find($request->item_id);
+        if($request->type=='add'){
+            $qty = $cartDetail->qty+1;
+            CartDetail::where('id',$request->item_id)->update(['qty'=>$qty]);
+        }else{
+            if($cartDetail->qty==1){
+                CartDetail::where('id',$request->item_id)->delete();
+            }else{
+                $qty = $cartDetail->qty-1;
+                CartDetail::where('id',$request->item_id)->update(['qty'=>$qty]);
+            }
+        }
+
+        $detail = CartDetail::find($request->item_id);
+
+        return response([
+            'status'=>true,
+            'message'=>'Item updated.',
+            'data'=>$detail
+        ],201);
+
+    }
+
+    public function deleteItem(Request $request){
+        $validator = Validator::make($request->all(), [
+            'item_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status' => false,
+                'message' => $error,
+                'data' => []
+            ],422);
+        }
+
+        $id = Auth::id();
+        CartDetail::where('id',$request->item_id)->delete();
+        
+        return response([
+            'status'=>true,
+            'message'=>'Item deleted.',
+            'data'=>[]
+        ],201);
+    }
 }
