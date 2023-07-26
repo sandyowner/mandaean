@@ -16,7 +16,6 @@ class CartController extends Controller
     public function addToCart(Request $request){
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
-            'qty' => 'required',
             'color' => 'required',
             'size' => 'required'
         ]);
@@ -40,18 +39,18 @@ class CartController extends Controller
 
             $cartDetail = CartDetail::where(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'size'=>$request->size, 'color'=>$request->color])->first();
             if($cartDetail){
-                CartDetail::where('id',$cartDetail->id)->update(['qty'=>$request->qty]);
+                CartDetail::where('id',$cartDetail->id)->update(['qty'=>1]);
             }else{
                 $product = Product::find($request->product_id);
-                CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>$request->qty]);
+                CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
             }
         }else{
             $cartDetail = CartDetail::where(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'size'=>$request->size, 'color'=>$request->color])->first();
             if($cartDetail){
-                CartDetail::where('id',$cartDetail->id)->update(['qty'=>$request->qty]);
+                CartDetail::where('id',$cartDetail->id)->update(['qty'=>1]);
             }else{
                 $product = Product::find($request->product_id);
-                CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>$request->qty]);
+                CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
             }
         }
 
