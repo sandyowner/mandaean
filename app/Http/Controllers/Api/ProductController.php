@@ -9,7 +9,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function ProductList(Request $request){
-        $data = Product::with(['images','colors','sizes', 'brands'])->where('status','active')->paginate(15);
+        $data = Product::with(['images','colors','sizes', 'brands'])->where('status','active')->get();
         foreach ($data as $key => $value) {
             foreach ($value->images as $k => $val) {
                 $val->image = url('/').'/'.$val->image;

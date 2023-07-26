@@ -14,7 +14,7 @@ class CategoryController extends Controller
 {
     public function MandanismList(Request $request)
     {
-        $data = Mandanism::select('id','title','group','description','created_at')->where('status','active')->paginate(10);
+        $data = Mandanism::select('id','title','group','description','created_at')->where('status','active')->get();
 
         foreach ($data as $key => $value) {
             // $data[$key]['description'] = \Illuminate\Support\Str::words(strip_tags($value->description), $limit = 15, $end = '...');
@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
     public function LatestNewsList(Request $request)
     {
-        $data = LatestNews::select('id','title','group','description','created_at')->where('status','active')->paginate(10);
+        $data = LatestNews::select('id','title','group','description','created_at')->where('status','active')->get();
 
         foreach ($data as $key => $value) {
             // $data[$key]['description'] = \Illuminate\Support\Str::words(strip_tags($value->description), $limit = 15, $end = '...');
@@ -66,7 +66,7 @@ class CategoryController extends Controller
 
     public function HolyBookList(Request $request)
     {
-        $data = HolyBook::select('id','title','description','image','url')->where('status','active')->paginate(10);
+        $data = HolyBook::select('id','title','description','image','url')->where('status','active')->get();
 
         foreach ($data as $key => $value) {
             $data[$key]['image'] = url('/').'/'.$value->image;
@@ -82,7 +82,7 @@ class CategoryController extends Controller
 
     public function RitualsList(Request $request)
     {
-        $data = Ritual::select('id','title')->where('status','active')->paginate(10);
+        $data = Ritual::select('id','title')->where('status','active')->get();
 
         return response([
             'status' => true,
@@ -103,7 +103,7 @@ class CategoryController extends Controller
 
     public function PrayerList(Request $request)
     {
-        $data = Prayer::select('id','title','subtitle')->where('status','active')->paginate(10);
+        $data = Prayer::select('id','title','subtitle')->where('status','active')->get();
 
         return response([
             'status' => true,
