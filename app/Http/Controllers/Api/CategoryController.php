@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Mandanism;
 use App\Models\LatestNews;
 use App\Models\HolyBook;
+use App\Models\Bookmark;
 use App\Models\Ritual;
 use App\Models\Prayer;
+use Auth;
+use Validator;
 
 class CategoryController extends Controller
 {
@@ -78,6 +81,46 @@ class CategoryController extends Controller
             'message' => 'Holy Book List.',
             'data' => $data
         ],201);
+    }
+
+    public function Bookmark(Request $request){
+        $validator = Validator::make($request->all(), [
+            'book_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status' => false,
+                'message' => $error,
+                'data' => []
+            ],422);
+        }
+
+        $id = Auth::id();
+
+        $data = Bookmark::where(['user_id'=>$id,'book_id'=>$request->book_id])->first();
+        if($data){
+            $bookmark = ($data->bookmark=='yes')?'no':'yes';
+            Bookmark::where(['user_id' => $id, 'book_id' => $request->book_id])->update(['bookmark' => $bookmark]);
+
+            return response([
+                'status' => true,
+                'message' => 'Bookmark saved.',
+                'data' => []
+            ],201);
+        }else{
+            Bookmark::create([
+                'user_id' => $id,
+                'book_id' => $request->book_id,
+                'bookmark' => 'yes'
+            ]);
+
+            return response([
+                'status' => true,
+                'message' => 'Bookmark saved.',
+                'data' => []
+            ],201);
+        }
     }
 
     public function RitualsList(Request $request)

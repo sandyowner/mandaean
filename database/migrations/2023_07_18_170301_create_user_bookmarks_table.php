@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_bookmarks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->bigInteger('book_id');
             $table->enum('bookmark',['yes','no'])->default('no');
             $table->timestamps();
         });
