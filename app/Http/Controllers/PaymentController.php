@@ -4,25 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use App\Models\Cart;
+use App\Models\Order;
 
 class PaymentController extends Controller
 {
     public function handlePayment(Request $request)
     {
+        $cartId = $request->cart_id;
+        $cart = Cart::with(['detail' => function ($query) {
+                $query->with(['product' => function ($q) {
+                    $q->with('images');
+                }])->with(['color','size']);
+            }])
+            ->where('id',$cartId)
+            ->first();
+        $amount = round((floatval($cart->total_amount)+floatval($cart->delivery_carge)),2);
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
         $response = $provider->createOrder([
             "intent" => "CAPTURE",
             "application_context" => [
-                "return_url" => route('success.payment'),
+                // "return_url" => route('success.payment'),
+                "return_url" => route('success.payment').'?cart_id='.$cartId,
                 "cancel_url" => route('cancel.payment'),
             ],
             "purchase_units" => [
                 0 => [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => "100.00"
+                        "value" => $amount
                     ]
                 ]
             ]
@@ -56,7 +69,40 @@ class PaymentController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
+
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+
+            $cartId = $request->cart_id;
+            $cart = Cart::with(['detail' => function ($query) {
+                    $query->with(['product' => function ($q) {
+                        $q->with('images');
+                    }])->with(['color','size']);
+                }])
+                ->where('id',$cartId)
+                ->first();
+            $amount = round((floatval($cart->total_amount)+floatval($cart->delivery_carge)),2);
+
+            $transaction = Transaction::create([
+                'transaction_id' => $response['id'],
+                'payment_method' => 'paypal',
+                'user_id' => $cart->user_id,
+                'amount' => $amount,
+                'response' => json_encode($response)
+            ]);
+
+            $orderId = 'ORD'.rand(1111111,9999999);
+            Order::create([
+                'order_number' => $orderId,
+                'transaction_id' => $transaction->id,
+                'user_id' => $cart->user_id,
+                'address_id' => $cart->address_id,
+                'total_amount' => $amount,
+                'status' => 'completed' 
+            ]);
+
+            Cart::where('id',$cartId)->delete();
+            CartDetail::where('cart_id',$cartId)->delete();
+
             return redirect()
                 ->route('create.payment')
                 ->with('success', 'Transaction complete.');

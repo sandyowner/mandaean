@@ -15,15 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('transaction_id');
             $table->string('payment_method');
-            $table->string('card_brand')->nullable();
-            $table->string('card_type')->nullable();
-            $table->string('card_last4')->nullable();
-            $table->string('receipt_url')->nullable();
+            $table->integer('user_id');
+            $table->double('amount',10,4);
             $table->text('response');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
