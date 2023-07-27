@@ -15,7 +15,7 @@ class CartDetail extends Model
 
     public function product()
     {
-        return $this->hasOne(Product::class, 'id', 'product_id')->select('id','name');
+        return $this->hasOne(Product::class, 'id', 'product_id')->select('id','name','category');
     }
 
     public function color()

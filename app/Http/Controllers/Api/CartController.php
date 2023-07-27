@@ -78,6 +78,7 @@ class CartController extends Controller
                 foreach ($value->product->images as $k => $val) {
                     $val->image = url('/').'/'.$val->image;
                 }
+                $value->delivery_date = 'Delivery by '.date('D M d');
             }
             return response([
                 'status'=>true,
@@ -145,7 +146,9 @@ class CartController extends Controller
         }
 
         $id = Auth::id();
-        CartDetail::where('id',$request->item_id)->delete();
+        foreach ($request->item_id as $key => $value) {
+            CartDetail::where('id',$request->item_id)->delete();
+        }
         
         return response([
             'status'=>true,
