@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ContainerController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,6 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('update-item', [CartController::class, 'updateItem']);
     Route::post('delete-item', [CartController::class, 'deleteItem']);
     Route::post('user-address', [CartController::class, 'userAddress']);
+    Route::get('order-history', [OrderController::class, 'orderHistory']);
+    Route::get('order-detail/{id}', [OrderController::class, 'orderDetail']);
 });

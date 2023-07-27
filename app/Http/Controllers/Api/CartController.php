@@ -90,7 +90,7 @@ class CartController extends Controller
                 'status'=>false,
                 'message'=>'Cart Empty.',
                 'data'=>[]
-            ],201);
+            ],422);
         }
     }
     
