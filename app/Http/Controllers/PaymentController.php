@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\Cart;
+use App\Models\CartDetail;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Transaction;
 
 class PaymentController extends Controller
 {
@@ -91,7 +94,7 @@ class PaymentController extends Controller
             ]);
 
             $orderId = 'ORD'.rand(1111111,9999999);
-            Order::create([
+            $order = Order::create([
                 'order_number' => $orderId,
                 'transaction_id' => $transaction->id,
                 'user_id' => $cart->user_id,
@@ -99,6 +102,17 @@ class PaymentController extends Controller
                 'total_amount' => $amount,
                 'status' => 'completed' 
             ]);
+
+            foreach ($cart->detail as $key => $value) {
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $value->product_id,
+                    'price' => $value->price,
+                    'qty' => $value->qty,
+                    'color' => $value->color,
+                    'size' => $value->size
+                ]);
+            }
 
             Cart::where('id',$cartId)->delete();
             CartDetail::where('cart_id',$cartId)->delete();

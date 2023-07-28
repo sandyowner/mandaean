@@ -42,7 +42,7 @@ class CartController extends Controller
                 CartDetail::where('id',$cartDetail->id)->update(['qty'=>1]);
             }else{
                 $product = Product::find($request->product_id);
-                CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
+                $cartDetail = CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
             }
         }else{
             $cartDetail = CartDetail::where(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'size'=>$request->size, 'color'=>$request->color])->first();
@@ -50,9 +50,16 @@ class CartController extends Controller
                 CartDetail::where('id',$cartDetail->id)->update(['qty'=>1]);
             }else{
                 $product = Product::find($request->product_id);
-                CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
+                $cartDetail = CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
             }
         }
+
+        $amount = 0;
+        $items = CartDetail::where('cart_id',$cartDetail->cart_id)->get();
+        foreach($items as $item){
+            $amount += $item->price*$item->qty;
+        }
+        Cart::where(['id'=>$cartDetail->cart_id])->update(['total_amount'=>$amount]);
 
         return response([
             'status'=>true,
@@ -124,6 +131,13 @@ class CartController extends Controller
 
         $detail = CartDetail::find($request->item_id);
 
+        $amount = 0;
+        $items = CartDetail::where('cart_id',$detail->cart_id)->get();
+        foreach($items as $item){
+            $amount += $item->price*$item->qty;
+        }
+        Cart::where(['id'=>$detail->cart_id])->update(['total_amount'=>$amount]);
+
         return response([
             'status'=>true,
             'message'=>'Item updated.',
@@ -150,6 +164,14 @@ class CartController extends Controller
             CartDetail::where('id',$request->item_id)->delete();
         }
         
+        $cart = Cart::where(['user_id'=>$id,'status'=>'active'])->first();
+        $amount = 0;
+        $items = CartDetail::where('cart_id',$cart->id)->get();
+        foreach($items as $item){
+            $amount += $item->price*$item->qty;
+        }
+        Cart::where(['id'=>$cart->id])->update(['total_amount'=>$amount]);
+
         return response([
             'status'=>true,
             'message'=>'Item deleted.',
