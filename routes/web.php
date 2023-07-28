@@ -53,7 +53,8 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
 Route::controller(PaymentController::class)
     ->prefix('paypal')
     ->group(function () {
-        Route::view('payment', 'paypal.index')->name('create.payment');
+        Route::view('success', 'paypal.success')->name('paypal.success');
+        Route::view('error', 'paypal.error')->name('paypal.error');
         Route::get('handle-payment', 'handlePayment')->name('make.payment');
         Route::get('cancel-payment', 'paymentCancel')->name('cancel.payment');
         Route::get('payment-success', 'paymentSuccess')->name('success.payment');

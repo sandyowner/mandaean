@@ -54,7 +54,7 @@ class PaymentController extends Controller
                 ->with('error', 'Something went wrong.');
         } else {
             return redirect()
-                ->route('create.payment')
+                ->route('paypal.error')
                 ->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }
@@ -62,7 +62,7 @@ class PaymentController extends Controller
     public function paymentCancel()
     {
         return redirect()
-            ->route('create.payment')
+            ->route('paypal.error')
             ->with('error', $response['message'] ?? 'You have canceled the transaction.');
     }
 
@@ -118,11 +118,11 @@ class PaymentController extends Controller
             CartDetail::where('cart_id',$cartId)->delete();
 
             return redirect()
-                ->route('create.payment')
+                ->route('paypal.success')
                 ->with('success', 'Transaction complete.');
         } else {
             return redirect()
-                ->route('create.payment')
+                ->route('paypal.error')
                 ->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }
