@@ -25,6 +25,13 @@ class OrderController extends Controller
             ->get();
 
         if(count($orders)>0){
+            foreach ($orders as $key => $value) {
+                foreach ($value->detail as $val) {
+                    foreach ($val->product->images as $image) {
+                        $image->image = url('/').'/'.$image->image;
+                    }
+                }
+            }
             return response([
                 'status'=>true,
                 'message'=>'Order Data.',
