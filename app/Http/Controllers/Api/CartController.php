@@ -160,17 +160,22 @@ class CartController extends Controller
         }
 
         $id = Auth::id();
-        foreach ($request->item_id as $key => $value) {
-            CartDetail::where('id',$request->item_id)->delete();
+        $items_ids = json_decode($request->item_id,true);
+        foreach ($items_ids as $key => $value) {
+            CartDetail::where('id',$value)->delete();
         }
         
         $cart = Cart::where(['user_id'=>$id,'status'=>'active'])->first();
-        $amount = 0;
         $items = CartDetail::where('cart_id',$cart->id)->get();
-        foreach($items as $item){
-            $amount += $item->price*$item->qty;
+        if(count($items)>0){
+            $amount = 0;
+            foreach($items as $item){
+                $amount += $item->price*$item->qty;
+            }
+            Cart::where(['id'=>$cart->id])->update(['total_amount'=>$amount]);
+        }else{
+            Cart::where(['id'=>$cart->id])->delete();
         }
-        Cart::where(['id'=>$cart->id])->update(['total_amount'=>$amount]);
 
         return response([
             'status'=>true,
