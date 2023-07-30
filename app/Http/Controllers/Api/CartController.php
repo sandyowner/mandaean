@@ -182,6 +182,7 @@ class CartController extends Controller
     public function userAddress(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'code' => 'required',
             'mobile_no' => 'required',
             'first_address' => 'required',
             'second_address' => 'required',
@@ -202,6 +203,7 @@ class CartController extends Controller
         Address::where('user_id',$id)->update(['is_primary'=>'no']);
         $address = Address::updateOrCreate([
             'user_id'=>$id,
+            'code'=>$request->code,
             'mobile_no'=>$request->mobile_no,
             'first_address'=>$request->first_address,
             'second_address'=>$request->second_address,
