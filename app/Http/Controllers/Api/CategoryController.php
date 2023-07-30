@@ -69,12 +69,16 @@ class CategoryController extends Controller
 
     public function HolyBookList(Request $request)
     {
+        $id = Auth::id();
         $data = HolyBook::select('id','title','description','image','url')->where('status','active')->get();
 
         foreach ($data as $key => $value) {
             $data[$key]['image'] = url('/').'/'.$value->image;
             $data[$key]['url'] = url('/').'/'.$value->url;
-            $data[$key]['bookmark'] = 'no';
+
+            $book = Bookmark::where(['user_id'=>$id,'book_id'=>$value->id])->first();
+            
+            $data[$key]['bookmark'] = $book?'yes':'no';
         }
         return response([
             'status' => true,
