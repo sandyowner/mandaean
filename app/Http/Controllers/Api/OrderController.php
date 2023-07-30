@@ -47,23 +47,30 @@ class OrderController extends Controller
         }
     }
 
-    public function orderDetail(Request $request, $id){
+    public function orderDetail(Request $request, $orderid){
         $id = Auth::id();
-        $orders = Order::with('address')
+        $order = Order::with('address')
             ->with(['detail' => function ($query) {
                 $query->with(['product' => function ($q) {
                     $q->with('images');
                 }])->with(['color','size']);
             }])
             ->withCount('detail as items')
-            ->where('id',$id)
-            ->get();
+            ->where('id',$orderid)
+            ->first();
 
-        if(count($orders)>0){
+        if($order){
+            foreach ($order->detail as $val) {
+                foreach ($val->product->images as $image) {
+                    $imgPath = str_replace(url('/').'/', '', $image->image);
+                    $image->image = url('/').'/'.$imgPath;
+                }
+            }
+
             return response([
                 'status'=>true,
                 'message'=>'Order Data.',
-                'data'=>$orders
+                'data'=>$order
             ],201);
         }else{
             return response([
