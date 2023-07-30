@@ -28,7 +28,8 @@ class OrderController extends Controller
             foreach ($orders as $key => $value) {
                 foreach ($value->detail as $val) {
                     foreach ($val->product->images as $image) {
-                        $image->image = url('/').'/'.$image->image;
+                        $imgPath = str_replace(url('/').'/', '', $image->image);
+                        $image->image = url('/').'/'.$imgPath;
                     }
                 }
             }
