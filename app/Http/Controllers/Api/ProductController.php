@@ -10,11 +10,20 @@ class ProductController extends Controller
 {
     public function ProductList(Request $request){
         $search = $request->search;
+        $filter = $request->filter;
         $data = Product::with(['images','colors','sizes', 'brands'])
             ->where('status','active');
         if($search){
             $data = $data->where('name', 'LIKE', '%'.$search.'%')
                 ->orWhere('price', 'LIKE', '%'.$search.'%');
+        }
+        if($filter){
+            if($filter==3){
+                $data = $data->orderBy('price','asc');
+            }
+            else if($filter==4){
+                $data = $data->orderBy('price','desc');
+            }
         }
         $data = $data->get();
 
