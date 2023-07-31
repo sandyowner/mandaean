@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use Validator;
+use Hash;
 
 class UserController extends Controller
 {
@@ -69,6 +70,51 @@ class UserController extends Controller
             'message'=>'User profile data updated.',
             'data'=>$user
         ],201);
+    }
+
+    public function changePassword(Request $request){
+        $id = Auth::id();
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status'=>false,
+                'message'=>$error,
+                'data'=>[]
+            ],422);
+        }
+
+        $oldPass = $request->old_password;
+        $newPass = $request->new_password;
+        $user = User::find($id);
+        
+        if (!$user) {
+            return response([
+                'status'=>false,
+                'message'=>'User not found.',
+                'data'=>[]
+            ],422);
+        }
+        if (Hash::check($oldPass, $user->password)) {
+            $user->password = Hash::make($newPass);
+            $user->save();
+            
+            return response([
+                'status'=>true,
+                'message'=>'Password changed successfully.',
+                'data'=>$user
+            ],201);
+        }else{
+            return response([
+                'status'=>false,
+                'message'=>'Old password does not match.',
+                'data'=>[]
+            ],422);
+        }
     }
 
     public function deleteAccount(Request $request){

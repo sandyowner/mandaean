@@ -35,6 +35,7 @@ Route::get('countries', [ContainerController::class,'countries']);
 Route::middleware('auth:sanctum')->group( function () {
     Route::post('profile', [UserController::class,'profile']);
     Route::post('update-profile', [UserController::class,'updateProfile']);
+    Route::post('change-password', [UserController::class,'changePassword']);
     Route::post('delete-account', [UserController::class,'deleteAccount']);
     
     Route::get('mandanism-list', [CategoryController::class,'MandanismList']);
