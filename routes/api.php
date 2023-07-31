@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\BaptismController;
+use App\Http\Controllers\Api\AdvertismentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,4 +61,6 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('user-address', [CartController::class, 'userAddress']);
     Route::get('order-history', [OrderController::class, 'orderHistory']);
     Route::get('order-detail/{id}', [OrderController::class, 'orderDetail']);
+    Route::post('book-baptism', [BaptismController::class, 'BookBaptism']);
+    Route::post('place-advertisment', [AdvertismentController::class, 'PlaceAdvertisment']);
 });
