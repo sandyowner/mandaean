@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\WebviewController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -37,6 +38,7 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('static-page-app', [WebviewController::class, 'app_term']);
 Route::get('login', [LoginController::class, 'Login']);
 Route::post('login-data', [LoginController::class, 'index']);
 Route::get('verify/{token}', [AuthController::class,'verify']);

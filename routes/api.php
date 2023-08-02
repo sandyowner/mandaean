@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\BaptismController;
 use App\Http\Controllers\Api\AdvertismentController;
+use App\Http\Controllers\Api\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +64,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('order-detail/{id}', [OrderController::class, 'orderDetail']);
     Route::post('book-baptism', [BaptismController::class, 'BookBaptism']);
     Route::post('place-advertisment', [AdvertismentController::class, 'PlaceAdvertisment']);
+    Route::get('notification-list', [NotificationController::class, 'NotificationList']);
+    Route::post('read-notification', [NotificationController::class, 'ReadNotification']);
+    Route::post('delete-notification', [NotificationController::class, 'DeleteNotification']);
 });
