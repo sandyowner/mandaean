@@ -22,15 +22,15 @@
                 <form class="forms-sample">
                     <div class="form-group col-sm-6">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{old('name')}}">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{old('name',$data['user']->name)}}">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail3">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{old('name')}}">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{old('name',$data['user']->email)}}">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword4">Mobile</label>
-                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile Number" value="{{old('name')}}">
+                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Mobile Number" value="{{old('name',$data['user']->mobile_no)}}">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleSelectGender">Gender</label>

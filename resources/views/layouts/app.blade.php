@@ -26,8 +26,8 @@
       </div>
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="{{url('dashboard')}}"><img src="{{url('assets/images/logo.svg')}}" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="{{url('dashboard')}}"><img src="{{url('assets/images/logo-mini.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="{{url('dashboard')}}">Mandaean<img src="https://mandaean.org.au/wp-content/uploads/2021/07/Mandean-Darfesh-Home-Page.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="{{url('dashboard')}}"><img src="https://mandaean.org.au/wp-content/uploads/2021/07/Mandean-Darfesh-Home-Page.png" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -100,7 +100,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="{{url('assets/images/faces/face1.jpg')}}" alt="image">
+                  <img src="{{url('uploads/admin.png')}}" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
@@ -127,7 +127,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="{{url('assets/images/faces/face1.jpg')}}" alt="profile">
+                  <img src="{{url('uploads/admin.png')}}" alt="profile">
                   <span class="login-status online"></span>
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
@@ -229,7 +229,14 @@
             </li>
           </ul>
         </nav>
-        @yield('content')
+        <div class="main-panel">
+          @yield('content')
+          <footer class="footer">
+            <div class="container-fluid d-flex justify-content-between">
+              <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">2023 © Copyright Mandaean Association of Australia. All rights reserved.</span>
+            </div>
+          </footer>
+        </div>
       </div>
     </div>
     <script src="{{url('assets/js/jquery.min.js')}}"></script>

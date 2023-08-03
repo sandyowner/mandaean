@@ -3,8 +3,7 @@
 @section('pagetitle','Users')
 @section('sort_name',$data['sort_name'])
 @section('content')
-<div class="main-panel">
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <div class="page-header">
       <h3 class="page-title">Users Management</h3>
       <nav aria-label="breadcrumb">
@@ -36,42 +35,32 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="warning-modal reward-modal">
-        <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <input type="hidden" name="id" id="id">
-                    <input type="hidden" name="url" id="url">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="warning-modal reward-modal">
+    <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="url" id="url">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <div class="warning-content">
+                        Alert!
                     </div>
-                    <div class="modal-body text-center p-0">
-                        <div class="warning-content">
-                            Alert!
-                        </div>
 
-                        <h2 class="my-5">Are you sure want to delete?</h2>
+                    <h2 class="my-5">Are you sure want to delete?</h2>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancle" data-bs-dismiss="modal">Cancel</button>
-                        <a href="javascript:void(0)" type="button" class="btn btn-proceed" onclick="DeleteRecord()" >Proceed</a>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancle" data-bs-dismiss="modal">Cancel</button>
+                    <a href="javascript:void(0)" type="button" class="btn btn-proceed" onclick="DeleteRecord()" >Proceed</a>
                 </div>
             </div>
         </div>
     </div>
-  <!-- content-wrapper ends -->
-  <!-- partial:../../partials/_footer.html -->
-  <footer class="footer">
-    <div class="container-fluid d-flex justify-content-between">
-      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
-      <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
-    </div>
-  </footer>
-  <!-- partial -->
 </div>
 @endsection
 @section('scripts')

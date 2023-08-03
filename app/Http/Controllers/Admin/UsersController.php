@@ -57,7 +57,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $adminuser = session()->get('adminuser');
+        $data['sort_name'] = $adminuser->name;
+        return view('admin.users.create',['data'=>$data]);
     }
 
     /**
@@ -81,7 +83,10 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $adminuser = session()->get('adminuser');
+        $data['sort_name'] = $adminuser->name;
+        $data['user'] = User::find($id);
+        return view('admin.users.edit',['data'=>$data]);
     }
 
     /**
