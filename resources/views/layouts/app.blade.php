@@ -249,6 +249,7 @@
     <script src="{{url('assets/js/misc.js')}}"></script>
     <script src="{{url('assets/js/dashboard.js')}}"></script>
     <script src="{{url('assets/js/todolist.js')}}"></script>
+    <script src="{{url('assets/js/file-upload.js')}}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>

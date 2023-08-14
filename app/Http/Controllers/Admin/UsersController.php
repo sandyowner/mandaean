@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\User;
+use Validator;
+use Hash;
 
 class UsersController extends Controller
 {
@@ -67,7 +69,44 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:200',
+            'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i|unique:users',
+            'country_code' => 'required',
+            'mobile_no' => 'required',
+            'gender' => 'required',
+            'photo' => 'required'
+        ]);
+ 
+        if ($validator->fails())
+        {
+            $messages = $validator->messages();
+            return back()->withInput()->withErrors($messages);
+        }else{
+            $password = rand_string(6);
+            $user = new User();
+            $user['name'] = $request->name;
+            $user['email'] = $request->email;
+            $user['gender'] = $request->gender;
+            $user['password'] = Hash::make($password);
+            $user['country_code'] = $request->country_code;
+            $user['mobile_no'] = $request->mobile_no;
+            $user['email_verified_at'] = date('Y-m-d H:i:s');
+
+            if ($request->hasFile('photo'))
+            {
+                // $destinationPath = 'public/uploads/';
+                $destinationPath = 'uploads/';
+                $file = $request->file('photo');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $user['profile'] = $imageName;
+            }
+    
+            $user->save();
+            return redirect('users')->with('message', 'Record Added!');
+        }
     }
 
     /**
@@ -94,7 +133,40 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:200',
+            'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i|unique:users,email,'.$id.',id',
+            'country_code' => 'required',
+            'mobile_no' => 'required',
+            'gender' => 'required'
+        ]);
+ 
+        if ($validator->fails())
+        {
+            $messages = $validator->messages();
+            return back()->withInput()->withErrors($messages);
+        }else{
+            $user = User::find($id);
+            $user['name'] = $request->name;
+            $user['email'] = $request->email;
+            $user['gender'] = $request->gender;
+            $user['country_code'] = $request->country_code;
+            $user['mobile_no'] = $request->mobile_no;
+
+            if ($request->hasFile('photo'))
+            {
+                // $destinationPath = 'public/uploads/';
+                $destinationPath = 'uploads/';
+                $file = $request->file('photo');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $user['profile'] = $imageName;
+            }
+    
+            $user->save();
+            return redirect('users')->with('message', 'Record Updated!');
+        }
     }
 
     /**
@@ -102,6 +174,6 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return User::where('id',$id)->delete();
     }
 }

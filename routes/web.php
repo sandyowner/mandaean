@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WebviewController;
+use App\Http\Controllers\Admin\RitualController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -50,6 +51,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('logout', [LoginController::class, 'logout']);
     Route::resource('users', UsersController::class);
+    Route::resource('ritual', RitualController::class);
 });
 
 Route::controller(PaymentController::class)
