@@ -132,4 +132,15 @@ class CalenderController extends Controller
             'data' => []
         ],201);
     }
+
+    public function DeleteAllReminder(Request $request){
+        $id = Auth::id();
+
+        $reminder = EventReminder::where('user_id',$id)->delete();
+        return response([
+            'status' => true,
+            'message' => 'All reminders deleted.',
+            'data' => []
+        ],201);
+    }
 }

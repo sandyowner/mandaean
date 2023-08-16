@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\BaptismController;
 use App\Http\Controllers\Api\AdvertismentController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\CalenderController;
 
 /*
@@ -79,7 +80,10 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('donation-event-list', [EventController::class, 'DonationEventList']);
     Route::get('event-detail/{id}', [EventController::class, 'EventDetail']);
     
+    Route::post('search', [SearchController::class, 'Search']);
+
     Route::post('religious-occasions', [CalenderController::class, 'ReligiousOccasions']);
     Route::post('choose-calender', [CalenderController::class, 'ChooseCalender']);
     Route::post('set-event-reminder', [CalenderController::class, 'SetEventReminder']);
+    Route::post('delete-all-reminder', [CalenderController::class, 'DeleteAllReminder']);
 });
