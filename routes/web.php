@@ -7,6 +7,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WebviewController;
 use App\Http\Controllers\Admin\RitualController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\PrayerController;
+use App\Http\Controllers\Admin\MandanismController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -51,7 +54,10 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('logout', [LoginController::class, 'logout']);
     Route::resource('users', UsersController::class);
+    Route::resource('mandanism', MandanismController::class);
     Route::resource('ritual', RitualController::class);
+    Route::resource('news', NewsController::class);
+    Route::resource('prayer', PrayerController::class);
 });
 
 Route::controller(PaymentController::class)

@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Ritual')
-@section('pagetitle','Ritual')
+@section('title','Latest News')
+@section('pagetitle','Latest News')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Ritual Management</h3>
+      <h3 class="page-title">Latest News Management</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{{url('ritual/create')}}" title="Add">
+            <a href="{{url('news/create')}}" title="Add">
               <label class="badge badge-info">+ Add</label>
             </a>
           </li>
@@ -20,11 +20,11 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <table class="table table-striped" id="ritual-table">
+            <table class="table table-striped" id="news-table">
               <thead>
                 <tr>
                   <th> Title </th>
-                  <th> Status </th>
+                  <th> Group </th>
                   <th> Action </th>
                 </tr>
               </thead>
@@ -63,28 +63,20 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    var oTable = $('#ritual-table').DataTable({
+    var oTable = $('#news-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: "{{url('ritual')}}",
+            url: "{{url('news')}}",
             data: function (d) {
                 d.search = "{{$data['filter']}}";
             }
         },
         columns: [
             {data: 'title', name: 'title'},
-            {data: 'status', name: 'status'},
+            {data: 'group', name: 'group'},
             {data: 'action', name: 'action', orderable:false, searchable:false}
         ],
-        // columnDefs: [
-        //     {
-        //         "targets":[1],
-        //         "render": function(data) {
-        //             return data[0].toUpperCase() + data.slice(1);
-        //         }
-        //     }
-        // ],
     });
     $('.dataTables_filter').hide();
     

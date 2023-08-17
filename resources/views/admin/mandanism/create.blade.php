@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Ritual')
-@section('pagetitle','Ritual')
+@section('title','Mandanism')
+@section('pagetitle','Mandanism')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Create Ritual</h3>
+      <h3 class="page-title">Create Mandanism</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{{url('ritual')}}" title="Back">
+            <a href="{{url('mandanism')}}" title="Back">
               <label><- Back</label>
             </a>
           </li>
@@ -19,9 +19,22 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <form class="forms-sample" method="POST" action="{{route('ritual.store')}}" enctype='multipart/form-data'>
+                <form class="forms-sample" method="POST" action="{{route('mandanism.store')}}" enctype='multipart/form-data'>
                     @csrf
                     <h4 align="center">English Language</h4><br/>
+                    <div class="form-group col-sm-12">
+                        <label>Banner Image</label>
+                        <input type="file" name="image" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                            </span>
+                        </div>
+                        @error('image')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
                     <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Title</label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{old('title')}}">
@@ -30,8 +43,22 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Group</label>
+                        <input type="text" class="form-control" id="group" name="group" placeholder="Group" value="{{old('group')}}">
+                        @error('group')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" placeholder="Date" value="{{old('date')}}">
+                        @error('date')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputEmail3">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Description" rows="5">{{old('description')}}</textarea>
+                        <textarea class="form-control" id="description" name="description" placeholder="Description" rows="4">{{old('description')}}</textarea>
                         @error('description')
                             <p style="color: red">{{$message}}</p>
                         @enderror
@@ -45,8 +72,15 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Group</label>
+                        <input type="text" class="form-control" id="ar_group" name="ar_group" placeholder="Group" value="{{old('ar_group')}}">
+                        @error('ar_group')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputEmail3">Description</label>
-                        <textarea class="form-control" id="ar_description" name="ar_description" placeholder="Description" rows="5">{{old('ar_description')}}</textarea>
+                        <textarea class="form-control" id="ar_description" name="ar_description" placeholder="Description" rows="4">{{old('ar_description')}}</textarea>
                         @error('ar_description')
                             <p style="color: red">{{$message}}</p>
                         @enderror
@@ -60,14 +94,21 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Group</label>
+                        <input type="text" class="form-control" id="pe_group" name="pe_group" placeholder="Group" value="{{old('pe_group')}}">
+                        @error('pe_group')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputEmail3">Description</label>
-                        <textarea class="form-control" id="pe_description" name="pe_description" placeholder="Description" rows="5">{{old('pe_description')}}</textarea>
+                        <textarea class="form-control" id="pe_description" name="pe_description" placeholder="Description" rows="4">{{old('pe_description')}}</textarea>
                         @error('pe_description')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
                     <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-                    <a href="{{url('ritual')}}" class="btn btn-light">Cancel</a>
+                    <a href="{{url('mandanism')}}" class="btn btn-light">Cancel</a>
                 </form>
             </div>
         </div>

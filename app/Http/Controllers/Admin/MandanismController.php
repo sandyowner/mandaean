@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use App\Models\Ritual;
+use App\Models\Mandanism;
 use Validator;
 use Hash;
 
-class RitualController extends Controller
+class MandanismController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,11 @@ class RitualController extends Controller
         $data['filter'] = $request->filter;
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        $dataList = Ritual::orderBy('id','desc');
+        $dataList = Mandanism::orderBy('id','desc');
         $search = $request->search;
         if($search){
             $dataList->where('title', 'LIKE', '%'.$search.'%')
+                ->orWhere('group', 'LIKE', '%'.$search.'%')
                 ->orWhere('description', 'LIKE', '%'.$search.'%');
         }
         $dataList = $dataList->get();
@@ -34,16 +35,16 @@ class RitualController extends Controller
                 })
                 ->addColumn('action', function($row){
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';
-                    $btn = '<a href="'.route('ritual.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
+                    $btn = '<a href="'.route('mandanism.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
                     $delimg = asset('/').'public/assets/images/dlt-icon.png';
-                    $btn .= '<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="deldata" id="'.$row->id.'" title="Delete" onclick=\'setData('.$row->id.',"'.route('ritual.destroy',$row->id).'");\'><label class="badge badge-danger">Delete</label></a>';
+                    $btn .= '<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="deldata" id="'.$row->id.'" title="Delete" onclick=\'setData('.$row->id.',"'.route('mandanism.destroy',$row->id).'");\'><label class="badge badge-danger">Delete</label></a>';
                     return $btn;
                 })
                 ->rawColumns(['description','action'])
                 ->make(true);
         }
 
-        return view('admin.ritual.index',['data'=>$data]);
+        return view('admin.mandanism.index',['data'=>$data]);
     }
 
     /**
@@ -53,7 +54,7 @@ class RitualController extends Controller
     {
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        return view('admin.ritual.create',['data'=>$data]);
+        return view('admin.mandanism.create',['data'=>$data]);
     }
 
     /**
@@ -63,15 +64,22 @@ class RitualController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:200',
+            'group' => 'required',
             'description' => 'required',
+            'date' => 'required',
+            'image' => 'required',
             'ar_title' => 'required|max:200',
+            'ar_group' => 'required',
             'ar_description' => 'required',
             'pe_title' => 'required|max:200',
+            'pe_group' => 'required',
             'pe_description' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
+            'ar_group.required' => 'The group field is required.',
             'ar_description.required' => 'The description field is required.',
             'pe_title.required' => 'The title field is required.',
+            'pe_group.required' => 'The group field is required.',
             'pe_description.required' => 'The description field is required.',
         ]);
  
@@ -81,15 +89,28 @@ class RitualController extends Controller
             return back()->withInput()->withErrors($messages);
         }else{
             $password = rand_string(6);
-            $ritual = new Ritual();
-            $ritual['title'] = $request->title;
-            $ritual['description'] = $request->description;
-            $ritual['ar_title'] = $request->ar_title;
-            $ritual['ar_description'] = $request->ar_description;
-            $ritual['pe_title'] = $request->pe_title;
-            $ritual['pe_description'] = $request->pe_description;
-            $ritual->save();
-            return redirect('ritual')->with('message', 'Record Added!');
+            $mandanism = new Mandanism();
+            $mandanism['title'] = $request->title;
+            $mandanism['group'] = $request->group;
+            $mandanism['description'] = $request->description;
+            $mandanism['date'] = $request->date;
+            $mandanism['ar_title'] = $request->ar_title;
+            $mandanism['ar_group'] = $request->ar_group;
+            $mandanism['ar_description'] = $request->ar_description;
+            $mandanism['pe_title'] = $request->pe_title;
+            $mandanism['pe_group'] = $request->pe_group;
+            $mandanism['pe_description'] = $request->pe_description;
+            if ($request->hasFile('image'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('image');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $mandanism['image'] = $imageName;
+            }
+            $mandanism->save();
+            return redirect('mandanism')->with('message', 'Record Added!');
         }
     }
 
@@ -108,8 +129,8 @@ class RitualController extends Controller
     {
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        $data['ritual'] = Ritual::find($id);
-        return view('admin.ritual.edit',['data'=>$data]);
+        $data['mandanism'] = Mandanism::find($id);
+        return view('admin.mandanism.edit',['data'=>$data]);
     }
 
     /**
@@ -119,15 +140,21 @@ class RitualController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:200',
+            'group' => 'required',
             'description' => 'required',
+            'date' => 'required',
             'ar_title' => 'required|max:200',
+            'ar_group' => 'required',
             'ar_description' => 'required',
             'pe_title' => 'required|max:200',
+            'pe_group' => 'required',
             'pe_description' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
+            'ar_group.required' => 'The group field is required.',
             'ar_description.required' => 'The description field is required.',
             'pe_title.required' => 'The title field is required.',
+            'pe_group.required' => 'The group field is required.',
             'pe_description.required' => 'The description field is required.',
         ]);
  
@@ -136,15 +163,28 @@ class RitualController extends Controller
             $messages = $validator->messages();
             return back()->withInput()->withErrors($messages);
         }else{
-            $ritual = Ritual::find($id);
-            $ritual['title'] = $request->title;
-            $ritual['description'] = $request->description;
-            $ritual['ar_title'] = $request->ar_title;
-            $ritual['ar_description'] = $request->ar_description;
-            $ritual['pe_title'] = $request->pe_title;
-            $ritual['pe_description'] = $request->pe_description;
-            $ritual->save();
-            return redirect('ritual')->with('message', 'Record Updated!');
+            $mandanism = Mandanism::find($id);
+            $mandanism['title'] = $request->title;
+            $mandanism['group'] = $request->group;
+            $mandanism['description'] = $request->description;
+            $mandanism['date'] = $request->date;
+            $mandanism['ar_title'] = $request->ar_title;
+            $mandanism['ar_group'] = $request->ar_group;
+            $mandanism['ar_description'] = $request->ar_description;
+            $mandanism['pe_title'] = $request->pe_title;
+            $mandanism['pe_group'] = $request->pe_group;
+            $mandanism['pe_description'] = $request->pe_description;
+            if ($request->hasFile('image'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('image');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $mandanism['image'] = $imageName;
+            }
+            $mandanism->save();
+            return redirect('mandanism')->with('message', 'Record Updated!');
         }
     }
 
@@ -153,6 +193,6 @@ class RitualController extends Controller
      */
     public function destroy(string $id)
     {
-        return Ritual::where('id',$id)->delete();
+        return Mandanism::where('id',$id)->delete();
     }
 }

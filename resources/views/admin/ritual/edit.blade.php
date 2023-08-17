@@ -22,17 +22,48 @@
                 <form class="forms-sample" method="POST" action="{{route('ritual.update',$data['ritual']->id)}}" enctype='multipart/form-data'>
                     @csrf
                     @method('PUT')
-                    <div class="form-group col-sm-6">
+                    <h4 align="center">English Language</h4><br/>
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Name" value="{{old('title',$data['ritual']->title)}}">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{old('title',$data['ritual']->title)}}">
                         @error('title')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputEmail3">Description</label>
                         <textarea class="form-control" id="description" name="description" placeholder="Description" rows="5">{{old('description',$data['ritual']->description)}}</textarea>
                         @error('description')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <h4 align="center">Arabic Language</h4><br/>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Title</label>
+                        <input type="text" class="form-control" id="ar_title" name="ar_title" placeholder="Title" value="{{old('ar_title',$data['ritual']->ar_title)}}">
+                        @error('ar_title')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail3">Description</label>
+                        <textarea class="form-control" id="ar_description" name="ar_description" placeholder="Description" rows="5">{{old('ar_description',$data['ritual']->ar_description)}}</textarea>
+                        @error('ar_description')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <h4 align="center">Persian Language</h4><br/>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Title</label>
+                        <input type="text" class="form-control" id="pe_title" name="pe_title" placeholder="Title" value="{{old('pe_title',$data['ritual']->pe_title)}}">
+                        @error('pe_title')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail3">Description</label>
+                        <textarea class="form-control" id="pe_description" name="pe_description" placeholder="Description" rows="5">{{old('pe_description',$data['ritual']->pe_description)}}</textarea>
+                        @error('pe_description')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
@@ -43,4 +74,14 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+<script type="text/javascript">
+    $('#description,#ar_description,#pe_description').summernote({
+        height: 300
+    });
+</script>
 @endsection

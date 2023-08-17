@@ -17,6 +17,14 @@ return new class extends Migration
             $table->text('subtitle')->nullable();
             $table->text('description');
             $table->text('other_info')->nullable();
+            $table->string('ar_title')->nullable();
+            $table->text('ar_subtitle')->nullable();
+            $table->text('ar_description')->nullable();
+            $table->text('ar_other_info')->nullable();
+            $table->string('pe_title')->nullable();
+            $table->text('pe_subtitle')->nullable();
+            $table->text('pe_description')->nullable();
+            $table->text('pe_other_info')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });

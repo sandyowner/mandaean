@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="{{url('assets/vendors/css/vendor.bundle.base.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
     <link rel="shortcut icon" href="{{url('assets/images/favicon.ico')}}" />
+
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
   </head>
   <body>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -149,28 +155,28 @@
                 <i class="mdi mdi-account-group menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ (\Request::segment(1)=='information')?'active':'' }}">
-              <a class="nav-link" href="{{url('information')}}">
-                <span class="menu-title">Information Management</span>
+            <li class="nav-item {{ (\Request::segment(1)=='mandanism')?'active':'' }}">
+              <a class="nav-link" href="{{url('mandanism')}}">
+                <span class="menu-title">Mandanism Management</span>
                 <i class="mdi mdi-information menu-icon"></i>
               </a>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='ritual')?'active':'' }}">
               <a class="nav-link" href="{{url('ritual')}}">
                 <span class="menu-title">Ritual Management</span>
-                <i class="mdi mdi-hands-pray menu-icon"></i>
+                <i class="mdi mdi-information menu-icon"></i>
               </a>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='news')?'active':'' }}">
               <a class="nav-link" href="{{url('news')}}">
                 <span class="menu-title">Latest News Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
+                <i class="mdi mdi-information menu-icon"></i>
               </a>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='prayer')?'active':'' }}">
               <a class="nav-link" href="{{url('prayer')}}">
-                <span class="menu-title">Prayer and Hymns Management</span>
-                <i class="mdi mdi-hands-pray menu-icon"></i>
+                <span class="menu-title">Prayer Management</span>
+                <i class="mdi mdi-information menu-icon"></i>
               </a>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='books')?'active':'' }}">
