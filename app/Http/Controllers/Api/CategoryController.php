@@ -10,6 +10,8 @@ use App\Models\HolyBook;
 use App\Models\Bookmark;
 use App\Models\Ritual;
 use App\Models\Prayer;
+use App\Http\Resources\MandanismResource;
+use App\Http\Resources\MandanismDetailResource;
 use Auth;
 use Validator;
 
@@ -17,27 +19,23 @@ class CategoryController extends Controller
 {
     public function MandanismList(Request $request)
     {
-        $data = Mandanism::select('id','title','group','description','created_at')->where('status','active')->get();
+        $data = Mandanism::where('status','active')->get();
 
-        foreach ($data as $key => $value) {
-            // $data[$key]['description'] = \Illuminate\Support\Str::words(strip_tags($value->description), $limit = 15, $end = '...');
-            $data[$key]['description'] = strip_tags($value->description);
-        }
         return response([
             'status' => true,
             'message' => 'Mandanism List.',
-            'data' => $data
+            'data' => MandanismResource::collection($data)
         ],201);
     }
 
     public function MandanismDetail($id)
     {
         $data = Mandanism::find($id);
-        $data['image'] = url('/').'/'.$data->image;
+        
         return response([
             'status' => true,
             'message' => 'Mandanism Detail.',
-            'data' => $data
+            'data' => new MandanismDetailResource($data)
         ],201);
     }
 
