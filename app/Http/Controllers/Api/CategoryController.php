@@ -12,6 +12,13 @@ use App\Models\Ritual;
 use App\Models\Prayer;
 use App\Http\Resources\MandanismResource;
 use App\Http\Resources\MandanismDetailResource;
+use App\Http\Resources\NewsResource;
+use App\Http\Resources\NewsDetailResource;
+use App\Http\Resources\RitualResource;
+use App\Http\Resources\RitualDetailResource;
+use App\Http\Resources\PrayerResource;
+use App\Http\Resources\PrayerDetailResource;
+use App\Http\Resources\HolyBookResource;
 use Auth;
 use Validator;
 
@@ -31,7 +38,7 @@ class CategoryController extends Controller
     public function MandanismDetail($id)
     {
         $data = Mandanism::find($id);
-        
+
         return response([
             'status' => true,
             'message' => 'Mandanism Detail.',
@@ -41,47 +48,35 @@ class CategoryController extends Controller
 
     public function LatestNewsList(Request $request)
     {
-        $data = LatestNews::select('id','title','group','description','created_at')->where('status','active')->get();
+        $data = LatestNews::where('status','active')->get();
 
-        foreach ($data as $key => $value) {
-            // $data[$key]['description'] = \Illuminate\Support\Str::words(strip_tags($value->description), $limit = 15, $end = '...');
-            $data[$key]['description'] = strip_tags($value->description);
-        }
         return response([
             'status' => true,
             'message' => 'Latest News List.',
-            'data' => $data
+            'data' => NewsResource::collection($data)
         ],201);
     }
 
     public function LatestNewsDetail($id)
     {
         $data = LatestNews::find($id);
-        $data['image'] = url('/').'/'.$data->image;
+
         return response([
             'status' => true,
             'message' => 'Latest News Detail.',
-            'data' => $data
+            'data' => new NewsDetailResource($data)
         ],201);
     } 
 
     public function HolyBookList(Request $request)
     {
         $id = Auth::id();
-        $data = HolyBook::select('id','title','description','image','url')->where('status','active')->get();
-
-        foreach ($data as $key => $value) {
-            $data[$key]['image'] = url('/').'/'.$value->image;
-            $data[$key]['url'] = url('/').'/'.$value->url;
-
-            $book = Bookmark::where(['user_id'=>$id,'book_id'=>$value->id])->first();
-            
-            $data[$key]['bookmark'] = $book?'yes':'no';
-        }
+        $data = HolyBook::where('status','active')->get();
+        
         return response([
             'status' => true,
             'message' => 'Holy Book List.',
-            'data' => $data
+            'data' => HolyBookResource::collection($data)
         ],201);
     }
 
@@ -127,12 +122,12 @@ class CategoryController extends Controller
 
     public function RitualsList(Request $request)
     {
-        $data = Ritual::select('id','title')->where('status','active')->get();
+        $data = Ritual::where('status','active')->get();
 
         return response([
             'status' => true,
             'message' => 'Rituals List.',
-            'data' => $data
+            'data' => RitualResource::collection($data)
         ],201);
     }
 
@@ -142,18 +137,18 @@ class CategoryController extends Controller
         return response([
             'status' => true,
             'message' => 'Rituals Detail.',
-            'data' => $data
+            'data' => new RitualDetailResource($data)
         ],201);
     } 
 
     public function PrayerList(Request $request)
     {
-        $data = Prayer::select('id','title','subtitle')->where('status','active')->get();
+        $data = Prayer::where('status','active')->get();
 
         return response([
             'status' => true,
             'message' => 'Prayer List.',
-            'data' => $data
+            'data' => PrayerResource::collection($data)
         ],201);
     }
 
@@ -163,7 +158,7 @@ class CategoryController extends Controller
         return response([
             'status' => true,
             'message' => 'Prayer Detail.',
-            'data' => $data
+            'data' => new PrayerDetailResource($data)
         ],201);
     } 
 
