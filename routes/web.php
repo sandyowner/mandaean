@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RitualController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PrayerController;
 use App\Http\Controllers\Admin\MandanismController;
+use App\Http\Controllers\Admin\HolyBookController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -58,6 +59,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('ritual', RitualController::class);
     Route::resource('news', NewsController::class);
     Route::resource('prayer', PrayerController::class);
+    Route::resource('books', HolyBookController::class);
 });
 
 Route::controller(PaymentController::class)
