@@ -155,82 +155,69 @@
                 <i class="mdi mdi-account-group menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ (\Request::segment(1)=='mandanism')?'active':'' }}">
-              <a class="nav-link" href="{{url('mandanism')}}">
-                <span class="menu-title">Mandanism Management</span>
-                <i class="mdi mdi-information menu-icon"></i>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#category-pages" aria-expanded="false" aria-controls="category-pages">
+                <span class="menu-title">Information Manage...</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-medical-bag menu-icon"></i>
               </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='ritual')?'active':'' }}">
-              <a class="nav-link" href="{{url('ritual')}}">
-                <span class="menu-title">Ritual Management</span>
-                <i class="mdi mdi-information menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='news')?'active':'' }}">
-              <a class="nav-link" href="{{url('news')}}">
-                <span class="menu-title">Latest News Management</span>
-                <i class="mdi mdi-information menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='prayer')?'active':'' }}">
-              <a class="nav-link" href="{{url('prayer')}}">
-                <span class="menu-title">Prayer Management</span>
-                <i class="mdi mdi-information menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='books')?'active':'' }}">
-              <a class="nav-link" href="{{url('books')}}">
-                <span class="menu-title">Holy Books Management</span>
-                <i class="mdi mdi-book-multiple menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='feedback')?'active':'' }}">
-              <a class="nav-link" href="{{url('feedback')}}">
-                <span class="menu-title">User Feedback Management</span>
-                <i class="mdi mdi-message-alert menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='advertisement')?'active':'' }}">
-              <a class="nav-link" href="{{url('advertisement')}}">
-                <span class="menu-title">Advertisement Inquiry Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
-              <a class="nav-link" href="{{url('product')}}">
-                <span class="menu-title">Product Inventory Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
-              </a>
+              <div class="collapse" id="category-pages">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item {{ (\Request::segment(1)=='mandanism')?'active':'' }}">
+                    <a class="nav-link" href="{{url('mandanism')}}">
+                      <span class="menu-title">Mandanism Mgmt</span>
+                      <!-- <i class="mdi mdi-information menu-icon"></i> -->
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='ritual')?'active':'' }}">
+                    <a class="nav-link" href="{{url('ritual')}}">
+                      <span class="menu-title">Ritual Mgmt</span>
+                      <!-- <i class="mdi mdi-information menu-icon"></i> -->
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='news')?'active':'' }}">
+                    <a class="nav-link" href="{{url('news')}}">
+                      <span class="menu-title">Latest News Mgmt</span>
+                      <!-- <i class="mdi mdi-information menu-icon"></i> -->
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='prayer')?'active':'' }}">
+                    <a class="nav-link" href="{{url('prayer')}}">
+                      <span class="menu-title">Prayer Mgmt</span>
+                      <!-- <i class="mdi mdi-information menu-icon"></i> -->
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='books')?'active':'' }}">
+                    <a class="nav-link" href="{{url('books')}}">
+                      <span class="menu-title">Holy Books Mgmt</span>
+                      <!-- <i class="mdi mdi-book-multiple menu-icon"></i> -->
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='products')?'active':'' }}">
+                    <a class="nav-link" href="{{url('products')}}">
+                      <span class="menu-title">Product Inventory</span>
+                      <i class="mdi mdi-users menu-icon"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
               <a class="nav-link" href="{{url('calender')}}">
                 <span class="menu-title">Calender Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
+                <i class="mdi mdi-calendar menu-icon"></i>
               </a>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='order')?'active':'' }}">
               <a class="nav-link" href="{{url('order')}}">
                 <span class="menu-title">Order Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
+                <i class="mdi mdi-cart menu-icon"></i>
               </a>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='payment')?'active':'' }}">
               <a class="nav-link" href="{{url('payment')}}">
-                <span class="menu-title">Donation/Payment Transaction Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='referral')?'active':'' }}">
-              <a class="nav-link" href="{{url('referral')}}">
-                <span class="menu-title">Referral Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='notification')?'active':'' }}">
-              <a class="nav-link" href="{{url('notification')}}">
-                <span class="menu-title">Notification Management</span>
-                <i class="mdi mdi-users menu-icon"></i>
+                <span class="menu-title">Payment Transactions</span>
+                <i class="mdi mdi-account-box menu-icon"></i>
               </a>
             </li>
           </ul>
