@@ -72,8 +72,8 @@ class UsersController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:200',
             'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i|unique:users',
-            'country_code' => 'required',
-            'mobile_no' => 'required',
+            // 'country_code' => 'required',
+            // 'mobile_no' => 'required',
             'gender' => 'required',
             'photo' => 'required'
         ]);
@@ -136,8 +136,8 @@ class UsersController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:200',
             'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i|unique:users,email,'.$id.',id',
-            'country_code' => 'required',
-            'mobile_no' => 'required',
+            // 'country_code' => 'required',
+            // 'mobile_no' => 'required',
             'gender' => 'required'
         ]);
  

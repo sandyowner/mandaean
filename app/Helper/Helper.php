@@ -31,4 +31,14 @@ function rand_string($length){
     return substr(str_shuffle($chars),0,$length);
 }
 
+function _getSKU($code_len = '12')
+{
+    $chars = "123456789";
+    $code = "";
+    for ($i = 0; $i < $code_len; $i++) {
+        $code .= $chars[mt_rand(0, strlen($chars) - 1)];
+    }
+    return $code;
+}
+
 ?>

@@ -15,8 +15,8 @@ class Product extends Model
     protected $guards = [];
 
     protected $casts = [
-        'color_ids' => 'array',
-        'size_ids' => 'array'
+        'color_ids' => 'json',
+        'size_ids' => 'json'
     ];
 
     public function images()

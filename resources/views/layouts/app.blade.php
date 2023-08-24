@@ -193,14 +193,14 @@
                       <!-- <i class="mdi mdi-book-multiple menu-icon"></i> -->
                     </a>
                   </li>
-                  <li class="nav-item {{ (\Request::segment(1)=='products')?'active':'' }}">
-                    <a class="nav-link" href="{{url('products')}}">
-                      <span class="menu-title">Product Inventory</span>
-                      <i class="mdi mdi-users menu-icon"></i>
-                    </a>
-                  </li>
                 </ul>
               </div>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
+              <a class="nav-link" href="{{url('product')}}">
+                <span class="menu-title">Product Inventory</span>
+                <i class="mdi mdi mdi-apps menu-icon"></i>
+              </a>
             </li>
             <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
               <a class="nav-link" href="{{url('calender')}}">
