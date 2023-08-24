@@ -84,7 +84,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="color[]" value="{{$color->id}}"> {{$color->name}} 
+                                            <input type="checkbox" class="form-check-input" name="color[]" value="{{$color->id}}" {{(in_array($color->id,$data['product']->color_ids))?"checked":""}}> {{$color->name}} 
                                         </label>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="size[]" value="{{$size->id}}"> {{$size->name}} 
+                                            <input type="checkbox" class="form-check-input" name="size[]" value="{{$size->id}}" {{(in_array($size->id,$data['product']->size_ids))?"checked":""}}> {{$size->name}} 
                                         </label>
                                     </div>
                                 </div>
