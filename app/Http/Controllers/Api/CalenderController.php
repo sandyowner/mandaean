@@ -148,7 +148,7 @@ class CalenderController extends Controller
     public function CalenderList(Request $request){
         $date = $request->date;
         
-        $allDates = Event::where(['status'=>'active'])->get()->pluck('date');
+        $allDates = Event::where(['status'=>'active'])->groupBy('date')->pluck('date');
         $allEvents = Event::select('id','title','description','date')->where(['status'=>'active'])->get();
         $data = Event::select('id','title','description','date')->where(['date'=>$date, 'status'=>'active'])->get();
 
