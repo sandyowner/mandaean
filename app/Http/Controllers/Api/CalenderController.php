@@ -143,4 +143,22 @@ class CalenderController extends Controller
             'data' => []
         ],201);
     }
+
+    public function CalenderList(Request $request){
+        $month = $request->month;
+        $year = $request->year;
+        $lastDay = date('t',strtotime('01-'.$month.'-'.$year));
+        
+        $array = [];
+        for ($i=1; $i <= $lastDay; $i++) { 
+            $date = date('Y-m-d',strtotime($i.'-'.$month.'-'.$year));
+            $array[$i-1]['date'] = $date;
+            $array[$i-1]['occasions'] = ReligiousOccasion::where('date',$date)->first();
+        }
+        return response([
+            'status' => true,
+            'message' => 'All calender list.',
+            'data' => $array
+        ],201);
+    }
 }

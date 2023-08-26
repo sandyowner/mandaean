@@ -208,8 +208,8 @@
                 <i class="mdi mdi-calendar menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ (\Request::segment(1)=='order')?'active':'' }}">
-              <a class="nav-link" href="{{url('order')}}">
+            <li class="nav-item {{ (\Request::segment(1)=='orders')?'active':'' }}">
+              <a class="nav-link" href="{{url('orders')}}">
                 <span class="menu-title">Order Management</span>
                 <i class="mdi mdi-cart menu-icon"></i>
               </a>
