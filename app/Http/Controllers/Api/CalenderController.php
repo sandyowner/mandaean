@@ -157,4 +157,63 @@ class CalenderController extends Controller
             'data' => $data
         ],201);
     }
+
+    public function Melvashe(){
+
+        $data['melvashe'] = [
+            ['id'=>1,'name'=>'Dowla'],
+            ['id'=>2,'name'=>'Nuna'],
+            ['id'=>3,'name'=>'Ambero'],
+            ['id'=>4,'name'=>'Towra'],
+            ['id'=>5,'name'=>'Selmi'],
+            ['id'=>6,'name'=>'Saratana'],
+            ['id'=>7,'name'=>'Aria'],
+            ['id'=>8,'name'=>'Shumbolta'],
+            ['id'=>9,'name'=>'Qina'],
+            ['id'=>10,'name'=>'Arqwa'],
+            ['id'=>11,'name'=>'Heṭia'],
+            ['id'=>12,'name'=>'Gadia']
+        ];
+        
+        $data['months'] = [
+            ['id'=>1,'name'=>'Dowla'],
+            ['id'=>2,'name'=>'Nuna'],
+            ['id'=>3,'name'=>'Ambero'],
+            ['id'=>4,'name'=>'Towra'],
+            ['id'=>5,'name'=>'Selmi'],
+            ['id'=>6,'name'=>'Saratana'],
+            ['id'=>7,'name'=>'Aria'],
+            ['id'=>8,'name'=>'Shumbolta'],
+            ['id'=>9,'name'=>'Qina'],
+            ['id'=>10,'name'=>'Arqwa'],
+            ['id'=>11,'name'=>'Heṭia'],
+            ['id'=>12,'name'=>'Gadia']
+        ];
+
+        return response([
+            'status' => true,
+            'message' => 'Melvashe list.',
+            'data' => $data
+        ],201);
+    }
+
+    public function MelvashePost(Request $request){
+
+        $gender = $request->gender;
+        $melvashe = $request->melvashe;
+        $month = $request->month;
+        $time = $request->time;
+        $dob = $request->dob;
+        $date_type = $request->date_type;
+
+        $data['mandaean_date'] = '19, Shombolta (445365 Adam) (1998 Yahyaiee)';
+        $data['gregorian_date'] = '1996,03,08 Friday';
+        $data['solar_date'] = '1374, 12, 18';
+
+        return response([
+            'status' => true,
+            'message' => 'Data fetched.',
+            'data' => $data
+        ],201);
+    }
 }
