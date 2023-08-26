@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ReligiousOccasion;
 use App\Models\ChooseCalender;
+use App\Models\Event;
 use App\Models\EventReminder;
 use Validator;
 use Auth;
@@ -145,20 +146,15 @@ class CalenderController extends Controller
     }
 
     public function CalenderList(Request $request){
-        $month = $request->month;
-        $year = $request->year;
-        $lastDay = date('t',strtotime('01-'.$month.'-'.$year));
+        $date = $request->date;
         
-        $array = [];
-        for ($i=1; $i <= $lastDay; $i++) { 
-            $date = date('Y-m-d',strtotime($i.'-'.$month.'-'.$year));
-            $array[$i-1]['date'] = $date;
-            $array[$i-1]['occasions'] = ReligiousOccasion::where('date',$date)->first();
-        }
+        $data['list'] = Event::where(['status'=>'active'])->get()->pluck('date');
+        $data['events'] = Event::where(['date'=>$date, 'status'=>'active'])->get();
+
         return response([
             'status' => true,
             'message' => 'All calender list.',
-            'data' => $array
+            'data' => $data
         ],201);
     }
 }
