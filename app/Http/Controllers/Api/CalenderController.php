@@ -148,13 +148,16 @@ class CalenderController extends Controller
     public function CalenderList(Request $request){
         $date = $request->date;
         
-        $data['list'] = Event::where(['status'=>'active'])->get()->pluck('date');
-        $data['events'] = Event::where(['date'=>$date, 'status'=>'active'])->get();
+        $allDates = Event::where(['status'=>'active'])->get()->pluck('date');
+        $allEvents = Event::select('id','title','description','date')->where(['status'=>'active'])->get();
+        $data = Event::select('id','title','description','date')->where(['date'=>$date, 'status'=>'active'])->get();
 
         return response([
             'status' => true,
             'message' => 'All calender list.',
-            'data' => $data
+            'data' => $data,
+            'allDates' => $allDates,
+            'allEvents' => $allEvents
         ],201);
     }
 
@@ -174,7 +177,7 @@ class CalenderController extends Controller
             ['id'=>11,'name'=>'Heṭia'],
             ['id'=>12,'name'=>'Gadia']
         ];
-        
+
         $data['months'] = [
             ['id'=>1,'name'=>'Dowla'],
             ['id'=>2,'name'=>'Nuna'],
