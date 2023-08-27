@@ -12,4 +12,9 @@ class Transaction extends Model
     protected $table = 'transactions';
 
     protected $fillable = ['transaction_id','payment_method','user_id','amount','response'];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

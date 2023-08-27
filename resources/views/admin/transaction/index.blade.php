@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Order')
-@section('pagetitle','Order')
+@section('title','Transaction')
+@section('pagetitle','Transaction')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Order Management</h3>
+      <h3 class="page-title">Payment Transaction</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <!-- <li class="breadcrumb-item">
-            <a href="{{url('order/create')}}" title="Add">
+            <a href="{{url('transaction/create')}}" title="Add">
               <label class="badge badge-info">+ Add</label>
             </a>
           </li> -->
@@ -20,13 +20,13 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <table class="table table-striped" id="order-table">
+            <table class="table table-striped" id="transaction-table">
               <thead>
                 <tr>
-                  <th> Order No.  </th>
+                  <th> Transaction No.  </th>
                   <th> User </th>
+                  <th> Payment Method </th>
                   <th> Price </th>
-                  <th> Status </th>
                   <th> Action </th>
                 </tr>
               </thead>
@@ -65,20 +65,20 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    var oTable = $('#order-table').DataTable({
+    var oTable = $('#transaction-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: "{{url('orders')}}",
+            url: "{{url('transaction')}}",
             data: function (d) {
                 d.search = "{{$data['filter']}}";
             }
         },
         columns: [
-            {data: 'order_number', name: 'order_number'},
+            {data: 'transaction_id', name: 'transaction_id'},
             {data: 'user', name: 'user'},
-            {data: 'total_amount', name: 'total_amount'},
-            {data: 'status', name: 'status'},
+            {data: 'payment_method', name: 'payment_method'},
+            {data: 'amount', name: 'amount'},
             {data: 'action', name: 'action', orderable:false, searchable:false}
         ],
         // columnDefs: [

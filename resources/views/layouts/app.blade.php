@@ -202,20 +202,20 @@
                 <i class="mdi mdi mdi-apps menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
+            <!-- <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
               <a class="nav-link" href="{{url('calender')}}">
                 <span class="menu-title">Calender Management</span>
                 <i class="mdi mdi-calendar menu-icon"></i>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item {{ (\Request::segment(1)=='orders')?'active':'' }}">
               <a class="nav-link" href="{{url('orders')}}">
                 <span class="menu-title">Order Management</span>
                 <i class="mdi mdi-cart menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item {{ (\Request::segment(1)=='payment')?'active':'' }}">
-              <a class="nav-link" href="{{url('payment')}}">
+            <li class="nav-item {{ (\Request::segment(1)=='transaction')?'active':'' }}">
+              <a class="nav-link" href="{{url('transaction')}}">
                 <span class="menu-title">Payment Transactions</span>
                 <i class="mdi mdi-account-box menu-icon"></i>
               </a>
