@@ -93,4 +93,5 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('melvashe', [CalenderController::class, 'Melvashe']);
     Route::post('melvashe-find', [CalenderController::class, 'MelvashePost']);
     Route::get('funeral', [FuneralController::class, 'Funeral']);
+    Route::post('funeral-post', [FuneralController::class, 'FuneralPost']);
 });

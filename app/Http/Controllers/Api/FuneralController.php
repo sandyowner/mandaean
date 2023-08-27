@@ -43,4 +43,47 @@ class FuneralController extends Controller
             'data' => $data
         ],201);
     }
+
+    public function FuneralPost(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status' => false,
+                'message' => $error,
+                'data' => []
+            ],422);
+        }
+
+        $id = Auth::id();
+
+        // $data = Funeral::create([
+        //     'salutation' => $request->salutation,
+        //     'name' => $request->name,
+        //     'family_name' => $request->family_name,
+        //     'dob' => $request->dob,
+        //     'dod' => $request->dod,
+        //     'register_address' => $request->register_address,
+        //     'pass_away' => $request->pass_away,
+        //     'body_now' => $request->body_now,
+        //     'identity' => $request->identity,
+        //     'kins_salutation' => $request->kins_salutation,
+        //     'kins_name' => $request->kins_name,
+        //     'kins_family_name' => $request->kins_family_name,
+        //     'kins_address' => $request->kins_address,
+        //     'kins_mobile' => $request->kins_mobile,
+        //     'kins_email' => $request->kins_email,
+        //     'relationship' => $request->relationship,
+        //     'kins_identity' => $request->kins_identity,
+        //     'signature' => $request->signature,
+        // ]);
+
+        return response([
+            'status' => true,
+            'message' => 'Added.',
+            'data' => []
+        ],201);
+    }
 }
