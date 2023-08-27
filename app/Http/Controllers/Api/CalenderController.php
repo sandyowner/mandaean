@@ -8,6 +8,7 @@ use App\Models\ReligiousOccasion;
 use App\Models\ChooseCalender;
 use App\Models\Event;
 use App\Models\EventReminder;
+use App\Http\Resources\EventResource;
 use Validator;
 use Auth;
 
@@ -155,9 +156,9 @@ class CalenderController extends Controller
         return response([
             'status' => true,
             'message' => 'All calender list.',
-            'data' => $data,
+            'data' => EventResource::collection($data),
             'allDates' => $allDates,
-            'allEvents' => $allEvents
+            'allEvents' => EventResource::collection($allEvents)
         ],201);
     }
 
