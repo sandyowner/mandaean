@@ -5,11 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Baptism;
+use App\Models\BaptismVenue;
 use Validator;
 use Auth;
 
 class BaptismController extends Controller
 {
+    public function BaptismVenue(Request $request){
+        $data = BaptismVenue::select('id','name','status')->where('status','active')->get();
+
+        return response([
+            'status' => true,
+            'message' => 'Fetched.',
+            'data' => $data
+        ],201);
+    }
+
     public function BookBaptism(Request $request){
         $validator = Validator::make($request->all(), [
             'venue' => 'required',
@@ -42,7 +53,7 @@ class BaptismController extends Controller
 
         return response([
             'status' => true,
-            'message' => 'Success.',
+            'message' => 'Booked successfully.',
             'data' => $data
         ],201);
     }

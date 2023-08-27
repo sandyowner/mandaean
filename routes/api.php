@@ -70,6 +70,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('order-history', [OrderController::class, 'orderHistory']);
     Route::get('order-detail/{id}', [OrderController::class, 'orderDetail']);
     
+    Route::get('baptism-venue', [BaptismController::class, 'BaptismVenue']);
     Route::post('book-baptism', [BaptismController::class, 'BookBaptism']);
     Route::post('place-advertisment', [AdvertismentController::class, 'PlaceAdvertisment']);
     
