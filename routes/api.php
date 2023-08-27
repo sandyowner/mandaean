@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\CalenderController;
+use App\Http\Controllers\Api\FuneralController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,4 +92,5 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('delete-all-reminder', [CalenderController::class, 'DeleteAllReminder']);
     Route::get('melvashe', [CalenderController::class, 'Melvashe']);
     Route::post('melvashe-find', [CalenderController::class, 'MelvashePost']);
+    Route::get('funeral', [FuneralController::class, 'Funeral']);
 });
