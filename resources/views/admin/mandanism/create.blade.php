@@ -44,7 +44,7 @@
                                 <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
                             </span>
                         </div>
-                        @error('image')
+                        @error('docs')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>

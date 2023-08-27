@@ -63,13 +63,13 @@ class NewsController extends Controller
             'group' => 'required',
             'description' => 'required',
             'image' => 'required',
-            'date' => 'required',
-            'ar_title' => 'required|max:200',
-            'ar_group' => 'required',
-            'ar_description' => 'required',
-            'pe_title' => 'required|max:200',
-            'pe_group' => 'required',
-            'pe_description' => 'required',
+            // 'date' => 'required',
+            // 'ar_title' => 'required|max:200',
+            // 'ar_group' => 'required',
+            // 'ar_description' => 'required',
+            // 'pe_title' => 'required|max:200',
+            // 'pe_group' => 'required',
+            // 'pe_description' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
             'ar_group.required' => 'The group field is required.',
@@ -105,6 +105,15 @@ class NewsController extends Controller
                 $imageName = $destinationPath.''.$file_name;
                 $news['image'] = $imageName;
             }
+            if ($request->hasFile('docs'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('docs');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $news['docs'] = $imageName;
+            }
             $news->save();
             return redirect('news')->with('message', 'Record Added!');
         }
@@ -138,13 +147,13 @@ class NewsController extends Controller
             'title' => 'required|max:200',
             'group' => 'required',
             'description' => 'required',
-            'date' => 'required',
-            'ar_title' => 'required|max:200',
-            'ar_group' => 'required',
-            'ar_description' => 'required',
-            'pe_title' => 'required|max:200',
-            'pe_group' => 'required',
-            'pe_description' => 'required',
+            // 'date' => 'required',
+            // 'ar_title' => 'required|max:200',
+            // 'ar_group' => 'required',
+            // 'ar_description' => 'required',
+            // 'pe_title' => 'required|max:200',
+            // 'pe_group' => 'required',
+            // 'pe_description' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
             'ar_group.required' => 'The group field is required.',
@@ -178,6 +187,15 @@ class NewsController extends Controller
                 $file->move($destinationPath , $file_name);
                 $imageName = $destinationPath.''.$file_name;
                 $news['image'] = $imageName;
+            }
+            if ($request->hasFile('docs'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('docs');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $news['docs'] = $imageName;
             }
             $news->save();
             return redirect('news')->with('message', 'Record Updated!');
