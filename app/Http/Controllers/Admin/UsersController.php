@@ -37,9 +37,9 @@ class UsersController extends Controller
                         return '<img src="'.url('/').'/assets/images/profile.png" alt="image" />';
                     }
                 })
-                ->editColumn('phone', function($row){
-                    return $row->country_code.''.$row->mobile_no;
-                })
+                // ->editColumn('phone', function($row){
+                //     return $row->country_code.''.$row->mobile_no;
+                // })
                 ->addColumn('action', function($row){
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';
                     $btn = '<a href="'.route('users.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
@@ -89,8 +89,8 @@ class UsersController extends Controller
             $user['email'] = $request->email;
             $user['gender'] = $request->gender;
             $user['password'] = Hash::make($password);
-            $user['country_code'] = $request->country_code;
-            $user['mobile_no'] = $request->mobile_no;
+            // $user['country_code'] = $request->country_code;
+            // $user['mobile_no'] = $request->mobile_no;
             $user['email_verified_at'] = date('Y-m-d H:i:s');
 
             if ($request->hasFile('photo'))
@@ -150,8 +150,8 @@ class UsersController extends Controller
             $user['name'] = $request->name;
             $user['email'] = $request->email;
             $user['gender'] = $request->gender;
-            $user['country_code'] = $request->country_code;
-            $user['mobile_no'] = $request->mobile_no;
+            // $user['country_code'] = $request->country_code;
+            // $user['mobile_no'] = $request->mobile_no;
 
             if ($request->hasFile('photo'))
             {

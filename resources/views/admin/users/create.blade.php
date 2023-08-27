@@ -35,7 +35,7 @@
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="form-group col-sm-1">
                             <label for="exampleInputPassword4">Code</label>
                             <select class="form-select" id="country_code" name="country_code" style="width: 80px !important;height: 45px;">
@@ -53,7 +53,7 @@
                                 <p style="color: red">{{$message}}</p>
                             @enderror
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-sm-6">
                         <label for="exampleSelectGender">Gender</label>
                         <select class="form-select" id="gender" name="gender">

@@ -26,7 +26,7 @@
                   <th> User </th>
                   <th> Name </th>
                   <th> Email </th>
-                  <th> Mobile No. </th>
+                  <!-- <th> Mobile No. </th> -->
                   <th> Action </th>
                 </tr>
               </thead>
@@ -78,7 +78,7 @@
             {data: 'profile', name: 'profile'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
-            {data: 'phone', name: 'phone'},
+            // {data: 'phone', name: 'phone'},
             {data: 'action', name: 'action', orderable:false, searchable:false}
         ],
         columnDefs: [
