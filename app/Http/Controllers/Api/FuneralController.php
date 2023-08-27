@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Funeral;
+use Validator;
+use Auth;
 
 class FuneralController extends Controller
 {
@@ -59,26 +62,55 @@ class FuneralController extends Controller
 
         $id = Auth::id();
 
-        // $data = Funeral::create([
-        //     'salutation' => $request->salutation,
-        //     'name' => $request->name,
-        //     'family_name' => $request->family_name,
-        //     'dob' => $request->dob,
-        //     'dod' => $request->dod,
-        //     'register_address' => $request->register_address,
-        //     'pass_away' => $request->pass_away,
-        //     'body_now' => $request->body_now,
-        //     'identity' => $request->identity,
-        //     'kins_salutation' => $request->kins_salutation,
-        //     'kins_name' => $request->kins_name,
-        //     'kins_family_name' => $request->kins_family_name,
-        //     'kins_address' => $request->kins_address,
-        //     'kins_mobile' => $request->kins_mobile,
-        //     'kins_email' => $request->kins_email,
-        //     'relationship' => $request->relationship,
-        //     'kins_identity' => $request->kins_identity,
-        //     'signature' => $request->signature,
-        // ]);
+        $data = new Funeral;
+        $data->coffin = $request->coffin;
+        $data->coffin_flower = $request->coffin_flower;
+        $data->transfers = $request->transfers;
+        $data->cremation = $request->cremation;
+        $data->salutation = $request->salutation;
+        $data->name = $request->name;
+        $data->family_name = $request->family_name;
+        $data->dob = $request->dob;
+        $data->dod = $request->dod;
+        $data->register_address = $request->register_address;
+        $data->pass_away = $request->pass_away;
+        $data->body_now = $request->body_now;
+        $data->kins_salutation = $request->kins_salutation;
+        $data->kins_name = $request->kins_name;
+        $data->kins_family_name = $request->kins_family_name;
+        $data->kins_address = $request->kins_address;
+        $data->kins_mobile = $request->kins_mobile;
+        $data->kins_email = $request->kins_email;
+        $data->relationship = $request->relationship;
+
+        if ($request->hasFile('identity'))
+        {
+            $destinationPath = 'uploads/';
+            $file = $request->file('identity');
+            $file_name = time().''.$file->getClientOriginalName();
+            $file->move($destinationPath, $file_name);
+            $data->identity = $destinationPath.''.$file_name;
+        }
+
+        if ($request->hasFile('kins_identity'))
+        {
+            $destinationPath = 'uploads/';
+            $file = $request->file('kins_identity');
+            $file_name = time().''.$file->getClientOriginalName();
+            $file->move($destinationPath, $file_name);
+            $data->kins_identity = $destinationPath.''.$file_name;
+        }
+
+        if ($request->hasFile('signature'))
+        {
+            $destinationPath = 'uploads/';
+            $file = $request->file('signature');
+            $file_name = time().''.$file->getClientOriginalName();
+            $file->move($destinationPath, $file_name);
+            $data->signature = $destinationPath.''.$file_name;
+        }
+        
+        $data->save();
 
         return response([
             'status' => true,
