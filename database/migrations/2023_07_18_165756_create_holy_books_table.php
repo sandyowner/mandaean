@@ -13,14 +13,22 @@ return new class extends Migration
     {
         Schema::create('holy_books', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('image');
-            $table->text('url');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->text('url')->nullable();
             $table->string('ar_title')->nullable();
             $table->text('ar_description')->nullable();
             $table->string('pe_title')->nullable();
             $table->text('pe_description')->nullable();
+            $table->string('other_title')->nullable();
+            $table->text('other_description')->nullable();
+            $table->string('other_ar_title')->nullable();
+            $table->text('other_ar_description')->nullable();
+            $table->string('other_pe_title')->nullable();
+            $table->text('other_pe_description')->nullable();
+            $table->string('other_image')->nullable();
+            $table->text('other_url')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });

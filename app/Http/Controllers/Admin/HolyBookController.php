@@ -62,55 +62,84 @@ class HolyBookController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|max:200',
-            'description' => 'required',
-            'image' => 'required',
-            'url' => 'required',
-            'ar_title' => 'required|max:200',
-            'ar_description' => 'required',
-            'pe_title' => 'required|max:200',
-            'pe_description' => 'required',
-        ],[
-            'ar_title.required' => 'The title field is required.',
-            'ar_description.required' => 'The description field is required.',
-            'pe_title.required' => 'The title field is required.',
-            'pe_description.required' => 'The description field is required.',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|max:200',
+        //     'description' => 'required',
+        //     'image' => 'required',
+        //     'url' => 'required',
+        //     'ar_title' => 'required|max:200',
+        //     'ar_description' => 'required',
+        //     'pe_title' => 'required|max:200',
+        //     'pe_description' => 'required',
+        // ],[
+        //     'ar_title.required' => 'The title field is required.',
+        //     'ar_description.required' => 'The description field is required.',
+        //     'pe_title.required' => 'The title field is required.',
+        //     'pe_description.required' => 'The description field is required.',
+        // ]);
  
-        if ($validator->fails())
-        {
-            $messages = $validator->messages();
-            return back()->withInput()->withErrors($messages);
-        }else{
+        // if ($validator->fails())
+        // {
+        //     $messages = $validator->messages();
+        //     return back()->withInput()->withErrors($messages);
+        // }else{
             $books = new HolyBook();
-            $books['title'] = $request->title;
-            $books['description'] = $request->description;
-            $books['ar_title'] = $request->ar_title;
-            $books['ar_description'] = $request->ar_description;
-            $books['pe_title'] = $request->pe_title;
-            $books['pe_description'] = $request->pe_description;
-            if ($request->hasFile('image'))
-            {
-                $destinationPath = 'uploads/';
-                $file = $request->file('image');
-                $file_name = time().''.$file->getClientOriginalName();
-                $file->move($destinationPath , $file_name);
-                $imageName = $destinationPath.''.$file_name;
-                $books['image'] = $imageName;
-            }
-            if ($request->hasFile('url'))
-            {
-                $destinationPath1 = 'uploads/';
-                $file1 = $request->file('url');
-                $file_name1 = time().''.$file1->getClientOriginalName();
-                $file1->move($destinationPath1 , $file_name1);
-                $imageName1 = $destinationPath1.''.$file_name1;
-                $books['url'] = $imageName1;
+            $books['type'] = $request->type;
+
+            if($request->type=='holy'){
+                $books['title'] = $request->title;
+                $books['description'] = $request->description;
+                $books['ar_title'] = $request->ar_title;
+                $books['ar_description'] = $request->ar_description;
+                $books['pe_title'] = $request->pe_title;
+                $books['pe_description'] = $request->pe_description;
+                if ($request->hasFile('image'))
+                {
+                    $destinationPath = 'uploads/';
+                    $file = $request->file('image');
+                    $file_name = time().''.$file->getClientOriginalName();
+                    $file->move($destinationPath , $file_name);
+                    $imageName = $destinationPath.''.$file_name;
+                    $books['image'] = $imageName;
+                }
+                if ($request->hasFile('url'))
+                {
+                    $destinationPath1 = 'uploads/';
+                    $file1 = $request->file('url');
+                    $file_name1 = time().''.$file1->getClientOriginalName();
+                    $file1->move($destinationPath1 , $file_name1);
+                    $imageName1 = $destinationPath1.''.$file_name1;
+                    $books['url'] = $imageName1;
+                }
+            }else{
+                $books['other_title'] = $request->other_title;
+                $books['other_description'] = $request->other_description;
+                $books['other_ar_title'] = $request->other_ar_title;
+                $books['other_ar_description'] = $request->other_ar_description;
+                $books['other_pe_title'] = $request->other_pe_title;
+                $books['other_pe_description'] = $request->other_pe_description;
+                if ($request->hasFile('other_image'))
+                {
+                    $destinationPath = 'uploads/';
+                    $file = $request->file('other_image');
+                    $file_name = time().''.$file->getClientOriginalName();
+                    $file->move($destinationPath , $file_name);
+                    $imageName = $destinationPath.''.$file_name;
+                    $books['other_image'] = $imageName;
+                }
+                if ($request->hasFile('other_url'))
+                {
+                    $destinationPath1 = 'uploads/';
+                    $file1 = $request->file('other_url');
+                    $file_name1 = time().''.$file1->getClientOriginalName();
+                    $file1->move($destinationPath1 , $file_name1);
+                    $imageName1 = $destinationPath1.''.$file_name1;
+                    $books['other_url'] = $imageName1;
+                }
             }
             $books->save();
             return redirect('books')->with('message', 'Record Added!');
-        }
+        // }
     }
 
     /**
@@ -137,53 +166,82 @@ class HolyBookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|max:200',
-            'description' => 'required',
-            'ar_title' => 'required|max:200',
-            'ar_description' => 'required',
-            'pe_title' => 'required|max:200',
-            'pe_description' => 'required',
-        ],[
-            'ar_title.required' => 'The title field is required.',
-            'ar_description.required' => 'The description field is required.',
-            'pe_title.required' => 'The title field is required.',
-            'pe_description.required' => 'The description field is required.',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|max:200',
+        //     'description' => 'required',
+        //     'ar_title' => 'required|max:200',
+        //     'ar_description' => 'required',
+        //     'pe_title' => 'required|max:200',
+        //     'pe_description' => 'required',
+        // ],[
+        //     'ar_title.required' => 'The title field is required.',
+        //     'ar_description.required' => 'The description field is required.',
+        //     'pe_title.required' => 'The title field is required.',
+        //     'pe_description.required' => 'The description field is required.',
+        // ]);
  
-        if ($validator->fails())
-        {
-            $messages = $validator->messages();
-            return back()->withInput()->withErrors($messages);
-        }else{
+        // if ($validator->fails())
+        // {
+        //     $messages = $validator->messages();
+        //     return back()->withInput()->withErrors($messages);
+        // }else{
             $books = HolyBook::find($id);
-            $books['title'] = $request->title;
-            $books['description'] = $request->description;
-            $books['ar_title'] = $request->ar_title;
-            $books['ar_description'] = $request->ar_description;
-            $books['pe_title'] = $request->pe_title;
-            $books['pe_description'] = $request->pe_description;
-            if ($request->hasFile('image'))
-            {
-                $destinationPath = 'uploads/';
-                $file = $request->file('image');
-                $file_name = time().''.$file->getClientOriginalName();
-                $file->move($destinationPath , $file_name);
-                $imageName = $destinationPath.''.$file_name;
-                $books['image'] = $imageName;
-            }
-            if ($request->hasFile('url'))
-            {
-                $destinationPath1 = 'uploads/';
-                $file1 = $request->file('url');
-                $file_name1 = time().''.$file1->getClientOriginalName();
-                $file1->move($destinationPath1 , $file_name1);
-                $imageName1 = $destinationPath1.''.$file_name1;
-                $books['url'] = $imageName1;
+            $books['type'] = $request->type;
+
+            if($request->type=='holy'){
+                $books['title'] = $request->title;
+                $books['description'] = $request->description;
+                $books['ar_title'] = $request->ar_title;
+                $books['ar_description'] = $request->ar_description;
+                $books['pe_title'] = $request->pe_title;
+                $books['pe_description'] = $request->pe_description;
+                if ($request->hasFile('image'))
+                {
+                    $destinationPath = 'uploads/';
+                    $file = $request->file('image');
+                    $file_name = time().''.$file->getClientOriginalName();
+                    $file->move($destinationPath , $file_name);
+                    $imageName = $destinationPath.''.$file_name;
+                    $books['image'] = $imageName;
+                }
+                if ($request->hasFile('url'))
+                {
+                    $destinationPath1 = 'uploads/';
+                    $file1 = $request->file('url');
+                    $file_name1 = time().''.$file1->getClientOriginalName();
+                    $file1->move($destinationPath1 , $file_name1);
+                    $imageName1 = $destinationPath1.''.$file_name1;
+                    $books['url'] = $imageName1;
+                }
+            }else{
+                $books['other_title'] = $request->other_title;
+                $books['other_description'] = $request->other_description;
+                $books['other_ar_title'] = $request->other_ar_title;
+                $books['other_ar_description'] = $request->other_ar_description;
+                $books['other_pe_title'] = $request->other_pe_title;
+                $books['other_pe_description'] = $request->other_pe_description;
+                if ($request->hasFile('other_image'))
+                {
+                    $destinationPath = 'uploads/';
+                    $file = $request->file('other_image');
+                    $file_name = time().''.$file->getClientOriginalName();
+                    $file->move($destinationPath , $file_name);
+                    $imageName = $destinationPath.''.$file_name;
+                    $books['other_image'] = $imageName;
+                }
+                if ($request->hasFile('other_url'))
+                {
+                    $destinationPath1 = 'uploads/';
+                    $file1 = $request->file('other_url');
+                    $file_name1 = time().''.$file1->getClientOriginalName();
+                    $file1->move($destinationPath1 , $file_name1);
+                    $imageName1 = $destinationPath1.''.$file_name1;
+                    $books['other_url'] = $imageName1;
+                }
             }
             $books->save();
             return redirect('books')->with('message', 'Record Updated!');
-        }
+        // }
     }
 
     /**
