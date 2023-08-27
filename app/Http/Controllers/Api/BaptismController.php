@@ -12,10 +12,10 @@ class BaptismController extends Controller
 {
     public function BookBaptism(Request $request){
         $validator = Validator::make($request->all(), [
+            'venue' => 'required',
             'name' => 'required',
-            'last_name' => 'required',
-            'date' => 'required',
             'email' => 'required',
+            'date' => 'required',
             'code' => 'required',
             'phone' => 'required'
         ]);
@@ -32,8 +32,8 @@ class BaptismController extends Controller
 
         $data = Baptism::create([
             'user_id' => $id,
+            'venue' => $request->venue,
             'name' => $request->name,
-            'last_name' => $request->last_name,
             'date' => $request->date,
             'email' => $request->email,
             'code' => $request->code,

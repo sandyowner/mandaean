@@ -21,26 +21,30 @@
   <div class="row">
     <div class="col-md-4 stretch-card grid-margin">
       <div class="card bg-gradient-danger card-img-holder text-white">
-        <div class="card-body">
-          <img src="{{url('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-          <h4 class="font-weight-normal mb-3">Total User
-            <!-- <i class="mdi mdi-chart-line mdi-24px float-right"></i> -->
-          </h4>
-          <h2 class="mb-5">{{$data['total_users']}}</h2>
-          <!-- <h6 class="card-text">Increased by 60%</h6> -->
-        </div>
+        <a href="{{url('users')}}" style="color:inherit; text-decoration:inherit;">
+          <div class="card-body">
+            <img src="{{url('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+            <h4 class="font-weight-normal mb-3">Total User
+              <!-- <i class="mdi mdi-chart-line mdi-24px float-right"></i> -->
+            </h4>
+            <h2 class="mb-5">{{$data['total_users']}}</h2>
+            <!-- <h6 class="card-text">Increased by 60%</h6> -->
+          </div>
+        </a>
       </div>
     </div>
     <div class="col-md-4 stretch-card grid-margin">
       <div class="card bg-gradient-info card-img-holder text-white">
-        <div class="card-body">
-          <img src="{{url('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-          <h4 class="font-weight-normal mb-3">Orders
-            <!-- <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i> -->
-          </h4>
-          <h2 class="mb-5">{{$data['total_orders']}}</h2>
-          <!-- <h6 class="card-text">Decreased by 10%</h6> -->
-        </div>
+        <a href="{{url('orders')}}" style="color:inherit; text-decoration:inherit;"> 
+          <div class="card-body">
+            <img src="{{url('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+            <h4 class="font-weight-normal mb-3">Orders
+              <!-- <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i> -->
+            </h4>
+            <h2 class="mb-5">{{$data['total_orders']}}</h2>
+            <!-- <h6 class="card-text">Decreased by 10%</h6> -->
+          </div>
+        </a>
       </div>
     </div>
     <div class="col-md-4 stretch-card grid-margin">
@@ -90,7 +94,7 @@
                   <th> User </th>
                   <th> Name </th>
                   <th> Email </th>
-                  <th> Mobile </th>
+                  <!-- <th> Mobile </th> -->
                   <th> Status </th>
                 </tr>
               </thead>
@@ -106,7 +110,7 @@
                   </td>
                   <td> {{$user->name}} </td>
                   <td> {{$user->email}} </td>
-                  <td> {{$user->country_code?$user->country_code:''}}{{$user->mobile_no?$user->mobile_no:''}} </td>
+                  <!-- <td> {{$user->country_code?$user->country_code:''}}{{$user->mobile_no?$user->mobile_no:''}} </td> -->
                   <td>
                     <label class="badge badge-gradient-success">Active</label>
                   </td>
