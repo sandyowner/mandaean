@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Donation;
 use Auth;
+use Validator;
 
 class EventController extends Controller
 {
@@ -54,5 +56,34 @@ class EventController extends Controller
                 'data' => []
             ],422);
         }
+    }
+
+    public function Donation(Request $request){
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required',
+            'amount' => 'required'
+        ]);
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status' => false,
+                'message' => $error,
+                'data' => []
+            ],422);
+        }
+
+        $id = Auth::id();
+
+        $data = Donation::create([
+            'user_id' => $id,
+            'event_id' => $request->event_id,
+            'amount' => $request->amount
+        ]);
+
+        return response([
+            'status' => true,
+            'message' => 'Donated.',
+            'data' => $data
+        ],201);
     }
 }

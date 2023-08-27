@@ -80,6 +80,7 @@ Route::middleware('auth:sanctum')->group( function () {
     
     Route::get('donation-event-list', [EventController::class, 'DonationEventList']);
     Route::get('event-detail/{id}', [EventController::class, 'EventDetail']);
+    Route::post('donation', [EventController::class, 'Donation']);
     
     Route::post('search', [SearchController::class, 'Search']);
 
