@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('rituals', function (Blueprint $table) {
             $table->id();
+            $table->string('docs')->nullable();
             $table->string('title');
             $table->text('description');
             $table->string('ar_title')->nullable();

@@ -64,10 +64,10 @@ class RitualController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:200',
             'description' => 'required',
-            'ar_title' => 'required|max:200',
-            'ar_description' => 'required',
-            'pe_title' => 'required|max:200',
-            'pe_description' => 'required',
+            // 'ar_title' => 'required|max:200',
+            // 'ar_description' => 'required',
+            // 'pe_title' => 'required|max:200',
+            // 'pe_description' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
             'ar_description.required' => 'The description field is required.',
@@ -82,6 +82,15 @@ class RitualController extends Controller
         }else{
             $password = rand_string(6);
             $ritual = new Ritual();
+            if ($request->hasFile('docs'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('docs');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $ritual['docs'] = $imageName;
+            }
             $ritual['title'] = $request->title;
             $ritual['description'] = $request->description;
             $ritual['ar_title'] = $request->ar_title;
@@ -120,10 +129,10 @@ class RitualController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:200',
             'description' => 'required',
-            'ar_title' => 'required|max:200',
-            'ar_description' => 'required',
-            'pe_title' => 'required|max:200',
-            'pe_description' => 'required',
+            // 'ar_title' => 'required|max:200',
+            // 'ar_description' => 'required',
+            // 'pe_title' => 'required|max:200',
+            // 'pe_description' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
             'ar_description.required' => 'The description field is required.',
@@ -137,6 +146,15 @@ class RitualController extends Controller
             return back()->withInput()->withErrors($messages);
         }else{
             $ritual = Ritual::find($id);
+            if ($request->hasFile('docs'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('docs');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $ritual['docs'] = $imageName;
+            }
             $ritual['title'] = $request->title;
             $ritual['description'] = $request->description;
             $ritual['ar_title'] = $request->ar_title;

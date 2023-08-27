@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('group');
             $table->text('description');
             $table->string('image');
+            $table->string('docs')->nullable();
             $table->date('date')->nullable();
             $table->string('ar_title')->nullable();
             $table->string('ar_group')->nullable();
