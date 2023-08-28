@@ -70,8 +70,8 @@ class FuneralController extends Controller
         $data->salutation = $request->salutation;
         $data->name = $request->name;
         $data->family_name = $request->family_name;
-        $data->dob = $request->dob;
-        $data->dod = $request->dod;
+        $data->dob = date('Y-m-d',strtotime($request->dob));
+        $data->dod = date('Y-m-d',strtotime($request->dod));
         $data->register_address = $request->register_address;
         $data->pass_away = $request->pass_away;
         $data->body_now = $request->body_now;
