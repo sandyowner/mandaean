@@ -27,4 +27,9 @@ class Order extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class, 'id', 'transaction_id');
+    }
 }

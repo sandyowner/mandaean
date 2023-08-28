@@ -18,13 +18,13 @@ class OrderDetail extends Model
         return $this->hasOne(Product::class, 'id', 'product_id')->select('id','name','category');
     }
 
-    public function color()
+    public function colorname()
     {
-        return $this->hasOne(Color::class, 'id', 'product_id')->select('id','name');
+        return $this->hasOne(Color::class, 'id', 'color')->select('id','name');
     }
 
-    public function size()
+    public function sizecode()
     {
-        return $this->hasOne(Size::class, 'id', 'product_id')->select('id','code');
+        return $this->hasOne(Size::class, 'id', 'size')->select('id','code');
     }
 }
