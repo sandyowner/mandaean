@@ -199,7 +199,7 @@
             <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
               <a class="nav-link" href="{{url('product')}}">
                 <span class="menu-title">Product Inventory</span>
-                <i class="mdi mdi mdi-apps menu-icon"></i>
+                <i class="mdi mdi-apps menu-icon"></i>
               </a>
             </li>
             <!-- <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
@@ -218,6 +218,12 @@
               <a class="nav-link" href="{{url('transaction')}}">
                 <span class="menu-title">Payment Transactions</span>
                 <i class="mdi mdi-account-box menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item {{ (\Request::segment(1)=='static-content')?'active':'' }}">
+              <a class="nav-link" href="{{url('static-content')}}">
+                <span class="menu-title">Static Content</span>
+                <i class="mdi mdi-apps menu-icon"></i>
               </a>
             </li>
           </ul>

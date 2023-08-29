@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('slug');
             $table->string('title')->nullable();
             $table->text('content')->nullable();
+            $table->string('ar_title')->nullable();
+            $table->text('ar_content')->nullable();
+            $table->string('pe_title')->nullable();
+            $table->text('pe_content')->nullable();
             $table->timestamps();
         });
     }
