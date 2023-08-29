@@ -74,7 +74,7 @@ class TransactionController extends Controller
     {
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        $data['order'] =  Transaction::with('user')
+        $data['transaction'] =  Transaction::with('user')
             ->orderBy('id','desc')
             ->where('id',$id)
             ->first();

@@ -21,25 +21,34 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <address>
                     <p class="font-weight-bold">Order Details </p>
-                    <p>{{$data['order']->order_number}}</p>
-                    <p>{{$data['order']->total_amount}}</p>
+                    <p>Order Id: <span>{{$data['order']->order_number}}</span></p>
+                    <p>Total: {{$data['order']->total_amount}}</p>
                   </address>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                  <address>
+                    <p class="font-weight-bold">Order Details </p>
+                    <p>Area: {{$data['order']->address->first_address}}, {{$data['order']->address->second_address}}</p>
+                    <p>City: {{$data['order']->address->city}}</p>
+                    <p>State: {{$data['order']->address->state}}</p>
+                    <p>Postal Code: {{$data['order']->address->postal_code}}</p>
+                  </address>
+                </div>
+                <div class="col-md-3">
                   <address>
                     <p class="font-weight-bold"> Transaction Details</p>
-                    <p>{{$data['order']->transaction->transaction_id}}</p>
-                    <p>{{$data['order']->transaction->payment_method}}</p>
+                    <p>Transaction Id: {{$data['order']->transaction->transaction_id}}</p>
+                    <p>Payment Method: {{$data['order']->transaction->payment_method}}</p>
                   </address>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <address>
                     <p class="font-weight-bold"> User Details </p>
-                    <p>{{$data['order']->user->name}}</p>
-                    <p>{{$data['order']->user->email}}</p>
+                    <p>Name: {{$data['order']->user->name}}</p>
+                    <p>Email: {{$data['order']->user->email}}</p>
                   </address>
                 </div>
               </div>

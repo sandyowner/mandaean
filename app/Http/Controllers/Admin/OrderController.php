@@ -25,7 +25,7 @@ class OrderController extends Controller
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
         $dataList = Order::with(['detail'=>function($q){
-                $q->with('product','color','size');
+                $q->with('product','colorname','sizecode');
             }])
             ->with('address')
             ->with('user')
