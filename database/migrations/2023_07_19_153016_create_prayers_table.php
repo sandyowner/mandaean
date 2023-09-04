@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('subtitle')->nullable();
             $table->text('description');
             $table->text('other_info')->nullable();
+            $table->string('docs')->nullable();
             $table->string('ar_title')->nullable();
             $table->text('ar_subtitle')->nullable();
             $table->text('ar_description')->nullable();

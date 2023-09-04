@@ -65,15 +65,15 @@ class PrayerController extends Controller
             'title' => 'required|max:200',
             'subtitle' => 'required',
             'description' => 'required',
-            'other_info' => 'required',
-            'ar_title' => 'required',
-            'ar_subtitle' => 'required',
-            'ar_description' => 'required',
-            'ar_other_info' => 'required',
-            'pe_title' => 'required',
-            'pe_subtitle' => 'required',
-            'pe_description' => 'required',
-            'pe_other_info' => 'required',
+            // 'other_info' => 'required',
+            // 'ar_title' => 'required',
+            // 'ar_subtitle' => 'required',
+            // 'ar_description' => 'required',
+            // 'ar_other_info' => 'required',
+            // 'pe_title' => 'required',
+            // 'pe_subtitle' => 'required',
+            // 'pe_description' => 'required',
+            // 'pe_other_info' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
             'ar_subtitle.required' => 'The subtitle field is required.',
@@ -104,6 +104,15 @@ class PrayerController extends Controller
             $prayer['pe_subtitle'] = $request->pe_subtitle;
             $prayer['pe_description'] = $request->pe_description;
             $prayer['pe_other_info'] = $request->pe_other_info;
+            if ($request->hasFile('docs'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('docs');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $prayer['docs'] = $imageName;
+            }
             $prayer->save();
             return redirect('prayer')->with('message', 'Record Added!');
         }
@@ -137,15 +146,15 @@ class PrayerController extends Controller
             'title' => 'required|max:200',
             'subtitle' => 'required',
             'description' => 'required',
-            'other_info' => 'required',
-            'ar_title' => 'required',
-            'ar_subtitle' => 'required',
-            'ar_description' => 'required',
-            'ar_other_info' => 'required',
-            'pe_title' => 'required',
-            'pe_subtitle' => 'required',
-            'pe_description' => 'required',
-            'pe_other_info' => 'required',
+            // 'other_info' => 'required',
+            // 'ar_title' => 'required',
+            // 'ar_subtitle' => 'required',
+            // 'ar_description' => 'required',
+            // 'ar_other_info' => 'required',
+            // 'pe_title' => 'required',
+            // 'pe_subtitle' => 'required',
+            // 'pe_description' => 'required',
+            // 'pe_other_info' => 'required',
         ],[
             'ar_title.required' => 'The title field is required.',
             'ar_subtitle.required' => 'The subtitle field is required.',
@@ -175,6 +184,15 @@ class PrayerController extends Controller
             $prayer['pe_subtitle'] = $request->pe_subtitle;
             $prayer['pe_description'] = $request->pe_description;
             $prayer['pe_other_info'] = $request->pe_other_info;
+            if ($request->hasFile('docs'))
+            {
+                $destinationPath = 'uploads/';
+                $file = $request->file('docs');
+                $file_name = time().''.$file->getClientOriginalName();
+                $file->move($destinationPath , $file_name);
+                $imageName = $destinationPath.''.$file_name;
+                $prayer['docs'] = $imageName;
+            }
             $prayer->save();
             return redirect('prayer')->with('message', 'Record Updated!');
         }
