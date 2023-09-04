@@ -1,17 +1,17 @@
 @extends('layouts.app')
-@section('title','Sizes')
-@section('pagetitle','Sizes')
+@section('title','Baptism')
+@section('pagetitle','Baptism')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Sizes</h3>
+      <h3 class="page-title">Baptism</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{{url('size/create')}}" title="Add">
+            <!-- <a href="{{url('baptism/create')}}" title="Add">
               <label class="badge badge-info">+ Add</label>
-            </a>
+            </a> -->
           </li>
         </ol>
       </nav>
@@ -20,11 +20,15 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <table class="table table-striped" id="size-table">
+            <table class="table table-striped" id="baptism-table">
               <thead>
                 <tr>
+                  <th> User Name</th>
                   <th> Name </th>
-                  <th> Code </th>
+                  <th> Venue </th>
+                  <th> Date </th>
+                  <th> Email </th>
+                  <th> Phone No. </th>
                   <th> Action </th>
                 </tr>
               </thead>
@@ -63,18 +67,22 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    var oTable = $('#size-table').DataTable({
+    var oTable = $('#baptism-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: "{{url('size')}}",
+            url: "{{url('baptism')}}",
             data: function (d) {
                 d.search = "{{$data['filter']}}";
             }
         },
         columns: [
+            {data: 'user_name', name: 'user_name'},
             {data: 'name', name: 'name'},
-            {data: 'code', name: 'code'},
+            {data: 'venue', name: 'venue'},
+            {data: 'date', name: 'date'},
+            {data: 'email', name: 'email'},
+            {data: 'phone', name: 'phone'},
             {data: 'action', name: 'action', orderable:false, searchable:false}
         ],
     });
