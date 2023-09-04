@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\StaticController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -68,6 +69,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('orders', OrderController::class);
     Route::resource('transaction', TransactionController::class);
     Route::resource('static-content', StaticController::class);
+    Route::resource('color', ColorController::class);
 });
 
 Route::controller(PaymentController::class)
