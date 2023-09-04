@@ -226,9 +226,15 @@
                 <i class="mdi mdi-apps menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item {{ (\Request::segment(1)=='funeral')?'active':'' }}">
+              <a class="nav-link" href="{{url('funeral')}}">
+                <span class="menu-title">Funeral Management</span>
+                <i class="mdi mdi-account-box menu-icon"></i>
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#baptism-pages" aria-expanded="false" aria-controls="category-pages">
-                <span class="menu-title">Baptism Manage...</span>
+                <span class="menu-title">Baptism Management</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-medical-bag menu-icon"></i>
               </a>
@@ -249,7 +255,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#setting-pages" aria-expanded="false" aria-controls="category-pages">
-                <span class="menu-title">Settings Manage...</span>
+                <span class="menu-title">Settings Management</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-medical-bag menu-icon"></i>
               </a>

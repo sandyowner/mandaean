@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BaptismVenueController;
 use App\Http\Controllers\Admin\BaptismController;
+use App\Http\Controllers\Admin\FuneralController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -78,6 +79,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('brand', BrandController::class);
     Route::resource('baptism-venue', BaptismVenueController::class);
     Route::resource('baptism', BaptismController::class);
+    Route::resource('funeral', FuneralController::class);
 });
 
 Route::controller(PaymentController::class)
