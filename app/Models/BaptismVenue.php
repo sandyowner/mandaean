@@ -11,5 +11,5 @@ class BaptismVenue extends Model
 
     protected $table = 'baptism_venue';
     
-    protected $fillable = ['name', 'venue'];
+    protected $fillable = ['name', 'status'];
 }

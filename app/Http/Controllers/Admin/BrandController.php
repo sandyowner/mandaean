@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Color;
+use App\Models\Brand;
 use DataTables;
 use Validator;
 
-class ColorController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,10 @@ class ColorController extends Controller
         $data['filter'] = $request->filter;
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        $dataList = Color::orderBy('id','desc');
+        $dataList = Brand::orderBy('id','desc');
         $search = $request->search;
         if($search){
-            $dataList->where('name', 'LIKE', '%'.$search.'%')
-                ->orWhere('color', 'LIKE', '%'.$search.'%');
+            $dataList->where('name', 'LIKE', '%'.$search.'%');
         }
         $dataList = $dataList->get();
         
@@ -30,16 +29,16 @@ class ColorController extends Controller
             return DataTables::of($dataList)
                 ->addColumn('action', function($row){
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';
-                    $btn = '<a href="'.route('color.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
+                    $btn = '<a href="'.route('brand.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
                     $delimg = asset('/').'public/assets/images/dlt-icon.png';
-                    $btn .= '<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="deldata" id="'.$row->id.'" title="Delete" onclick=\'setData('.$row->id.',"'.route('color.destroy',$row->id).'");\'><label class="badge badge-danger">Delete</label></a>';
+                    $btn .= '<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="deldata" id="'.$row->id.'" title="Delete" onclick=\'setData('.$row->id.',"'.route('brand.destroy',$row->id).'");\'><label class="badge badge-danger">Delete</label></a>';
                     return $btn;
                 })
                 ->rawColumns(['image','action'])
                 ->make(true);
         }
 
-        return view('admin.color.index',['data'=>$data]);
+        return view('admin.brand.index',['data'=>$data]);
     }
 
     /**
@@ -49,7 +48,7 @@ class ColorController extends Controller
     {
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        return view('admin.color.create',['data'=>$data]);
+        return view('admin.brand.create',['data'=>$data]);
     }
 
     /**
@@ -58,7 +57,7 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:50'
+            'name' => 'required|max:200'
         ]);
  
         if ($validator->fails())
@@ -66,12 +65,11 @@ class ColorController extends Controller
             $messages = $validator->messages();
             return back()->withInput()->withErrors($messages);
         }else{
-            $color = new Color();
-            $color['name'] = $request->name;
-            $color['color'] = $request->color;
-            $color->save();
+            $brand = new Brand();
+            $brand['name'] = $request->name;
+            $brand->save();
 
-            return redirect('color')->with('message', 'Record Added!');
+            return redirect('brand')->with('message', 'Record Added!');
         }
     }
 
@@ -90,8 +88,8 @@ class ColorController extends Controller
     {
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        $data['color'] = Color::find($id);
-        return view('admin.color.edit',['data'=>$data]);
+        $data['brand'] = Brand::find($id);
+        return view('admin.brand.edit',['data'=>$data]);
     }
 
     /**
@@ -108,12 +106,11 @@ class ColorController extends Controller
             $messages = $validator->messages();
             return back()->withInput()->withErrors($messages);
         }else{
-            $color = Color::find($id);
-            $color['name'] = $request->name;
-            $color['color'] = $request->color;
-            $color->save();
+            $brand = Brand::find($id);
+            $brand['name'] = $request->name;
+            $brand->save();
 
-            return redirect('color')->with('message', 'Record Updated!');
+            return redirect('brand')->with('message', 'Record Updated!');
         }
     }
 
@@ -122,7 +119,7 @@ class ColorController extends Controller
      */
     public function destroy(string $id)
     {
-        Color::where('id',$id)->delete();
+        Brand::where('id',$id)->delete();
         
         return true;
     }

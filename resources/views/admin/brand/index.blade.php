@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Prayers')
-@section('pagetitle','Prayers')
+@section('title','Brands')
+@section('pagetitle','Brands')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Prayer Management</h3>
+      <h3 class="page-title">Brands</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{{url('prayer/create')}}" title="Add">
+            <a href="{{url('brand/create')}}" title="Add">
               <label class="badge badge-info">+ Add</label>
             </a>
           </li>
@@ -20,11 +20,11 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <table class="table table-striped" id="prayer-table">
+            <table class="table table-striped" id="brand-table">
               <thead>
                 <tr>
-                  <th> Title </th>
-                  <th> Subtitle </th>
+                  <th> Name </th>
+                  <th> Status </th>
                   <th> Action </th>
                 </tr>
               </thead>
@@ -63,18 +63,18 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    var oTable = $('#prayer-table').DataTable({
+    var oTable = $('#brand-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: "{{url('prayer')}}",
+            url: "{{url('brand')}}",
             data: function (d) {
                 d.search = "{{$data['filter']}}";
             }
         },
         columns: [
-            {data: 'title', name: 'title'},
-            {data: 'subtitle', name: 'subtitle'},
+            {data: 'name', name: 'name'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable:false, searchable:false}
         ],
     });

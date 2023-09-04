@@ -226,6 +226,53 @@
                 <i class="mdi mdi-apps menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#baptism-pages" aria-expanded="false" aria-controls="category-pages">
+                <span class="menu-title">Baptism Manage...</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-medical-bag menu-icon"></i>
+              </a>
+              <div class="collapse" id="baptism-pages">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item {{ (\Request::segment(1)=='baptism')?'active':'' }}">
+                    <a class="nav-link" href="{{url('baptism')}}">
+                      <span class="menu-title">Baptism</span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='baptism-venue')?'active':'' }}">
+                    <a class="nav-link" href="{{url('baptism-venue')}}">
+                      <span class="menu-title">Baptism Venue</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#setting-pages" aria-expanded="false" aria-controls="category-pages">
+                <span class="menu-title">Settings Manage...</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-medical-bag menu-icon"></i>
+              </a>
+              <div class="collapse" id="setting-pages">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item {{ (\Request::segment(1)=='brand')?'active':'' }}">
+                    <a class="nav-link" href="{{url('brand')}}">
+                      <span class="menu-title">Brands</span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='color')?'active':'' }}">
+                    <a class="nav-link" href="{{url('color')}}">
+                      <span class="menu-title">Colors</span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='size')?'active':'' }}">
+                    <a class="nav-link" href="{{url('size')}}">
+                      <span class="menu-title">Sizes</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </nav>
         <div class="main-panel">

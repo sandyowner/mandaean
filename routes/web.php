@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\StaticController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\BaptismVenueController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -70,6 +73,9 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('transaction', TransactionController::class);
     Route::resource('static-content', StaticController::class);
     Route::resource('color', ColorController::class);
+    Route::resource('size', SizeController::class);
+    Route::resource('brand', BrandController::class);
+    Route::resource('baptism-venue', BaptismVenueController::class);
 });
 
 Route::controller(PaymentController::class)

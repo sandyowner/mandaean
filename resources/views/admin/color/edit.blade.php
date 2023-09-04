@@ -25,14 +25,14 @@
                     <h4 align="center">English Language</h4><br/>
                     <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Color Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Color Name" value="{{old('name',$data['name']->name)}}">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Color Name" value="{{old('name',$data['color']->name)}}">
                         @error('name')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="form-group col-sm-12">
                         <label for="exampleInputEmail3">Color Code</label>
-                        <textarea class="form-control" id="color" name="color" placeholder="Color Code" rows="3">{{old('color',$data['color']->color)}}</textarea>
+                        <input type="text" class="form-control" id="color" name="color" placeholder="Color Code" value="{{old('color',$data['color']->color)}}">
                         @error('color')
                             <p style="color: red">{{$message}}</p>
                         @enderror
@@ -63,14 +63,4 @@
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
-<script type="text/javascript">
-    $('#description,#other_info,#ar_description,#ar_other_info,#pe_description,#pe_other_info').summernote({
-        height: 300
-    });
-</script>
 @endsection

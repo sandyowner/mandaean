@@ -62,13 +62,3 @@
     </div>
 </div>
 @endsection
-@section('scripts')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
-<script type="text/javascript">
-    $('#description,#other_info,#ar_description,#ar_other_info,#pe_description,#pe_other_info').summernote({
-        height: 300
-    });
-</script>
-@endsection

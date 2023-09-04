@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Colors')
-@section('pagetitle','Colors')
+@section('title','Baptism Venue')
+@section('pagetitle','Baptism Venue')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Colors</h3>
+      <h3 class="page-title">Baptism Venue</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{{url('color/create')}}" title="Add">
+            <a href="{{url('baptism-venue/create')}}" title="Add">
               <label class="badge badge-info">+ Add</label>
             </a>
           </li>
@@ -20,11 +20,11 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <table class="table table-striped" id="color-table">
+            <table class="table table-striped" id="baptism-venue-table">
               <thead>
                 <tr>
                   <th> Name </th>
-                  <th> Code </th>
+                  <th> Status </th>
                   <th> Action </th>
                 </tr>
               </thead>
@@ -63,18 +63,18 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    var oTable = $('#color-table').DataTable({
+    var oTable = $('#baptism-venue-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: "{{url('color')}}",
+            url: "{{url('baptism-venue')}}",
             data: function (d) {
                 d.search = "{{$data['filter']}}";
             }
         },
         columns: [
             {data: 'name', name: 'name'},
-            {data: 'color', name: 'color'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable:false, searchable:false}
         ],
     });
