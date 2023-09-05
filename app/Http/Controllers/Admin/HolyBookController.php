@@ -30,8 +30,20 @@ class HolyBookController extends Controller
         if ($request->ajax()) {
             return DataTables::of($dataList)
                 ->addColumn('image', function($row){
-                    $url = url('/').'/'.$row->image;
-                    return '<img src="'.$url.'">';
+                    if($row->type=='holy'){
+                        $url = url('/').'/'.$row->image;
+                        return '<img src="'.$url.'">';
+                    }else{
+                        $url = url('/').'/'.$row->other_image;
+                        return '<img src="'.$url.'">';
+                    }
+                })
+                ->editColumn('title', function($row){
+                    if($row->type=='holy'){
+                        return $row->title;
+                    }else{
+                        return $row->other_title;
+                    }
                 })
                 ->addColumn('action', function($row){
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';

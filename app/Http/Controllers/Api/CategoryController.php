@@ -70,6 +70,7 @@ class CategoryController extends Controller
 
     public function HolyBookList(Request $request)
     {
+        dd($request->all());
         $id = Auth::id();
         $data = HolyBook::where('status','active')->get();
         
