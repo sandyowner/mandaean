@@ -41,7 +41,7 @@ class HolyBookResource extends JsonResource
             }else{
                 return [
                     'id'            => $this->id,
-                    'title'         => $type,//$this->title,
+                    'title'         => $this->title,
                     'description'   => $this->description,
                     'image'         => ($this->image)?url('/').'/'.$this->image:null,
                     'url'           => ($this->url)?url('/').'/'.$this->url:null,
@@ -70,7 +70,7 @@ class HolyBookResource extends JsonResource
             }else{
                 return [
                     'id'            => $this->id,
-                    'title'         => $type,//$this->other_title,
+                    'title'         => $this->other_title,
                     'description'   => $this->other_description,
                     'image'         => ($this->other_image)?url('/').'/'.$this->other_image:null,
                     'url'           => ($this->other_url)?url('/').'/'.$this->other_url:null,

@@ -70,10 +70,13 @@ class CategoryController extends Controller
 
     public function HolyBookList(Request $request)
     {
-        // dd($request->all());
         $id = Auth::id();
-        $data = HolyBook::where('status','active')->get();
-        
+        $type = $request->type;
+        if($type=='holy'){
+            $data = HolyBook::where('type','holy')->where('status','active')->get();
+        }else{
+            $data = HolyBook::where('type','author')->where('status','active')->get();
+        }    
         return response([
             'status' => true,
             'message' => 'Holy Book List.',
