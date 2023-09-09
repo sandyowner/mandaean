@@ -21,6 +21,7 @@ class PrayerDetailResource extends JsonResource
                 'subtitle'      => $this->ar_subtitle,
                 'description'   => $this->ar_description,
                 'other_info'    => $this->ar_other_info,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
             ];
         }elseif ($request->lang == 'pe') {
             return [
@@ -29,6 +30,7 @@ class PrayerDetailResource extends JsonResource
                 'subtitle'      => $this->pe_subtitle,
                 'description'   => $this->pe_description,
                 'other_info'    => $this->pe_other_info,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
             ];
         }else{
             return [
@@ -37,6 +39,7 @@ class PrayerDetailResource extends JsonResource
                 'subtitle'      => $this->subtitle,
                 'description'   => $this->description,
                 'other_info'    => $this->other_info,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
             ];
         }
     }

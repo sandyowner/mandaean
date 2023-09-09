@@ -19,18 +19,21 @@ class RitualDetailResource extends JsonResource
                 'id'            => $this->id,
                 'title'         => $this->ar_title,
                 'description'   => $this->ar_description,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
             ];
         }elseif ($request->lang == 'pe') {
             return [
                 'id'            => $this->id,
                 'title'         => $this->pe_title,
                 'description'   => $this->pe_description,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
             ];
         }else{
             return [
                 'id'            => $this->id,
                 'title'         => $this->title,
                 'description'   => $this->description,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
             ];
         }
     }

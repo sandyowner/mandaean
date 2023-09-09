@@ -22,6 +22,7 @@ class MandanismDetailResource extends JsonResource
                 'date'          => $this->date,
                 'description'   => $this->ar_description,
                 'image'         => url('/').'/'.$this->image,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }elseif ($request->lang == 'pe') {
@@ -32,6 +33,7 @@ class MandanismDetailResource extends JsonResource
                 'date'          => $this->date,
                 'description'   => $this->pe_description,
                 'image'         => url('/').'/'.$this->image,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }else{
@@ -42,6 +44,7 @@ class MandanismDetailResource extends JsonResource
                 'date'          => $this->date,
                 'description'   => $this->description,
                 'image'         => url('/').'/'.$this->image,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }
