@@ -97,6 +97,13 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-12 holy">
+                        <label for="exampleInputName1">Author Name</label>
+                        <input type="text" class="form-control" id="author" name="author" placeholder="Author Name" value="{{old('author')}}">
+                        @error('author')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12 holy">
                         <label for="exampleInputName1">Title</label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{old('title')}}">
                         @error('title')

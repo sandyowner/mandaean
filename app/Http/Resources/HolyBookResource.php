@@ -23,6 +23,7 @@ class HolyBookResource extends JsonResource
             if($request->lang == 'ar'){
                 return [
                     'id'            => $this->id,
+                    'author'        => $this->author,
                     'title'         => $this->ar_title,
                     'description'   => $this->ar_description,
                     'image'         => ($this->image)?url('/').'/'.$this->image:null,
@@ -32,6 +33,7 @@ class HolyBookResource extends JsonResource
             }elseif ($request->lang == 'pe') {
                 return [
                     'id'            => $this->id,
+                    'author'        => $this->author,
                     'title'         => $this->pe_title,
                     'description'   => $this->pe_description,
                     'image'         => ($this->image)?url('/').'/'.$this->image:null,
@@ -41,6 +43,7 @@ class HolyBookResource extends JsonResource
             }else{
                 return [
                     'id'            => $this->id,
+                    'author'        => $this->author,
                     'title'         => $this->title,
                     'description'   => $this->description,
                     'image'         => ($this->image)?url('/').'/'.$this->image:null,
@@ -52,6 +55,7 @@ class HolyBookResource extends JsonResource
             if($request->lang == 'ar'){
                 return [
                     'id'            => $this->id,
+                    'author'        => $this->author,
                     'title'         => $this->other_ar_title,
                     'description'   => $this->other_ar_description,
                     'image'         => ($this->other_image)?url('/').'/'.$this->other_image:null,
@@ -61,6 +65,7 @@ class HolyBookResource extends JsonResource
             }elseif ($request->lang == 'pe') {
                 return [
                     'id'            => $this->id,
+                    'author'        => $this->author,
                     'title'         => $this->other_pe_title,
                     'description'   => $this->other_pe_description,
                     'image'         => ($this->other_image)?url('/').'/'.$this->other_image:null,
@@ -70,6 +75,7 @@ class HolyBookResource extends JsonResource
             }else{
                 return [
                     'id'            => $this->id,
+                    'author'        => $this->author,
                     'title'         => $this->other_title,
                     'description'   => $this->other_description,
                     'image'         => ($this->other_image)?url('/').'/'.$this->other_image:null,
