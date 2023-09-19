@@ -10,6 +10,7 @@ use App\Models\HolyBook;
 use App\Models\Bookmark;
 use App\Models\Ritual;
 use App\Models\Prayer;
+use App\Models\Program;
 use App\Http\Resources\MandanismResource;
 use App\Http\Resources\MandanismDetailResource;
 use App\Http\Resources\NewsResource;
@@ -19,6 +20,8 @@ use App\Http\Resources\RitualDetailResource;
 use App\Http\Resources\PrayerResource;
 use App\Http\Resources\PrayerDetailResource;
 use App\Http\Resources\HolyBookResource;
+use App\Http\Resources\ProgramResource;
+use App\Http\Resources\ProgramDetailResource;
 use Auth;
 use Validator;
 
@@ -164,6 +167,28 @@ class CategoryController extends Controller
             'message' => 'Prayer Detail.',
             'data' => new PrayerDetailResource($data)
         ],201);
-    } 
+    }
+
+    public function ProgramList(Request $request)
+    {
+        $data = Program::where('status','active')->get();
+
+        return response([
+            'status' => true,
+            'message' => 'Program List.',
+            'data' => ProgramResource::collection($data)
+        ],201);
+    }
+
+    public function ProgramDetail($id)
+    {
+        $data = Program::find($id);
+
+        return response([
+            'status' => true,
+            'message' => 'Program Detail.',
+            'data' => new ProgramDetailResource($data)
+        ],201);
+    }
 
 }
