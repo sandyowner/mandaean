@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title','Mandanism')
-@section('pagetitle','Mandanism')
+@section('title','Program')
+@section('pagetitle','Program')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Edit Mandanism</h3>
+      <h3 class="page-title">Edit Program</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">

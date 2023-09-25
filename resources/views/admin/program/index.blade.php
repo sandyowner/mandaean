@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Mandanism')
-@section('pagetitle','Mandanism')
+@section('title','Program')
+@section('pagetitle','Program')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Mandanism Management</h3>
+      <h3 class="page-title">Program Management</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{{url('mandanism/create')}}" title="Add">
+            <a href="{{url('program/create')}}" title="Add">
               <label class="badge badge-info">+ Add</label>
             </a>
           </li>
@@ -20,7 +20,7 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <table class="table table-striped" id="mandanism-table">
+            <table class="table table-striped" id="program-table">
               <thead>
                 <tr>
                   <th> Title </th>
@@ -63,11 +63,11 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    var oTable = $('#mandanism-table').DataTable({
+    var oTable = $('#program-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: "{{url('mandanism')}}",
+            url: "{{url('program')}}",
             data: function (d) {
                 d.search = "{{$data['filter']}}";
             }

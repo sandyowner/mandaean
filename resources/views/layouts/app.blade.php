@@ -196,6 +196,12 @@
                       <!-- <i class="mdi mdi-book-multiple menu-icon"></i> -->
                     </a>
                   </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='program')?'active':'' }}">
+                    <a class="nav-link" href="{{url('program')}}">
+                      <span class="menu-title">Program Mgmt</span>
+                      <!-- <i class="mdi mdi-book-multiple menu-icon"></i> -->
+                    </a>
+                  </li>
                 </ul>
               </div>
             </li>
