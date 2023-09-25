@@ -20,6 +20,8 @@ class ProgramResource extends JsonResource
                 'title'         => $this->ar_title,
                 'group'         => $this->ar_group,
                 'description'   => strip_tags($this->ar_description),
+                'image'         => ($this->image)?url('/').'/'.$this->image:null,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }elseif ($request->lang == 'pe') {
@@ -28,6 +30,8 @@ class ProgramResource extends JsonResource
                 'title'         => $this->pe_title,
                 'group'         => $this->pe_group,
                 'description'   => strip_tags($this->pe_description),
+                'image'         => ($this->image)?url('/').'/'.$this->image:null,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }else{
@@ -36,6 +40,8 @@ class ProgramResource extends JsonResource
                 'title'         => $this->title,
                 'group'         => $this->group,
                 'description'   => strip_tags($this->description),
+                'image'         => ($this->image)?url('/').'/'.$this->image:null,
+                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }

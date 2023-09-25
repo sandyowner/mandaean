@@ -20,7 +20,7 @@ class ProgramDetailResource extends JsonResource
                 'title'         => $this->ar_title,
                 'group'         => $this->ar_group,
                 'description'   => $this->ar_description,
-                'image'         => url('/').'/'.$this->image,
+                'image'         => ($this->image)?url('/').'/'.$this->image:null,
                 'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
@@ -30,7 +30,7 @@ class ProgramDetailResource extends JsonResource
                 'title'         => $this->pe_title,
                 'group'         => $this->pe_group,
                 'description'   => $this->pe_description,
-                'image'         => url('/').'/'.$this->image,
+                'image'         => ($this->image)?url('/').'/'.$this->image:null,
                 'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
@@ -40,7 +40,7 @@ class ProgramDetailResource extends JsonResource
                 'title'         => $this->title,
                 'group'         => $this->group,
                 'description'   => $this->description,
-                'image'         => url('/').'/'.$this->image,
+                'image'         => ($this->image)?url('/').'/'.$this->image:null,
                 'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
