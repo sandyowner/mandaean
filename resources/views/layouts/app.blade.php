@@ -288,6 +288,12 @@
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ (\Request::segment(1)=='religious-occasions')?'active':'' }}">
+              <a class="nav-link" href="{{url('funeral')}}">
+                <span class="menu-title">Religious Occasions</span>
+                <i class="mdi mdi-account-box menu-icon"></i>
+              </a>
+            </li>
           </ul>
         </nav>
         <div class="main-panel">

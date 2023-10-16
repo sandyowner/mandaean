@@ -11,5 +11,5 @@ class ReligiousOccasion extends Model
 
     protected $table = 'religious_occasions';
 
-    protected $fillable = ['user_id', 'date', 'date_type', 'occasion', 'status'];
+    protected $fillable = ['date', 'year', 'date_type', 'occasion', 'occasion_type', 'status'];
 }

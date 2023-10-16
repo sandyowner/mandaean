@@ -16,7 +16,7 @@ class CalenderController extends Controller
 {
     public function ReligiousOccasions(Request $request){
         $validator = Validator::make($request->all(), [
-            'date' => 'required',
+            'year' => 'required',
             'date_type' => 'required',
             'occasion' => 'required'
         ]);
@@ -32,8 +32,7 @@ class CalenderController extends Controller
         $id = Auth::id();
 
         $occasion = ReligiousOccasion::create([
-            'user_id' => $id,
-            'date' => $request->date,
+            'year' => $request->date,
             'date_type' => $request->date_type,
             'occasion' => $request->occasion
         ]);

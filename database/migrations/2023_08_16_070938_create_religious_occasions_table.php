@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('religious_occasions', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->date('date');
+            $table->date('date')->nullable();
+            $table->string('year');
             $table->string('date_type');
             $table->string('occasion');
+            $table->string('occasion_type')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
