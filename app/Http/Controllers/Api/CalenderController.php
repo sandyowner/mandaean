@@ -18,7 +18,7 @@ class CalenderController extends Controller
         $validator = Validator::make($request->all(), [
             'year' => 'required',
             'date_type' => 'required',
-            'occasion' => 'required'
+            'occasion_type' => 'required'
         ]);
         if ($validator->fails()) {
             $error = $validator->errors()->first();
@@ -31,16 +31,12 @@ class CalenderController extends Controller
 
         $id = Auth::id();
 
-        $occasion = ReligiousOccasion::create([
-            'year' => $request->date,
-            'date_type' => $request->date_type,
-            'occasion' => $request->occasion
-        ]);
+        $data = ReligiousOccasion::select('id','date','occasion')->where('year',$request->year)->get();
 
         return response([
             'status'=>true,
-            'message'=>'Occasion added.',
-            'data'=>$occasion
+            'message'=>'Occasion List.',
+            'data'=>$data
         ],201);
     }
 

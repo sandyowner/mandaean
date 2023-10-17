@@ -43,6 +43,13 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail3">Description</label>
+                        <input class="form-control" id="condition" name="condition" placeholder="Description" value="{{old('condition')}}">
+                        @error('condition')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputEmail3">Category</label>
                         <input class="form-control" id="category" name="category" placeholder="Category" value="{{old('category')}}">
                         @error('category')
@@ -110,18 +117,18 @@
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputEmail3">Condition</label>
-                        <input class="form-control" id="condition" name="condition" placeholder="Condition" value="{{old('condition')}}">
-                        @error('condition')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
                     <h4 align="center">Arabic Language</h4><br/>
                     <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" id="ar_name" name="ar_name" placeholder="Name" value="{{old('ar_name')}}">
                         @error('ar_name')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail3">Description</label>
+                        <input class="form-control" id="ar_condition" name="ar_condition" placeholder="Description" value="{{old('ar_condition')}}">
+                        @error('ar_condition')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
@@ -139,18 +146,18 @@
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputEmail3">Condition</label>
-                        <input class="form-control" id="ar_condition" name="ar_condition" placeholder="Condition" value="{{old('ar_condition')}}">
-                        @error('ar_condition')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
                     <h4 align="center">Persian Language</h4><br/>
                     <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" id="pe_name" name="pe_name" placeholder="Name" value="{{old('pe_name')}}">
                         @error('pe_name')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputEmail3">Description</label>
+                        <input class="form-control" id="pe_condition" name="pe_condition" placeholder="Description" value="{{old('pe_condition')}}">
+                        @error('pe_condition')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
@@ -165,13 +172,6 @@
                         <label for="exampleInputEmail3">Material</label>
                         <input class="form-control" id="pe_material" name="pe_material" placeholder="Material" value="{{old('pe_material')}}">
                         @error('pe_material')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputEmail3">Condition</label>
-                        <input class="form-control" id="pe_condition" name="pe_condition" placeholder="Condition" value="{{old('pe_condition')}}">
-                        @error('pe_condition')
                             <p style="color: red">{{$message}}</p>
                         @enderror
                     </div>
