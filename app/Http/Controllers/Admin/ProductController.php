@@ -238,4 +238,10 @@ class ProductController extends Controller
         
         return true;
     }
+
+    public function RemoveImage(Request $request){
+        ProductImage::where('id',$request->id)->delete();
+        
+        return true;
+    }
 }

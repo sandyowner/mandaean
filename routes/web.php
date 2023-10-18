@@ -73,6 +73,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('prayer', PrayerController::class);
     Route::resource('books', HolyBookController::class);
     Route::resource('product', ProductController::class);
+    Route::post('remove-image', [ProductController::class,'RemoveImage']);
     Route::resource('orders', OrderController::class);
     Route::resource('transaction', TransactionController::class);
     Route::resource('static-content', StaticController::class);

@@ -24,8 +24,9 @@
                     @method('PUT')
                     <h4 align="center">English Language</h4><br/>
                     <div class="row">
-                        @foreach($data['product']->images as $image)
-                            <div class="form-group col-sm-2">
+                        @foreach($data['product']->images as $key => $image)
+                            <div class="form-group col-sm-2 img-remove" id="img-div-{{$image->id}}">
+                                <a href="javascript:void(0);" title="Remove" class="remove-image" id="remove-img-{{$image->id}}"><i class="fas fa-remove"></i> X</a>
                                 <img src="{{url('/')}}/{{$image->image}}" height="110px;" width="170px;">
                             </div>
                         @endforeach
@@ -190,14 +191,59 @@
         </div>
     </div>
 </div>
+<style>
+.img-remove {
+    position: relative;
+}
+
+.img-remove > a {
+    position: absolute;
+    color: red;
+    top: 0;
+    right: 30px;
+    text-decoration:none;
+}
+</style>
 @endsection
 @section('scripts')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
     $('#description,#ar_description,#pe_description').summernote({
         height: 300
+    });
+
+    $(".remove-image").click(function(){
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this image!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                let id = (this.id).replace('remove-img-','');
+                var url = '{{url("remove-image")}}';
+                var token = $("meta[name='csrf-token']").attr("content");
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        _token: token,
+                        id: id
+                    },
+                    success: function (response){
+                        swal("Your image file has been deleted!", {
+                            icon: "success",
+                        });
+                        $("#img-div-"+id).remove();
+                    }
+                });
+            }
+        });
     });
 </script>
 @endsection
