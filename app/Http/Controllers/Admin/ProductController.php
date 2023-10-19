@@ -126,12 +126,14 @@ class ProductController extends Controller
             $product['pe_condition'] = $request->pe_condition;
             $product->save();
 
-            foreach ($request->file('photo') as $key => $file) {
-                $destinationPath = 'uploads/';
-                $file_name = time().''.$file->getClientOriginalName();
-                $file->move($destinationPath , $file_name);
-                $imageName = $destinationPath.''.$file_name;
-                ProductImage::create(['product_id'=>$product->id,'image'=>$imageName]);
+            if($request->hasfile('photo')){
+                foreach ($request->file('photo') as $key => $file) {
+                    $destinationPath = 'uploads/';
+                    $file_name = time().''.$file->getClientOriginalName();
+                    $file->move($destinationPath , $file_name);
+                    $imageName = $destinationPath.''.$file_name;
+                    ProductImage::create(['product_id'=>$product->id,'image'=>$imageName]);
+                }
             }
             return redirect('product')->with('message', 'Record Added!');
         }
@@ -217,12 +219,14 @@ class ProductController extends Controller
             $product['pe_condition'] = $request->pe_condition;
             $product->save();
 
-            foreach ($request->file('photo') as $key => $file) {
-                $destinationPath = 'uploads/';
-                $file_name = time().''.$file->getClientOriginalName();
-                $file->move($destinationPath , $file_name);
-                $imageName = $destinationPath.''.$file_name;
-                ProductImage::create(['product_id'=>$product->id,'image'=>$imageName]);
+            if($request->hasfile('photo')){
+                foreach ($request->file('photo') as $key => $file) {
+                    $destinationPath = 'uploads/';
+                    $file_name = time().''.$file->getClientOriginalName();
+                    $file->move($destinationPath , $file_name);
+                    $imageName = $destinationPath.''.$file_name;
+                    ProductImage::create(['product_id'=>$product->id,'image'=>$imageName]);
+                }
             }
             return redirect('product')->with('message', 'Record Updated!');
         }
