@@ -181,7 +181,7 @@ class ProductController extends Controller
             // 'pe_category' => 'required',
             // 'pe_material' => 'required',
             // 'pe_condition' => 'required',
-            'photo' => 'required',
+            // 'photo' => 'required',
         ],[
             'ar_name.required' => 'The name field is required.',
             'ar_category.required' => 'The category field is required.',
