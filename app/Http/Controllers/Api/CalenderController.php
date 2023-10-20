@@ -160,33 +160,39 @@ class CalenderController extends Controller
     public function Melvashe(){
 
         $data['melvashe'] = [
-            ['id'=>1,'name'=>'Dowla'],
-            ['id'=>2,'name'=>'Nuna'],
-            ['id'=>3,'name'=>'Ambero'],
-            ['id'=>4,'name'=>'Towra'],
-            ['id'=>5,'name'=>'Selmi'],
-            ['id'=>6,'name'=>'Saratana'],
-            ['id'=>7,'name'=>'Aria'],
-            ['id'=>8,'name'=>'Shumbolta'],
-            ['id'=>9,'name'=>'Qina'],
-            ['id'=>10,'name'=>'Arqwa'],
-            ['id'=>11,'name'=>'Heṭia'],
-            ['id'=>12,'name'=>'Gadia']
+            ['id'=>1,'name'=>'Hawa'],
+            ['id'=>2,'name'=>'Sharat'],
+            ['id'=>3,'name'=>'Yasman'],
+            ['id'=>4,'name'=>'Modl-lal'],
+            ['id'=>5,'name'=>'Anhar'],
+            ['id'=>6,'name'=>'Mahnash'],
+            ['id'=>7,'name'=>'Simet'],
+            ['id'=>8,'name'=>'Hawa Simet'],
+            ['id'=>9,'name'=>'Sharat Simet'],
+            ['id'=>10,'name'=>'Mamani'],
+            ['id'=>11,'name'=>'Hawa Mamani'],
+            ['id'=>12,'name'=>'Maliha'],
+            ['id'=>13,'name'=>'Narges']
         ];
 
         $data['months'] = [
-            ['id'=>1,'name'=>'Dowla'],
-            ['id'=>2,'name'=>'Nuna'],
-            ['id'=>3,'name'=>'Ambero'],
-            ['id'=>4,'name'=>'Towra'],
-            ['id'=>5,'name'=>'Selmi'],
-            ['id'=>6,'name'=>'Saratana'],
-            ['id'=>7,'name'=>'Aria'],
-            ['id'=>8,'name'=>'Shumbolta'],
-            ['id'=>9,'name'=>'Qina'],
-            ['id'=>10,'name'=>'Arqwa'],
-            ['id'=>11,'name'=>'Heṭia'],
-            ['id'=>12,'name'=>'Gadia']
+            ['id'=>1,'name'=>'Embra'],
+            ['id'=>2,'name'=>'Taura'],
+            ['id'=>3,'name'=>'Selmi'],
+            ['id'=>4,'name'=>'Sartana'],
+            ['id'=>5,'name'=>'Aria'],
+            ['id'=>6,'name'=>'Shombolta'],
+            ['id'=>7,'name'=>'Panja Day 1'],
+            ['id'=>8,'name'=>'Panja Day 2'],
+            ['id'=>9,'name'=>'Panja Day 3'],
+            ['id'=>10,'name'=>'Panja Day 4'],
+            ['id'=>11,'name'=>'Panja Day 5'],
+            ['id'=>12,'name'=>'Qaina'],
+            ['id'=>13,'name'=>'Arqawa'],
+            ['id'=>14,'name'=>'Hatia'],
+            ['id'=>15,'name'=>'Gadia'],
+            ['id'=>16,'name'=>'Daula'],
+            ['id'=>17,'name'=>'Nuna']
         ];
 
         return response([
@@ -202,8 +208,6 @@ class CalenderController extends Controller
         $melvashe = $request->melvashe;
         $month = $request->month;
         $time = $request->time;
-        $dob = $request->dob;
-        $date_type = $request->date_type;
 
         $data['mandaean_date'] = '19, Shombolta (445365 Adam) (1998 Yahyaiee)';
         $data['gregorian_date'] = '1996,03,08 Friday';
