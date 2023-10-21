@@ -144,16 +144,14 @@ class CalenderController extends Controller
     public function CalenderList(Request $request){
         $date = $request->date;
         
-        $allDates = Event::where(['status'=>'active'])->groupBy('date')->pluck('date');
-        $allEvents = Event::select('id','title','description','date')->where(['status'=>'active'])->get();
-        $data = Event::select('id','title','description','date')->where(['date'=>$date, 'status'=>'active'])->get();
+        $allDates = ReligiousOccasion::where(['status'=>'active'])->groupBy('date')->pluck('date');
+        $data = ReligiousOccasion::select('id','date','occasion','occasion_type')->where(['date'=>$date, 'status'=>'active'])->get();
 
         return response([
             'status' => true,
             'message' => 'All calender list.',
-            'data' => EventResource::collection($data),
-            'allDates' => $allDates,
-            'allEvents' => EventResource::collection($allEvents)
+            'data' => $data,
+            'allDates' => $allDates
         ],201);
     }
 
