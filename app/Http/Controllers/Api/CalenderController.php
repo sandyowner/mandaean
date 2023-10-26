@@ -144,7 +144,7 @@ class CalenderController extends Controller
     public function CalenderList(Request $request){
         $date = $request->date;
         
-        $allDates = ReligiousOccasion::where(['status'=>'active'])->groupBy('date')->pluck('date');
+        $allDates = ReligiousOccasion::select('date','occasion','occasion_type')->whereYear('date',date('Y'))->where(['status'=>'active'])->get();
         $data = ReligiousOccasion::select('id','date','occasion','occasion_type')->where(['date'=>$date, 'status'=>'active'])->get();
 
         return response([
