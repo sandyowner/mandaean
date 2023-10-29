@@ -31,7 +31,11 @@ class CalenderController extends Controller
 
         $id = Auth::id();
 
-        $data = ReligiousOccasion::select('id','date','occasion')->where('year',$request->year)->get();
+        $data = ReligiousOccasion::select('id','date','occasion')
+            ->where('year', $request->year)
+            ->where('date_type', $request->date_type)
+            ->where('occasion_type', $request->occasion_type)
+            ->get();
 
         return response([
             'status'=>true,

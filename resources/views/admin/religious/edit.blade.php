@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Program')
-@section('pagetitle','Program')
+@section('title','Religious Occasion')
+@section('pagetitle','Religious Occasion')
 @section('sort_name',$data['sort_name'])
 @section('content')
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Edit Program</h3>
+      <h3 class="page-title">Edit Religious Occasion</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{{url('program')}}" title="Back">
+            <a href="{{url('religious-occasion')}}" title="Back">
               <label><- Back</label>
             </a>
           </li>
@@ -19,115 +19,88 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <form class="forms-sample" method="POST" action="{{route('program.update',$data['program']->id)}}" enctype='multipart/form-data'>
+                <form class="forms-sample" method="POST" action="{{route('religious-occasion.update',$data['religious']->id)}}" enctype='multipart/form-data'>
                     @csrf
                     @method('PUT')
-                    <h4 align="center">English Language</h4><br/>
                     <div class="row">
-                        <div class="form-group col-sm-8">
-                            <label>Banner Image</label>
-                            <input type="file" name="image" class="file-upload-default">
-                            <div class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                                <span class="input-group-append">
-                                    <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
-                                </span>
-                            </div>
-                            @error('image')
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputName1">Date Type</label>
+                            <select name="date_type" id="date_type" class="form-select">
+                                <option value="Gregorian" {{(old('date_type',$data['religious']->date_type)=="Gregorian")?"selected":""}}>Gregorian Date</option>
+                                <option value="Solar" {{(old('date_type',$data['religious']->date_type)=="Solar")?"selected":""}}>Solar Date</option>
+                            </select>
+                            @error('date_type')
                                 <p style="color: red">{{$message}}</p>
                             @enderror
                         </div>
-                        <div class="form-group col-sm-4">
-                            <img src="{{url('/')}}/{{$data['program']->image}}" height="110px;" width="220px;">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-8">
-                            <label>PDF/Video</label>
-                            <input type="file" name="docs" class="file-upload-default">
-                            <div class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload PDF/Video">
-                                <span class="input-group-append">
-                                    <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
-                                </span>
-                            </div>
-                            @error('docs')
+                        <div class="form-group col-sm-2 Gregorian-div">
+                            <label for="exampleInputName1">Year</label>
+                            <select name="year" class="form-select">
+                                @for($i=1921; $i<=2121; $i++)
+                                    <option value="{{$i}}" {{(old('year',$data['religious']->year)==$i)?"selected":""}}>{{$i}}</option>
+                                @endfor
+                            </select>
+                            @error('year')
                                 <p style="color: red">{{$message}}</p>
                             @enderror
                         </div>
-                        @if($data['program']->docs)
-                        <div class="form-group col-sm-4">
-                            <a href="{{url('/')}}/{{$data['program']->docs}}" target="_blank"><img src="{{url('assets/images/pdf-icon.png')}}" height="70px;" width="70px;"></a>
+                        <div class="form-group col-sm-2 Solar-div" style="display:none;">
+                            <label for="exampleInputName1">Year</label>
+                            <select name="year" class="form-select">
+                                @for($i=1300; $i<=1500; $i++)
+                                    <option value="{{$i}}" {{(old('year',$data['religious']->year)==$i)?"selected":""}}>{{$i}}</option>
+                                @endfor
+                            </select>
+                            @error('year')
+                                <p style="color: red">{{$message}}</p>
+                            @enderror
                         </div>
-                        @endif
+                        <div class="form-group col-sm-3">
+                            <label for="exampleInputName1">Month</label>
+                            <select name="month" class="form-select">
+                                @for($j=1; $j<=12; $j++)
+                                    <option value="{{$j}}" {{(old('month',date('m',strtotime($data['religious']->date)))==$j)?"selected":""}}>{{date('F',strtotime('01-'.$j.'-2023'))}}</option>
+                                @endfor
+                            </select>
+                            @error('month')
+                                <p style="color: red">{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label for="exampleInputName1">Day</label>
+                            <select name="day" class="form-select">
+                                @for($z=1; $z<=31; $z++)
+                                    <option value="{{$z}}" {{(old('day',date('d',strtotime($data['religious']->date)))==$z)?"selected":""}}>{{$z}}</option>
+                                @endfor
+                            </select>
+                            @error('day')
+                                <p style="color: red">{{$message}}</p>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputName1">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{old('title',$data['program']->title)}}">
-                        @error('title')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputName1">Group</label>
-                        <input type="text" class="form-control" id="group" name="group" placeholder="Group" value="{{old('group',$data['program']->group)}}">
-                        @error('group')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputEmail3">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Description" rows="4">{{old('description',$data['program']->description)}}</textarea>
-                        @error('description')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <h4 align="center">Arabic Language</h4><br/>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputName1">Title</label>
-                        <input type="text" class="form-control" id="ar_title" name="ar_title" placeholder="Title" value="{{old('ar_title',$data['program']->ar_title)}}">
-                        @error('ar_title')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputName1">Group</label>
-                        <input type="text" class="form-control" id="ar_group" name="ar_group" placeholder="Group" value="{{old('ar_group',$data['program']->ar_group)}}">
-                        @error('ar_group')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputEmail3">Description</label>
-                        <textarea class="form-control" id="ar_description" name="ar_description" placeholder="Description" rows="4">{{old('ar_description',$data['program']->ar_description)}}</textarea>
-                        @error('ar_description')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <h4 align="center">Persian Language</h4><br/>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputName1">Title</label>
-                        <input type="text" class="form-control" id="pe_title" name="pe_title" placeholder="Title" value="{{old('pe_title',$data['program']->pe_title)}}">
-                        @error('pe_title')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputName1">Group</label>
-                        <input type="text" class="form-control" id="pe_group" name="pe_group" placeholder="Group" value="{{old('pe_group',$data['program']->pe_group)}}">
-                        @error('pe_group')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <label for="exampleInputEmail3">Description</label>
-                        <textarea class="form-control" id="pe_description" name="pe_description" placeholder="Description" rows="4">{{old('pe_description',$data['program']->pe_description)}}</textarea>
-                        @error('pe_description')
-                            <p style="color: red">{{$message}}</p>
-                        @enderror
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <label for="exampleInputEmail3">Occasion Type</label>
+                            <select name="occasion_type" class="form-select">
+                                <option value="Religious Holy Days" {{(old('occasion_type',$data['religious']->occasion_type)=="Religious Holy Days")?"selected":""}}>Religious Holy Days</option>
+                                <option value="First day of Mandaic Month" {{(old('occasion_type',$data['religious']->occasion_type)=="First day of Mandaic Month")?"selected":""}}>First day of Mandaic Month</option>
+                                <option value="Minor Mbattal Day" {{(old('occasion_type',$data['religious']->occasion_type)=="Minor Mbattal Day")?"selected":""}}>Minor Mbattal Day</option>
+                                <option value="Major Mbattal Day" {{(old('occasion_type',$data['religious']->occasion_type)=="Major Mbattal Day")?"selected":""}}>Major Mbattal Day</option>
+                            </select>
+                            @error('occasion_type')
+                                <p style="color: red">{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="exampleInputEmail3">Occasion</label>
+                            <input type="text" class="form-control" id="occasion" name="occasion" placeholder="Occasion" value="{{old('occasion',$data['religious']->occasion)}}">
+                            @error('occasion')
+                                <p style="color: red">{{$message}}</p>
+                            @enderror
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-                    <a href="{{url('program')}}" class="btn btn-light">Cancel</a>
+                    <a href="{{url('religious-occasion')}}" class="btn btn-light">Cancel</a>
                 </form>
             </div>
         </div>

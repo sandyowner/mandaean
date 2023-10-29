@@ -19,7 +19,7 @@ class ReligiousOccasionController extends Controller
         $data['filter'] = $request->filter;
         $adminuser = session()->get('adminuser');
         $data['sort_name'] = $adminuser->name;
-        $dataList = ReligiousOccasion::orderBy('id','desc');
+        $dataList = ReligiousOccasion::orderBy('year','asc');
         $search = $request->search;
         if($search){
             $dataList->where('year', 'LIKE', '%'.$search.'%')
@@ -112,55 +112,33 @@ class ReligiousOccasionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|max:200',
-            'group' => 'required',
-            'description' => 'required',
-        ],[
-            'ar_title.required' => 'The title field is required.',
-            'ar_group.required' => 'The group field is required.',
-            'ar_description.required' => 'The description field is required.',
-            'pe_title.required' => 'The title field is required.',
-            'pe_group.required' => 'The group field is required.',
-            'pe_description.required' => 'The description field is required.',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|max:200',
+        //     'group' => 'required',
+        //     'description' => 'required',
+        // ],[
+        //     'ar_title.required' => 'The title field is required.',
+        //     'ar_group.required' => 'The group field is required.',
+        //     'ar_description.required' => 'The description field is required.',
+        //     'pe_title.required' => 'The title field is required.',
+        //     'pe_group.required' => 'The group field is required.',
+        //     'pe_description.required' => 'The description field is required.',
+        // ]);
  
-        if ($validator->fails())
-        {
-            $messages = $validator->messages();
-            return back()->withInput()->withErrors($messages);
-        }else{
+        // if ($validator->fails())
+        // {
+        //     $messages = $validator->messages();
+        //     return back()->withInput()->withErrors($messages);
+        // }else{
             $religious = ReligiousOccasion::find($id);
-            $religious['title'] = $request->title;
-            $religious['group'] = $request->group;
-            $religious['description'] = $request->description;
-            $religious['ar_title'] = $request->ar_title;
-            $religious['ar_group'] = $request->ar_group;
-            $religious['ar_description'] = $request->ar_description;
-            $religious['pe_title'] = $request->pe_title;
-            $religious['pe_group'] = $request->pe_group;
-            $religious['pe_description'] = $request->pe_description;
-            if ($request->hasFile('image'))
-            {
-                $destinationPath = 'uploads/';
-                $file = $request->file('image');
-                $file_name = time().''.$file->getClientOriginalName();
-                $file->move($destinationPath , $file_name);
-                $imageName = $destinationPath.''.$file_name;
-                $religious['image'] = $imageName;
-            }
-            if ($request->hasFile('docs'))
-            {
-                $destinationPath = 'uploads/';
-                $file = $request->file('docs');
-                $file_name = time().''.$file->getClientOriginalName();
-                $file->move($destinationPath , $file_name);
-                $imageName = $destinationPath.''.$file_name;
-                $religious['docs'] = $imageName;
-            }
+            $religious['date'] = date('Y-m-d',strtotime($request->year.'-'.$request->month.'-'.$request->day));
+            $religious['year'] = $request->year;
+            $religious['date_type'] = $request->date_type;
+            $religious['occasion'] = $request->occasion;
+            $religious['occasion_type'] = $request->occasion_type;
             $religious->save();
             return redirect('religious-occasion')->with('message', 'Record Updated!');
-        }
+        // }
     }
 
     /**
