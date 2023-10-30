@@ -37,11 +37,32 @@ class CalenderController extends Controller
             ->where('occasion_type', $request->occasion_type)
             ->get();
 
+        if(count($data)<1){
+            if($request->date_type=='Solar'){
+                $data = ReligiousOccasion::select('id','date','occasion')
+                    ->where('year', 1300)
+                    ->where('date_type', $request->date_type)
+                    ->where('occasion_type', $request->occasion_type)
+                    ->get();
+            }else{
+                $data = ReligiousOccasion::select('id','date','occasion')
+                    ->where('year', 2021)
+                    ->where('date_type', $request->date_type)
+                    ->where('occasion_type', $request->occasion_type)
+                    ->get();
+            }
+            
+            foreach ($data as $key => $value) {
+                $value->date = date('Y-m-d',strtotime($request->year.'-'.date('m',strtotime($value->date)).'-'.date('d',strtotime($value->date))));
+            }
+        }
+        
         return response([
             'status'=>true,
             'message'=>'Occasion List.',
             'data'=>$data
         ],201);
+    
     }
 
     public function ChooseCalender(Request $request){
