@@ -46,4 +46,16 @@ class AdvertismentController extends Controller
             'data' => $data
         ],201);
     }
+
+    public function AdvertismentList(Request $request){
+        $id = Auth::id();
+
+        $data = Advertisment::get();
+
+        return response([
+            'status' => true,
+            'message' => 'List.',
+            'data' => $data
+        ],201);
+    }
 }

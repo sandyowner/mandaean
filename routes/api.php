@@ -77,6 +77,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('baptism-venue', [BaptismController::class, 'BaptismVenue']);
     Route::post('book-baptism', [BaptismController::class, 'BookBaptism']);
     Route::post('place-advertisment', [AdvertismentController::class, 'PlaceAdvertisment']);
+    Route::get('advertisment-list', [AdvertismentController::class, 'AdvertismentList']);
     
     Route::get('notification-list', [NotificationController::class, 'NotificationList']);
     Route::post('read-notification', [NotificationController::class, 'ReadNotification']);
