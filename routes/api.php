@@ -95,7 +95,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('set-event-reminder', [CalenderController::class, 'SetEventReminder']);
     Route::post('delete-all-reminder', [CalenderController::class, 'DeleteAllReminder']);
     Route::get('melvashe', [CalenderController::class, 'Melvashe']);
-    Route::post('melvashe-find', [CalenderController::class, 'MelvashePost']);
+    Route::post('melvashe-find', [CalenderController::class, 'MelvasheFind']);
     Route::get('funeral', [FuneralController::class, 'Funeral']);
     Route::post('funeral-post', [FuneralController::class, 'FuneralPost']);
 });

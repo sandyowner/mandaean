@@ -8,6 +8,7 @@ use App\Models\ReligiousOccasion;
 use App\Models\ChooseCalender;
 use App\Models\Event;
 use App\Models\EventReminder;
+use App\Models\Melvashe;
 use App\Http\Resources\EventResource;
 use Validator;
 use Auth;
@@ -224,21 +225,55 @@ class CalenderController extends Controller
         ],201);
     }
 
-    public function MelvashePost(Request $request){
+    public function MelvasheFind(Request $request){
+        $validator = Validator::make($request->all(), [
+            'mother_name' => 'required',
+            'birth_month' => 'required',
+            'gender' => 'required',
+            'time_type' => 'required',
+            'time' => 'required'
+        ]);
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response([
+                'status' => false,
+                'message' => $error,
+                'data' => []
+            ],422);
+        }
 
+        $mother_name = $request->mother_name;
+        $birth_month = $request->birth_month;
         $gender = $request->gender;
-        $melvashe = $request->melvashe;
-        $month = $request->month;
+        $time_type = $request->time_type;
         $time = $request->time;
 
-        $data['mandaean_date'] = '19, Shombolta (445365 Adam) (1998 Yahyaiee)';
-        $data['gregorian_date'] = '1996,03,08 Friday';
-        $data['solar_date'] = '1374, 12, 18';
+        $data = Melvashe::select('id','talea','first_melvashe_name','second_melvashe_name')
+                    ->where('mother_name', $mother_name)
+                    ->where('birth_month', $birth_month)
+                    ->where('gender', $gender)
+                    ->where('time_type', $time_type)
+                    ->where('from', $time)
+                    ->first();
 
-        return response([
-            'status' => true,
-            'message' => 'Data fetched.',
-            'data' => $data
-        ],201);
+        if($data){
+            return response([
+                'status' => true,
+                'message' => 'Data fetched.',
+                'data' => $data
+            ],201);
+        }else{
+            $data = [
+                "id" => 1,
+                "talea" => "Sheep",
+                "first_melvashe_name" => "Maliha _Path_ Hawa",
+                "second_melvashe_name" => "Narges _Path_ Hawa"
+            ];
+            return response([
+                'status' => true,
+                'message' => 'Data fetched.',
+                'data' => $data
+            ],201);
+        }
     }
 }
