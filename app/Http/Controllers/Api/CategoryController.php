@@ -51,7 +51,12 @@ class CategoryController extends Controller
 
     public function LatestNewsList(Request $request)
     {
-        $data = LatestNews::where('status','active')->get();
+        $country = $request->country;
+        $data = LatestNews::where('status','active');
+        if($country){
+            $data = $data->where('country',$country);
+        }
+        $data = $data->get();
 
         return response([
             'status' => true,
