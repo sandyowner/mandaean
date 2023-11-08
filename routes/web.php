@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\BaptismController;
 use App\Http\Controllers\Admin\FuneralController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\ReligiousOccasionController;
+use App\Http\Controllers\Admin\AdvertismentController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -85,6 +86,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('funeral', FuneralController::class);
     Route::resource('program', ProgramController::class);
     Route::resource('religious-occasion', ReligiousOccasionController::class);
+    Route::resource('advertisment', AdvertismentController::class);
 });
 
 Route::controller(PaymentController::class)

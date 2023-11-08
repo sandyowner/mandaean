@@ -202,6 +202,12 @@
                       <!-- <i class="mdi mdi-book-multiple menu-icon"></i> -->
                     </a>
                   </li>
+                  <li class="nav-item {{ (\Request::segment(1)=='advertisment')?'active':'' }}">
+                    <a class="nav-link" href="{{url('advertisment')}}">
+                      <span class="menu-title">Advertisment Mgmt</span>
+                      <!-- <i class="mdi mdi-information menu-icon"></i> -->
+                    </a>
+                  </li>
                 </ul>
               </div>
             </li>
