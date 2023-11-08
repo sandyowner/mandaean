@@ -9,7 +9,7 @@ use App\Models\Advertisment;
 use Validator;
 use Hash;
 
-class AdvertismentController extends Controller
+class AdvertismentsController extends Controller
 {
     /**
      * Display a listing of the resource.

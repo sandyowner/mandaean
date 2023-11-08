@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\BaptismController;
 use App\Http\Controllers\Admin\FuneralController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\ReligiousOccasionController;
-use App\Http\Controllers\Admin\AdvertismentController;
+use App\Http\Controllers\Admin\AdvertismentsController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -71,6 +71,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('mandanism', MandanismController::class);
     Route::resource('ritual', RitualController::class);
     Route::resource('news', NewsController::class);
+    Route::resource('advertisment', AdvertismentsController::class);
     Route::resource('prayer', PrayerController::class);
     Route::resource('books', HolyBookController::class);
     Route::resource('product', ProductController::class);
@@ -86,7 +87,6 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('funeral', FuneralController::class);
     Route::resource('program', ProgramController::class);
     Route::resource('religious-occasion', ReligiousOccasionController::class);
-    Route::resource('advertisment', AdvertismentController::class);
 });
 
 Route::controller(PaymentController::class)
