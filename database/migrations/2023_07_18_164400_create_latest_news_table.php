@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('docs')->nullable();
             $table->date('date')->nullable();
+            $table->string('country')->nullable();
             $table->string('ar_title')->nullable();
             $table->string('ar_group')->nullable();
             $table->text('ar_description')->nullable();

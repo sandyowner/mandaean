@@ -24,6 +24,7 @@
               <thead>
                 <tr>
                   <th> Title </th>
+                  <th> Country </th>
                   <th> Group </th>
                   <th> Action </th>
                 </tr>
@@ -74,6 +75,7 @@
         },
         columns: [
             {data: 'title', name: 'title'},
+            {data: 'country', name: 'country'},
             {data: 'group', name: 'group'},
             {data: 'action', name: 'action', orderable:false, searchable:false}
         ],

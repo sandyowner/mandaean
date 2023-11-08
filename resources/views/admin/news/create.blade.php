@@ -63,6 +63,19 @@
                         @enderror
                     </div>
                     <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Country</label>
+                        <select class="form-select" id="country" name="country">
+                            <option value="">Select Country</option>
+                            <option value="Australia" {{(old('country')=="Australia")? "Selected":""}}>Australia</option>
+                            <option value="Iraq" {{(old('country')=="Iraq")? "Selected":""}}>Iraq</option>
+                            <option value="Iran" {{(old('country')=="Iran")? "Selected":""}}>Iran</option>
+                            <option value="USA" {{(old('country')=="USA")? "Selected":""}}>USA</option>
+                        </select>
+                        @error('country')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Date</label>
                         <input type="date" class="form-control" id="date" name="date" placeholder="Date" value="{{old('date')}}">
                         @error('date')

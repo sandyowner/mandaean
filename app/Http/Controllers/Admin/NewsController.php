@@ -89,6 +89,7 @@ class NewsController extends Controller
             $news['title'] = $request->title;
             $news['group'] = $request->group;
             $news['description'] = $request->description;
+            $news['country'] = $request->country;
             $news['date'] = $request->date;
             $news['ar_title'] = $request->ar_title;
             $news['ar_group'] = $request->ar_group;
@@ -172,6 +173,7 @@ class NewsController extends Controller
             $news['title'] = $request->title;
             $news['group'] = $request->group;
             $news['description'] = $request->description;
+            $news['country'] = $request->country;
             $news['date'] = $request->date;
             $news['ar_title'] = $request->ar_title;
             $news['ar_group'] = $request->ar_group;
