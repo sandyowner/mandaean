@@ -33,7 +33,7 @@ class AdvertismentsController extends Controller
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';
                     $btn = '<a href="'.route('advertisment.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
                     $delimg = asset('/').'public/assets/images/dlt-icon.png';
-                    $btn .= '<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="deldata" id="'.$row->id.'" title="Delete" onclick=\'setData('.$row->id.',"'.route('advertisment.destroy',$row->id).'");\'><label class="badge badge-danger">Delete</label></a>';
+                    $btn .= '<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="deldata" id="'.$row->id.'" title="Delete" onclick=\'setData('.$row->id.',"'.route('delete-advertisment').'");\'><label class="badge badge-danger">Delete</label></a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -152,8 +152,9 @@ class AdvertismentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function deleteAdvertisment(Request $request)
     {
+        $id = $request->id;
         return Advertisment::where('id',$id)->delete();
     }
 }

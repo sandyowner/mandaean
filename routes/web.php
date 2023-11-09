@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WebviewController;
 use App\Http\Controllers\Admin\RitualController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\AdvertismentsController;
 use App\Http\Controllers\Admin\PrayerController;
 use App\Http\Controllers\Admin\MandanismController;
 use App\Http\Controllers\Admin\HolyBookController;
@@ -23,7 +24,6 @@ use App\Http\Controllers\Admin\BaptismController;
 use App\Http\Controllers\Admin\FuneralController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\ReligiousOccasionController;
-use App\Http\Controllers\Admin\AdvertismentsController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -71,6 +71,7 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('mandanism', MandanismController::class);
     Route::resource('ritual', RitualController::class);
     Route::resource('news', NewsController::class);
+    Route::post('delete-advertisment', [AdvertismentsController::class, 'deleteAdvertisment'])->name('delete-advertisment');
     Route::resource('advertisment', AdvertismentsController::class);
     Route::resource('prayer', PrayerController::class);
     Route::resource('books', HolyBookController::class);

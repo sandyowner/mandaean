@@ -98,7 +98,7 @@
         var token = $("meta[name='csrf-token']").attr("content");
         $.ajax({
             url: url,
-            type: 'DELETE',
+            type: 'POST',
             data: {
                 _token: token,
                 id: id
