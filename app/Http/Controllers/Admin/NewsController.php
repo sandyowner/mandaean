@@ -29,6 +29,13 @@ class NewsController extends Controller
         
         if ($request->ajax()) {
             return DataTables::of($dataList)
+                ->addColumn('country', function($row){
+                    if($row->country){
+                        return strtoupper($row->country);
+                    }else{
+                        return 'N/A';
+                    }
+                })
                 ->addColumn('action', function($row){
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';
                     $btn = '<a href="'.route('news.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
@@ -36,7 +43,7 @@ class NewsController extends Controller
                     $btn .= '<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="deldata" id="'.$row->id.'" title="Delete" onclick=\'setData('.$row->id.',"'.route('news.destroy',$row->id).'");\'><label class="badge badge-danger">Delete</label></a>';
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['country', 'action'])
                 ->make(true);
         }
 

@@ -66,10 +66,11 @@
                         <label for="exampleInputName1">Country</label>
                         <select class="form-select" id="country" name="country">
                             <option value="">Select Country</option>
-                            <option value="Australia" {{(old('country')=="Australia")? "Selected":""}}>Australia</option>
-                            <option value="Iraq" {{(old('country')=="Iraq")? "Selected":""}}>Iraq</option>
-                            <option value="Iran" {{(old('country')=="Iran")? "Selected":""}}>Iran</option>
-                            <option value="USA" {{(old('country')=="USA")? "Selected":""}}>USA</option>
+                            <option value="australia" {{(old('country')=="australia")? "Selected":""}}>AUSTRALIA</option>
+                            <option value="usa" {{(old('country')=="usa")? "Selected":""}}>USA</option>
+                            <option value="canada" {{(old('country')=="canada")? "Selected":""}}>CANADA</option>
+                            <option value="iran" {{(old('country')=="iran")? "Selected":""}}>IRAN</option>
+                            <option value="iraq" {{(old('country')=="iraq")? "Selected":""}}>IRAQ</option>
                         </select>
                         @error('country')
                             <p style="color: red">{{$message}}</p>
