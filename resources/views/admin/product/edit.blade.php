@@ -105,12 +105,24 @@
                     <div class="form-group col-sm-12">
                         <label for="exampleInputEmail3">Size</label>
                         <div class="row">
+                            <?php 
+                            $k = 0;
+                            ?>
                             @foreach($data['sizes'] as $size)
+                            <?php
+                            if(in_array($size->id,$data['product']->size_ids)){
+                                $value = $data['product']->sizeprice[$k];
+                                $k++;
+                            }else{
+                                $value = "";
+                            }
+                            ?>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="size[]" value="{{$size->id}}" {{(in_array($size->id,$data['product']->size_ids))?"checked":""}}> {{$size->name}} 
+                                            <input type="checkbox" class="form-check-input size-checkbox" id="size_{{$size->id}}" name="size[]" value="{{$size->id}}" {{(in_array($size->id,$data['product']->size_ids))?"checked":""}}> {{$size->name}} 
                                         </label>
+                                        <input type="text" class="form-control" id="price_{{$size->id}}" name="sizeprice[]" placeholder="price" style="{{(in_array($size->id,$data['product']->size_ids))?'display:block':'display:none'}}" value="{{$value}}">
                                     </div>
                                 </div>
                             @endforeach
@@ -244,6 +256,18 @@
                 });
             }
         });
+    });
+
+    $(".size-checkbox").click(function(){
+        var id = (this.id).replace("size_","");
+        if ($(this).prop('checked')==true){
+            $("#price_"+id).css("display", "block");
+            $("#price_"+id).val("0");
+        }else{
+            $("#price_"+id).css("display", "none");
+            $("#price_"+id).val("");
+
+        }
     });
 </script>
 @endsection

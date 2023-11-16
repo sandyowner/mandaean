@@ -16,7 +16,8 @@ class Product extends Model
 
     protected $casts = [
         'color_ids' => 'json',
-        'size_ids' => 'json'
+        'size_ids' => 'json',
+        'sizeprice' => 'json'
     ];
 
     public function images()

@@ -173,6 +173,7 @@ class ProductController extends Controller
             'brand' => 'required',
             'color' => 'required',
             'size' => 'required',
+            'sizeprice' => 'required',
             'material' => 'required',
             // 'condition' => 'required',
             // 'ar_name' => 'required|max:200',
@@ -200,12 +201,20 @@ class ProductController extends Controller
             $messages = $validator->messages();
             return back()->withInput()->withErrors($messages);
         }else{
+            $sizeprice = $request->sizeprice;
+            foreach($sizeprice as $key=>$value)
+            {
+                if(is_null($value) || $value == '')
+                    unset($sizeprice[$key]);
+            }
+            // dd(array_values($sizeprice));
             $product = Product::find($id);
             $product['name'] = $request->name;
             $product['category'] = $request->category;
             $product['price'] = $request->price;
             $product['color_ids'] = array_map('intval', $request->color);
             $product['size_ids'] = array_map('intval', $request->size);
+            $product['sizeprice'] = array_map('floatval', array_values($sizeprice));
             $product['brand_id'] = $request->brand;
             $product['material'] = $request->material;
             $product['condition'] = $request->condition;
