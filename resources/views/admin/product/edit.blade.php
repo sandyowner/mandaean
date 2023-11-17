@@ -67,9 +67,9 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="exampleInputEmail3">Price</label>
-                            <input class="form-control" id="price" name="price" placeholder="Price" value="{{old('price',$data['product']->price)}}">
-                            @error('price')
+                            <label for="exampleInputEmail3">Inventory</label>
+                            <input class="form-control" id="inventory" name="inventory" placeholder="Inventory" value="{{old('inventory',$data['product']->inventory)}}">
+                            @error('inventory')
                                 <p style="color: red">{{$message}}</p>
                             @enderror
                         </div>

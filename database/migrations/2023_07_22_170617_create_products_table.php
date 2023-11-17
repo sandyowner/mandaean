@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->string('sku');
             $table->double('price', 10, 4);
+            $table->integer('inventory')->nullable();
             $table->json('color_ids')->nullable();
             $table->json('size_ids')->nullable();
+            $table->json('sizeprice')->nullable();
             $table->integer('brand_id')->nullable();
             $table->string('material')->nullable();
             $table->string('condition')->nullable();

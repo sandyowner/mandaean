@@ -58,9 +58,9 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="exampleInputEmail3">Price</label>
-                            <input class="form-control" id="price" name="price" placeholder="Price" value="{{old('price')}}">
-                            @error('price')
+                            <label for="exampleInputEmail3">Inventory</label>
+                            <input class="form-control" id="inventory" name="inventory" placeholder="Inventory" value="{{old('inventory')}}">
+                            @error('inventory')
                                 <p style="color: red">{{$message}}</p>
                             @enderror
                         </div>
@@ -100,8 +100,9 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="size[]" value="{{$size->id}}"> {{$size->name}} 
+                                            <input type="checkbox" class="form-check-input size-checkbox" id="size_{{$size->id}}" name="size[]" value="{{$size->id}}"> {{$size->name}} 
                                         </label>
+                                        <input type="text" class="form-control" id="price_{{$size->id}}" name="sizeprice[]" placeholder="price" style="display:none">
                                     </div>
                                 </div>
                             @endforeach
@@ -190,6 +191,18 @@
 <script type="text/javascript">
     $('#description,#ar_description,#pe_description').summernote({
         height: 300
+    });
+
+    $(".size-checkbox").click(function(){
+        var id = (this.id).replace("size_","");
+        if ($(this).prop('checked')==true){
+            $("#price_"+id).css("display", "block");
+            $("#price_"+id).val("0");
+        }else{
+            $("#price_"+id).css("display", "none");
+            $("#price_"+id).val("");
+
+        }
     });
 </script>
 @endsection
