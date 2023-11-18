@@ -37,19 +37,53 @@ class CartController extends Controller
                 'address_id' => $address?$address->id:null
             ]);
 
+            $product = Product::find($request->product_id);
             $cartDetail = CartDetail::where(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'size'=>$request->size, 'color'=>$request->color])->first();
             if($cartDetail){
+                $cartQty = $cartDetail->qty + 1;
+                $inventory = $product->inventory;
+                if($cartQty > $inventory){
+                    return response([
+                        'status' => false,
+                        'message' => 'Product quantity is not enough.',
+                        'data' => []
+                    ],422);    
+                }
                 CartDetail::where('id',$cartDetail->id)->update(['qty'=>1]);
             }else{
-                $product = Product::find($request->product_id);
+                $inventory = $product->inventory;
+                if($inventory < 1){
+                    return response([
+                        'status' => false,
+                        'message' => 'Product quantity is not enough.',
+                        'data' => []
+                    ],422);    
+                }
                 $cartDetail = CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
             }
         }else{
+            $product = Product::find($request->product_id);
             $cartDetail = CartDetail::where(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'size'=>$request->size, 'color'=>$request->color])->first();
             if($cartDetail){
+                $cartQty = $cartDetail->qty + 1;
+                $inventory = $product->inventory;
+                if($cartQty > $inventory){
+                    return response([
+                        'status' => false,
+                        'message' => 'Product quantity is not enough.',
+                        'data' => []
+                    ],422);    
+                }
                 CartDetail::where('id',$cartDetail->id)->update(['qty'=>1]);
             }else{
-                $product = Product::find($request->product_id);
+                $inventory = $product->inventory;
+                if($inventory < 1){
+                    return response([
+                        'status' => false,
+                        'message' => 'Product quantity is not enough.',
+                        'data' => []
+                    ],422);    
+                }
                 $cartDetail = CartDetail::create(['cart_id'=>$cart->id, 'product_id'=>$request->product_id, 'price'=>$product->price, 'size'=>$request->size, 'color'=>$request->color, 'qty'=>1]);
             }
         }
@@ -119,6 +153,15 @@ class CartController extends Controller
         $cartDetail = CartDetail::find($request->item_id);
         if($request->type=='add'){
             $qty = $cartDetail->qty+1;
+            $product = Product::find($cartDetail->product_id);
+            $inventory = $product->inventory;
+            if($qty > $inventory){
+                return response([
+                    'status' => false,
+                    'message' => 'Product quantity is not enough.',
+                    'data' => []
+                ],422);    
+            }
             CartDetail::where('id',$request->item_id)->update(['qty'=>$qty]);
         }else{
             if($cartDetail->qty==1){

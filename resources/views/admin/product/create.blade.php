@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label for="exampleInputEmail3">Inventory</label>
-                            <input class="form-control" id="inventory" name="inventory" placeholder="Inventory" value="{{old('inventory')}}">
+                            <input type="number" class="form-control" id="inventory" name="inventory" placeholder="Inventory" value="{{old('inventory')}}">
                             @error('inventory')
                                 <p style="color: red">{{$message}}</p>
                             @enderror
