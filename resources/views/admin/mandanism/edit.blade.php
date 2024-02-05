@@ -62,6 +62,25 @@
                         @endif
                     </div>
                     <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Category</label>
+                        <select class="form-select" name="category" id="category">
+                            <option value="our_history" {{($data['mandanism']->category=='our_history')?'selected':''}}>Our History</option>
+                            <option value="our_culture" {{($data['mandanism']->category=='our_culture')?'selected':''}}>Our Culture</option>
+                            <option value="online_articles" {{($data['mandanism']->category=='online_articles')?'selected':''}}>Online Articles</option>
+                            <option value="online_videos" {{($data['mandanism']->category=='online_videos')?'selected':''}}>Online Videos</option>
+                        </select>
+                        @error('category')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="exampleInputName1">Online Link (URL)</label>
+                        <input type="text" class="form-control" id="online_link" name="online_link" placeholder="Online Link" value="{{old('online_link',$data['mandanism']->online_link)}}">
+                        @error('online_link')
+                            <p style="color: red">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Title</label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{old('title',$data['mandanism']->title)}}">
                         @error('title')

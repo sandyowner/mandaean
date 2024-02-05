@@ -11,5 +11,5 @@ class Mandanism extends Model
 
     protected $table = 'mandanism';
 
-    protected $fillable = ['title','group','description','image','docs','date','ar_title','ar_group','ar_description','pe_title','pe_group','pe_description','status'];
+    protected $fillable = ['title','category','group','description','image','docs','date','ar_title','ar_group','ar_description','pe_title','pe_group','pe_description','status'];
 }

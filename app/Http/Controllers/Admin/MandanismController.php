@@ -33,6 +33,9 @@ class MandanismController extends Controller
                 ->editColumn('description', function($row){
                     return $row->description;
                 })
+                ->editColumn('category', function($row){
+                    return ucfirst(str_replace("_", ' ', $row->category));
+                })
                 ->addColumn('action', function($row){
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';
                     $btn = '<a href="'.route('mandanism.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
@@ -63,10 +66,10 @@ class MandanismController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:200',
-            'group' => 'required',
-            'description' => 'required',
-            'image' => 'required',
+            'title' => 'nullable|max:200',
+            // 'group' => 'required',
+            // 'description' => 'required',
+            // 'image' => 'required',
             // 'date' => 'required',
             // 'ar_title' => 'required|max:200',
             // 'ar_group' => 'required',
@@ -91,6 +94,7 @@ class MandanismController extends Controller
             $password = rand_string(6);
             $mandanism = new Mandanism();
             $mandanism['title'] = $request->title;
+            $mandanism['category'] = $request->category;
             $mandanism['group'] = $request->group;
             $mandanism['description'] = $request->description;
             $mandanism['date'] = $request->date;
@@ -100,6 +104,7 @@ class MandanismController extends Controller
             $mandanism['pe_title'] = $request->pe_title;
             $mandanism['pe_group'] = $request->pe_group;
             $mandanism['pe_description'] = $request->pe_description;
+            $mandanism['online_link'] = $request->online_link;
             if ($request->hasFile('image'))
             {
                 $destinationPath = 'uploads/';
@@ -148,9 +153,9 @@ class MandanismController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:200',
-            'group' => 'required',
-            'description' => 'required',
+            'title' => 'nullable|max:200',
+            // 'group' => 'required',
+            // 'description' => 'required',
             // 'date' => 'required',
             // 'ar_title' => 'required|max:200',
             // 'ar_group' => 'required',
@@ -174,6 +179,7 @@ class MandanismController extends Controller
         }else{
             $mandanism = Mandanism::find($id);
             $mandanism['title'] = $request->title;
+            $mandanism['category'] = $request->category;
             $mandanism['group'] = $request->group;
             $mandanism['description'] = $request->description;
             $mandanism['date'] = $request->date;
@@ -183,6 +189,7 @@ class MandanismController extends Controller
             $mandanism['pe_title'] = $request->pe_title;
             $mandanism['pe_group'] = $request->pe_group;
             $mandanism['pe_description'] = $request->pe_description;
+            $mandanism['online_link'] = $request->online_link;
             if ($request->hasFile('image'))
             {
                 $destinationPath = 'uploads/';
