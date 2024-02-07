@@ -211,30 +211,36 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
+            <li class="nav-item {{ (\Request::segment(1)=='inquiry')?'active':'' }}">
+              <a class="nav-link" href="{{url('inquiry')}}">
+                <span class="menu-title">Inquiry Management</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <!-- <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
               <a class="nav-link" href="{{url('product')}}">
                 <span class="menu-title">Product Inventory</span>
                 <i class="mdi mdi-apps menu-icon"></i>
               </a>
-            </li>
+            </li> -->
             <!-- <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
               <a class="nav-link" href="{{url('calender')}}">
                 <span class="menu-title">Calender Management</span>
                 <i class="mdi mdi-calendar menu-icon"></i>
               </a>
             </li> -->
-            <li class="nav-item {{ (\Request::segment(1)=='orders')?'active':'' }}">
+            <!-- <li class="nav-item {{ (\Request::segment(1)=='orders')?'active':'' }}">
               <a class="nav-link" href="{{url('orders')}}">
                 <span class="menu-title">Order Management</span>
                 <i class="mdi mdi-cart menu-icon"></i>
               </a>
-            </li>
-            <li class="nav-item {{ (\Request::segment(1)=='transaction')?'active':'' }}">
+            </li> -->
+            <!-- <li class="nav-item {{ (\Request::segment(1)=='transaction')?'active':'' }}">
               <a class="nav-link" href="{{url('transaction')}}">
                 <span class="menu-title">Payment Transactions</span>
                 <i class="mdi mdi-account-box menu-icon"></i>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item {{ (\Request::segment(1)=='static-content')?'active':'' }}">
               <a class="nav-link" href="{{url('static-content')}}">
                 <span class="menu-title">Static Content</span>
