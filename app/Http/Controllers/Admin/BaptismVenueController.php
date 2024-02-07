@@ -21,7 +21,9 @@ class BaptismVenueController extends Controller
         $dataList = BaptismVenue::orderBy('id','desc');
         $search = $request->search;
         if($search){
-            $dataList->where('name', 'LIKE', '%'.$search.'%');
+            $dataList->where('name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('ar_name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('pe_name', 'LIKE', '%'.$search.'%');
         }
         $dataList = $dataList->get();
         
@@ -67,6 +69,8 @@ class BaptismVenueController extends Controller
         }else{
             $data = new BaptismVenue();
             $data['name'] = $request->name;
+            $data['ar_name'] = $request->ar_name;
+            $data['pe_name'] = $request->pe_name;
             $data->save();
 
             return redirect('baptism-venue')->with('message', 'Record Added!');
@@ -108,6 +112,8 @@ class BaptismVenueController extends Controller
         }else{
             $data = BaptismVenue::find($id);
             $data['name'] = $request->name;
+            $data['ar_name'] = $request->ar_name;
+            $data['pe_name'] = $request->pe_name;
             $data->save();
 
             return redirect('baptism-venue')->with('message', 'Record Updated!');

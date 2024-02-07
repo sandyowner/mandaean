@@ -11,21 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('baptism_venue', function (Blueprint $table) {
+        Schema::create('inquiries', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('name');
-            $table->string('ar_name')->nullable();
-            $table->string('pe_name')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->string('email');
+            $table->string('mobile')->nullable();
+            $table->text('query');
+            $table->text('reply_message')->nullable();
+            $table->enum('status',['pending','replied'])->default('pending');
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('baptism_venue');
+        Schema::dropIfExists('inquiries');
     }
 };

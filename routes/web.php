@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\BaptismController;
 use App\Http\Controllers\Admin\FuneralController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\ReligiousOccasionController;
+use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -88,6 +89,9 @@ Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
     Route::resource('funeral', FuneralController::class);
     Route::resource('program', ProgramController::class);
     Route::resource('religious-occasion', ReligiousOccasionController::class);
+    Route::get('inquiry-reply/{id}', [InquiryController::class,'reply'])->name('inquiry.reply');
+    Route::post('inquiry-reply-post/{id}', [InquiryController::class,'replyPost'])->name('inquiry.reply.post');
+    Route::resource('inquiry', InquiryController::class);
 });
 
 Route::controller(PaymentController::class)

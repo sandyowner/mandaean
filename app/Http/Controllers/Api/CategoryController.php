@@ -196,4 +196,91 @@ class CategoryController extends Controller
         ],201);
     }
 
+    public function OurHistory(Request $request)
+    {
+        $data = Mandanism::where(['category'=>'our_history','status'=>'active'])->get();
+
+        return response([
+            'status' => true,
+            'message' => 'Our History List.',
+            'data' => MandanismResource::collection($data)
+        ],201);
+    }
+
+    public function OurHistoryDetail($id)
+    {
+        $data = Mandanism::where(['category'=>'our_history', 'id'=>$id])->first();
+
+        return response([
+            'status' => true,
+            'message' => 'Our History Detail.',
+            'data' => new MandanismDetailResource($data)
+        ],201);
+    }
+
+    public function OurCulture(Request $request)
+    {
+        $data = Mandanism::where(['category'=>'our_culture', 'status'=>'active'])->get();
+
+        return response([
+            'status' => true,
+            'message' => 'Our Culture List.',
+            'data' => MandanismResource::collection($data)
+        ],201);
+    }
+
+    public function OurCultureDetail($id)
+    {
+        $data = Mandanism::where(['category'=>'our_culture', 'id'=>$id])->first();
+
+        return response([
+            'status' => true,
+            'message' => 'Our Culture Detail.',
+            'data' => new MandanismDetailResource($data)
+        ],201);
+    }
+
+    public function OnlineArticles(Request $request)
+    {
+        $data = Mandanism::where(['category'=>'online_articles', 'status'=>'active'])->get();
+
+        return response([
+            'status' => true,
+            'message' => 'Our Culture List.',
+            'data' => MandanismResource::collection($data)
+        ],201);
+    }
+
+    public function OnlineArticleDetail($id)
+    {
+        $data = Mandanism::where(['category'=>'online_articles', 'id'=>$id])->first();
+
+        return response([
+            'status' => true,
+            'message' => 'Our Culture Detail.',
+            'data' => new MandanismDetailResource($data)
+        ],201);
+    }
+
+    public function OnlineVideos(Request $request)
+    {
+        $data = Mandanism::where(['category'=>'online_videos', 'status'=>'active'])->get();
+
+        return response([
+            'status' => true,
+            'message' => 'Our Culture List.',
+            'data' => MandanismResource::collection($data)
+        ],201);
+    }
+
+    public function OnlineVideoDetail($id)
+    {
+        $data = Mandanism::where(['category'=>'online_videos', 'id'=>$id])->first();
+
+        return response([
+            'status' => true,
+            'message' => 'Our Culture Detail.',
+            'data' => new MandanismDetailResource($data)
+        ],201);
+    }
 }

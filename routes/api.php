@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\CalenderController;
 use App\Http\Controllers\Api\FuneralController;
+use App\Http\Controllers\Api\InquiryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -98,4 +100,15 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('melvashe-find', [CalenderController::class, 'MelvasheFind']);
     Route::get('funeral', [FuneralController::class, 'Funeral']);
     Route::post('funeral-post', [FuneralController::class, 'FuneralPost']);
+
+    Route::get('our-history', [CategoryController::class,'OurHistory']);
+    Route::get('our-history-detail/{id}', [CategoryController::class,'OurHistoryDetail']);    
+    Route::get('our-culture', [CategoryController::class,'OurCulture']);
+    Route::get('our-culture-detail/{id}', [CategoryController::class,'OurCultureDetail']);
+    Route::get('online-articles', [CategoryController::class,'OnlineArticles']);
+    Route::get('online-article-detail/{id}', [CategoryController::class,'OnlineArticleDetail']);
+    Route::get('online-videos', [CategoryController::class,'OnlineVideos']);
+    Route::get('online-video-detail/{id}', [CategoryController::class,'OnlineVideoDetail']);
+
+    Route::post('inquiry-now', [InquiryController::class, 'InquiryNow']);
 });
