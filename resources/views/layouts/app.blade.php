@@ -217,12 +217,12 @@
                 <i class="mdi mdi-apps menu-icon"></i>
               </a>
             </li>
-            <!-- <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
+            <li class="nav-item {{ (\Request::segment(1)=='product')?'active':'' }}">
               <a class="nav-link" href="{{url('product')}}">
                 <span class="menu-title">Product Inventory</span>
                 <i class="mdi mdi-apps menu-icon"></i>
               </a>
-            </li> -->
+            </li>
             <!-- <li class="nav-item {{ (\Request::segment(1)=='calender')?'active':'' }}">
               <a class="nav-link" href="{{url('calender')}}">
                 <span class="menu-title">Calender Management</span>
