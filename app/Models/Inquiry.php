@@ -11,7 +11,7 @@ class Inquiry extends Model
 
     protected $table = 'inquiries';
 
-    protected $fillable = ['user_id', 'name', 'email', 'mobile', 'query', 'reply_message', 'status'];
+    protected $fillable = ['user_id', 'product_id', 'name', 'email', 'mobile', 'query', 'reply_message', 'status'];
 
     public function user()
     {

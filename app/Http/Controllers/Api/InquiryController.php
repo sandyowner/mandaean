@@ -13,6 +13,7 @@ class InquiryController extends Controller
     public function InquiryNow(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
             'name' => 'required',
             'email' => 'required',
             'mobile' => 'required',
@@ -31,6 +32,7 @@ class InquiryController extends Controller
 
         $data = Inquiry::create([
             'user_id' => $id,
+            'product_id' => $request->product_id,
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
