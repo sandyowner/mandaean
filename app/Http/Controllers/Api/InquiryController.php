@@ -47,7 +47,7 @@ class InquiryController extends Controller
             'email' => $email,
             'query' => $request->ask_query
         ];
-        ___mail_sender($email,$name,$template,$data,$subject);
+        //___mail_sender($email,$name,$template,$data,$subject);
 
         return response([
             'status' => true,
