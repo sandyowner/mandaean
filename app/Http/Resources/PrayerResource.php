@@ -19,21 +19,21 @@ class PrayerResource extends JsonResource
                 'id'    => $this->id,
                 'title' => $this->ar_title,
                 'subtitle' => $this->ar_subtitle,
-                'url'      => ($this->docs)?url('/').'/'.$this->docs:null,
+                'url'      => ($this->docs)?url('/').'/public/'.$this->docs:null,
             ];
         }elseif ($request->lang == 'pe') {
             return [
                 'id'    => $this->id,
                 'title' => $this->pe_title,
                 'subtitle' => $this->pe_subtitle,
-                'url'      => ($this->docs)?url('/').'/'.$this->docs:null,
+                'url'      => ($this->docs)?url('/').'/public/'.$this->docs:null,
             ];
         }else{
             return [
                 'id'    => $this->id,
                 'title' => $this->title,
                 'subtitle' => $this->subtitle,
-                'url'      => ($this->docs)?url('/').'/'.$this->docs:null,
+                'url'      => ($this->docs)?url('/').'/public/'.$this->docs:null,
             ];
         }
     }
