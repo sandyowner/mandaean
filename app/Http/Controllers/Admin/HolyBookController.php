@@ -97,11 +97,11 @@ class HolyBookController extends Controller
         // }else{
             $books = new HolyBook();
             $books['type'] = $request->type;
+            $books['author'] = $request->author;
 
             if($request->type=='holy'){
                 $books['title'] = $request->title;
                 $books['description'] = $request->description;
-                $books['author'] = $request->author;
                 $books['ar_title'] = $request->ar_title;
                 $books['ar_description'] = $request->ar_description;
                 $books['pe_title'] = $request->pe_title;
@@ -200,11 +200,11 @@ class HolyBookController extends Controller
         // }else{
             $books = HolyBook::find($id);
             $books['type'] = $request->type;
+            $books['author'] = $request->author;
 
             if($request->type=='holy'){
                 $books['title'] = $request->title;
                 $books['description'] = $request->description;
-                $books['author'] = $request->author;
                 $books['ar_title'] = $request->ar_title;
                 $books['ar_description'] = $request->ar_description;
                 $books['pe_title'] = $request->pe_title;

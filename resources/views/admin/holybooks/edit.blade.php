@@ -117,7 +117,7 @@
                             <a href="{{url('/')}}/{{$data['books']->other_url}}" target="_blank"><img src="{{url('assets/images/pdf-icon.png')}}" height="70px;" width="70px;"></a>
                         </div>
                     </div>
-                    <div class="form-group col-sm-12 holy">
+                    <div class="form-group col-sm-12">
                         <label for="exampleInputName1">Author Name</label>
                         <input type="text" class="form-control" id="author" name="author" placeholder="Author Name" value="{{old('author',$data['books']->author)}}">
                         @error('author')
