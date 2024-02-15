@@ -101,6 +101,7 @@ class HolyBookController extends Controller
             if($request->type=='holy'){
                 $books['title'] = $request->title;
                 $books['description'] = $request->description;
+                $books['author'] = $request->author;
                 $books['ar_title'] = $request->ar_title;
                 $books['ar_description'] = $request->ar_description;
                 $books['pe_title'] = $request->pe_title;
@@ -203,6 +204,7 @@ class HolyBookController extends Controller
             if($request->type=='holy'){
                 $books['title'] = $request->title;
                 $books['description'] = $request->description;
+                $books['author'] = $request->author;
                 $books['ar_title'] = $request->ar_title;
                 $books['ar_description'] = $request->ar_description;
                 $books['pe_title'] = $request->pe_title;
