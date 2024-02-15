@@ -27,7 +27,7 @@ class HolyBookResource extends JsonResource
                     'title'         => $this->ar_title,
                     'description'   => $this->ar_description,
                     'image'         => ($this->image)?url('/').'/'.$this->image:null,
-                    'url'           => ($this->url)?url('/').'/'.$this->url:null,
+                    'url'           => ($this->url)?url('/').'public/'.$this->url:null,
                     'bookmark'      => ($book)?'yes':'no',
                 ];
             }elseif ($request->lang == 'pe') {
@@ -37,7 +37,7 @@ class HolyBookResource extends JsonResource
                     'title'         => $this->pe_title,
                     'description'   => $this->pe_description,
                     'image'         => ($this->image)?url('/').'/'.$this->image:null,
-                    'url'           => ($this->url)?url('/').'/'.$this->url:null,
+                    'url'           => ($this->url)?url('/').'public/'.$this->url:null,
                     'bookmark'      => ($book)?'yes':'no',
                 ];
             }else{
@@ -47,7 +47,7 @@ class HolyBookResource extends JsonResource
                     'title'         => $this->title,
                     'description'   => $this->description,
                     'image'         => ($this->image)?url('/').'/'.$this->image:null,
-                    'url'           => ($this->url)?url('/').'/'.$this->url:null,
+                    'url'           => ($this->url)?url('/').'public/'.$this->url:null,
                     'bookmark'      => ($book)?'yes':'no',
                 ];
             }
@@ -59,7 +59,7 @@ class HolyBookResource extends JsonResource
                     'title'         => $this->other_ar_title,
                     'description'   => $this->other_ar_description,
                     'image'         => ($this->other_image)?url('/').'/'.$this->other_image:null,
-                    'url'           => ($this->other_url)?url('/').'/'.$this->other_url:null,
+                    'url'           => ($this->other_url)?url('/').'public/'.$this->other_url:null,
                     'bookmark'      => ($book)?'yes':'no',
                 ];
             }elseif ($request->lang == 'pe') {
@@ -69,7 +69,7 @@ class HolyBookResource extends JsonResource
                     'title'         => $this->other_pe_title,
                     'description'   => $this->other_pe_description,
                     'image'         => ($this->other_image)?url('/').'/'.$this->other_image:null,
-                    'url'           => ($this->other_url)?url('/').'/'.$this->other_url:null,
+                    'url'           => ($this->other_url)?url('/').'public/'.$this->other_url:null,
                     'bookmark'      => ($book)?'yes':'no',
                 ];
             }else{
@@ -79,7 +79,7 @@ class HolyBookResource extends JsonResource
                     'title'         => $this->other_title,
                     'description'   => $this->other_description,
                     'image'         => ($this->other_image)?url('/').'/'.$this->other_image:null,
-                    'url'           => ($this->other_url)?url('/').'/'.$this->other_url:null,
+                    'url'           => ($this->other_url)?url('/').'public/'.$this->other_url:null,
                     'bookmark'      => ($book)?'yes':'no',
                 ];
             }
