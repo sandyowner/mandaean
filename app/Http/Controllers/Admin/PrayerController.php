@@ -78,11 +78,11 @@ class PrayerController extends Controller
             'ar_title.required' => 'The title field is required.',
             'ar_subtitle.required' => 'The subtitle field is required.',
             'ar_description.required' => 'The description field is required.',
-            'ar_other_info.required' => 'The other info field is required.',
+            // 'ar_other_info.required' => 'The other info field is required.',
             'pe_title.required' => 'The title field is required.',
             'pe_subtitle.required' => 'The subtitle field is required.',
             'pe_description.required' => 'The description field is required.',
-            'pe_other_info.required' => 'The other info field is required.',
+            // 'pe_other_info.required' => 'The other info field is required.',
         ]);
  
         if ($validator->fails())
@@ -95,15 +95,15 @@ class PrayerController extends Controller
             $prayer['title'] = $request->title;
             $prayer['subtitle'] = $request->subtitle;
             $prayer['description'] = $request->description;
-            $prayer['other_info'] = $request->other_info;
+            // $prayer['other_info'] = $request->other_info;
             $prayer['ar_title'] = $request->ar_title;
             $prayer['ar_subtitle'] = $request->ar_subtitle;
             $prayer['ar_description'] = $request->ar_description;
-            $prayer['ar_other_info'] = $request->ar_other_info;
+            // $prayer['ar_other_info'] = $request->ar_other_info;
             $prayer['pe_title'] = $request->pe_title;
             $prayer['pe_subtitle'] = $request->pe_subtitle;
             $prayer['pe_description'] = $request->pe_description;
-            $prayer['pe_other_info'] = $request->pe_other_info;
+            // $prayer['pe_other_info'] = $request->pe_other_info;
             if ($request->hasFile('docs'))
             {
                 $destinationPath = 'uploads/';
@@ -159,11 +159,11 @@ class PrayerController extends Controller
             'ar_title.required' => 'The title field is required.',
             'ar_subtitle.required' => 'The subtitle field is required.',
             'ar_description.required' => 'The description field is required.',
-            'ar_other_info.required' => 'The other info field is required.',
+            // 'ar_other_info.required' => 'The other info field is required.',
             'pe_title.required' => 'The title field is required.',
             'pe_subtitle.required' => 'The subtitle field is required.',
             'pe_description.required' => 'The description field is required.',
-            'pe_other_info.required' => 'The other info field is required.',
+            // 'pe_other_info.required' => 'The other info field is required.',
         ]);
  
         if ($validator->fails())
@@ -175,15 +175,15 @@ class PrayerController extends Controller
             $prayer['title'] = $request->title;
             $prayer['subtitle'] = $request->subtitle;
             $prayer['description'] = $request->description;
-            $prayer['other_info'] = $request->other_info;
+            // $prayer['other_info'] = $request->other_info;
             $prayer['ar_title'] = $request->ar_title;
             $prayer['ar_subtitle'] = $request->ar_subtitle;
             $prayer['ar_description'] = $request->ar_description;
-            $prayer['ar_other_info'] = $request->ar_other_info;
+            // $prayer['ar_other_info'] = $request->ar_other_info;
             $prayer['pe_title'] = $request->pe_title;
             $prayer['pe_subtitle'] = $request->pe_subtitle;
             $prayer['pe_description'] = $request->pe_description;
-            $prayer['pe_other_info'] = $request->pe_other_info;
+            // $prayer['pe_other_info'] = $request->pe_other_info;
             if ($request->hasFile('docs'))
             {
                 $destinationPath = 'uploads/';
