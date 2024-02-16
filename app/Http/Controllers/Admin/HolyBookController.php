@@ -31,10 +31,10 @@ class HolyBookController extends Controller
             return DataTables::of($dataList)
                 ->addColumn('image', function($row){
                     if($row->type=='holy'){
-                        $url = url('/').'/'.$row->image;
+                        $url = url('/').'/public/'.$row->image;
                         return '<img src="'.$url.'">';
                     }else{
-                        $url = url('/').'/'.$row->other_image;
+                        $url = url('/').'/public/'.$row->other_image;
                         return '<img src="'.$url.'">';
                     }
                 })
