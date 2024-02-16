@@ -22,8 +22,8 @@ class NewsDetailResource extends JsonResource
                 'country'       => $this->country,
                 'date'          => $this->date,
                 'description'   => $this->ar_description,
-                'image'         => url('/').'/'.$this->image,
-                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
+                'image'         => url('/').'/public/'.$this->image,
+                'url'           => ($this->docs)?url('/').'/public/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }elseif ($request->lang == 'pe') {
@@ -34,8 +34,8 @@ class NewsDetailResource extends JsonResource
                 'country'       => $this->country,
                 'date'          => $this->date,
                 'description'   => $this->pe_description,
-                'image'         => url('/').'/'.$this->image,
-                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
+                'image'         => url('/').'/public/'.$this->image,
+                'url'           => ($this->docs)?url('/').'/public/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }else{
@@ -46,8 +46,8 @@ class NewsDetailResource extends JsonResource
                 'country'       => $this->country,
                 'date'          => $this->date,
                 'description'   => $this->description,
-                'image'         => url('/').'/'.$this->image,
-                'url'           => ($this->docs)?url('/').'/'.$this->docs:null,
+                'image'         => url('/').'/public/'.$this->image,
+                'url'           => ($this->docs)?url('/').'/public/'.$this->docs:null,
                 'created_at'    => date("Y-m-d H:i:s",strtotime($this->created_at)),
             ];
         }
