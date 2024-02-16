@@ -60,7 +60,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-sm-4">
-                            <img src="{{url('/')}}/public/{{$data['books']->image}}" height="110px;" width="220px;">
+                            <img src="{{url('/')}}/{{$data['books']->image}}" height="110px;" width="220px;">
                         </div>
                     </div>
                     <div class="row other">
@@ -78,7 +78,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-sm-4">
-                            <img src="{{url('/')}}/public/{{$data['books']->other_image}}" height="110px;" width="220px;">
+                            <img src="{{url('/')}}/{{$data['books']->other_image}}" height="110px;" width="220px;">
                         </div>
                     </div>
                     <div class="row holy">
@@ -96,7 +96,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-sm-4">
-                            <a href="{{url('/')}}/public/{{$data['books']->url}}" target="_blank"><img src="{{url('assets/images/pdf-icon.png')}}" height="70px;" width="70px;"></a>
+                            <a href="{{url('/')}}/{{$data['books']->url}}" target="_blank"><img src="{{url('assets/images/pdf-icon.png')}}" height="70px;" width="70px;"></a>
                         </div>
                     </div>
                     <div class="row other">
@@ -114,7 +114,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-sm-4">
-                            <a href="{{url('/')}}/public/{{$data['books']->other_url}}" target="_blank"><img src="{{url('assets/images/pdf-icon.png')}}" height="70px;" width="70px;"></a>
+                            <a href="{{url('/')}}/{{$data['books']->other_url}}" target="_blank"><img src="{{url('assets/images/pdf-icon.png')}}" height="70px;" width="70px;"></a>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
