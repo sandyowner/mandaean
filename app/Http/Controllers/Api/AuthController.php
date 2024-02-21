@@ -130,6 +130,7 @@ class AuthController extends Controller
             'email' => 'required|unique:users,email',
             'country_code' => 'required',
             'mobile_no' => 'required|unique:users,mobile_no',
+            'password' => 'required',
             'gender' => 'required',
             'dob' => 'required',
         ]);
@@ -146,7 +147,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => ($request->password)?Hash::make($request->password):NULL,
+            'password' => Hash::make($request->password),
             'country_code' => $request->country_code,
             'mobile_no' => $request->mobile_no,
             'profile' => NULL,
@@ -182,6 +183,8 @@ class AuthController extends Controller
         //     'from' => $twilio_number, 
         //     'body' => $message
         // ]);
+
+        User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s')]);
 
         return response([
             'status'=>true,
@@ -292,7 +295,7 @@ class AuthController extends Controller
                 $currentTime = date('Y-m-d H:i:s');
                 $timeDiff = getTimeDifference($user->otp_time,$currentTime);
                 if($timeDiff<=10){
-                    User::where('id',$user->id)->update(['otp'=>null,'otp_time'=>null]);
+                    User::where('id',$user->id)->update(['otp'=>null, 'otp_time'=>null, 'mobile_verified_at'=>date('Y-m-d H:i:s')]);
                     return response([
                         'status'=>true,
                         'message'=>'OTP verified.',
