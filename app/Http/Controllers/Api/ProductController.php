@@ -29,7 +29,7 @@ class ProductController extends Controller
 
         foreach ($data as $key => $value) {
             foreach ($value->images as $k => $val) {
-                $val->image = url('/').'/'.$val->image;
+                $val->image = url('/').'/public/'.$val->image;
             }
         }
         return response([
@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function ProductDetail(Request $request, $id){
         $data = Product::with(['images','colors','sizes', 'brands'])->where('status','active')->find($id);
         foreach ($data->images as $k => $val) {
-            $val->image = url('/').'/'.$val->image;
+            $val->image = url('/').'/public/'.$val->image;
         }
         return response([
             'status' => true,

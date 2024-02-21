@@ -88,7 +88,7 @@ class FuneralController extends Controller
             $destinationPath = 'uploads/';
             $file = $request->file('identity');
             $file_name = time().''.$file->getClientOriginalName();
-            $file->move($destinationPath, $file_name);
+            $file->move('public/'.$destinationPath, $file_name);
             $data->identity = $destinationPath.''.$file_name;
         }
 
@@ -97,7 +97,7 @@ class FuneralController extends Controller
             $destinationPath = 'uploads/';
             $file = $request->file('kins_identity');
             $file_name = time().''.$file->getClientOriginalName();
-            $file->move($destinationPath, $file_name);
+            $file->move('public/'.$destinationPath, $file_name);
             $data->kins_identity = $destinationPath.''.$file_name;
         }
 
@@ -106,7 +106,7 @@ class FuneralController extends Controller
             $destinationPath = 'uploads/';
             $file = $request->file('signature');
             $file_name = time().''.$file->getClientOriginalName();
-            $file->move($destinationPath, $file_name);
+            $file->move('public/'.$destinationPath, $file_name);
             $data->signature = $destinationPath.''.$file_name;
         }
         

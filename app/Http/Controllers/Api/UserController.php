@@ -16,7 +16,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user){
-            $user->profile = ($user->profile)?url('/').'/'.$user->profile:NULL;
+            $user->profile = ($user->profile)?url('/').'/public/'.$user->profile:NULL;
             return response([
                 'status'=>true,
                 'message'=>'User profile data.',
@@ -59,11 +59,11 @@ class UserController extends Controller
             $destinationPath = 'uploads/';
             $file = $request->file('profile');
             $file_name = time().''.$file->getClientOriginalName();
-            $file->move($destinationPath, $file_name);
+            $file->move('public/'.$destinationPath, $file_name);
             $user->profile = $destinationPath.''.$file_name;
         }
         $user->save();
-        $user->profile = $user->profile?url('/').'/'.$user->profile:NULL;
+        $user->profile = $user->profile?url('/').'/public/'.$user->profile:NULL;
 
         return response([
             'status'=>true,
