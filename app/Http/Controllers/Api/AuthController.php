@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Auth;
+use Exception;
+// use Twilio\Rest\Client;
 
 class AuthController extends Controller
 {
@@ -17,7 +19,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
-            'password' => 'required'
+            // 'password' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -28,47 +30,108 @@ class AuthController extends Controller
                 'data'=>[]
             ],422);
         }
-    
-        // if(Auth()->attempt(array('email' => $request->email, 'password' => $request->password))){
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
-            // $user = Auth::user(); 
-            $user = User::where('email',$request->email)->first();
-            if($user->email_verified_at){
-                // $token = $user->createToken('usertoken')->plainTextToken;
-                $token = $user->createToken('usertoken')->plainTextToken;
 
-                return response([
-                    'status'=>true,
-                    'message'=>'Signed in',
-                    'data'=>$user,
-                    'token'=>$token
-                ],201);
-            }else{
-                // $userId = Auth::id();
-                // $status = DB::table('personal_access_tokens')->where('user_id', $userId)->update([
-                //     'revoked' => 1,
-                //     'expires_at' => date('Y-m-d H:i:s'),
-                // ]);
+        if (str_contains($request->email, '@')) { 
+            if(!$request->password){
                 return response([
                     'status'=>false,
-                    'message'=>'Please verify your email.',
+                    'message'=>'The password field is required.',
                     'data'=>[]
                 ],422);
             }
-        }
 
-        return response([
-            'status'=>false,
-            'message'=>'Invalid credentials.',
-            'data'=>[]
-        ],422);
+            if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+                // $user = Auth::user(); 
+                $user = User::where('email',$request->email)->first();
+                if($user->email_verified_at){
+                    // $token = $user->createToken('usertoken')->plainTextToken;
+                    $token = $user->createToken('usertoken')->plainTextToken;
+    
+                    return response([
+                        'status'=>true,
+                        'message'=>'Signed in',
+                        'data'=>$user,
+                        'token'=>$token
+                    ],201);
+                }else{
+                    // $userId = Auth::id();
+                    // $status = DB::table('personal_access_tokens')->where('user_id', $userId)->update([
+                    //     'revoked' => 1,
+                    //     'expires_at' => date('Y-m-d H:i:s'),
+                    // ]);
+                    return response([
+                        'status'=>false,
+                        'message'=>'Please verify your email.',
+                        'data'=>[]
+                    ],422);
+                }
+            }
+    
+            return response([
+                'status'=>false,
+                'message'=>'Invalid credentials.',
+                'data'=>[]
+            ],422);
+
+        }else{
+            $user = User::where('mobile_no',$request->email)->first();
+            if(!$user){
+                return response([
+                    'status'=>false,
+                    'message'=>'User not found.',
+                    'data'=>[]
+                ],422);
+            }
+            else if($user->mobile_verified_at){
+                // $token = $user->createToken('usertoken')->plainTextToken;
+
+                $otp = 1111;
+                // $otp = rand(1111, 9999);
+                // $message = "Login OTP is ".$otp;
+                
+                // $account_sid = env("TWILIO_SID");
+                // $auth_token = env("TWILIO_TOKEN");
+                // $twilio_number = env("TWILIO_FROM");
+                
+                // $client = new Client($account_sid, $auth_token);
+                // $client->messages->create($request->country_code.''.$request->mobile_no, [
+                    //     'from' => $twilio_number, 
+                    //     'body' => $message
+                // ]);
+                    
+                User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s')]);
+                
+                return response([
+                    'status' => true,
+                    'message' => 'OTP send',
+                    'data' => $user,
+                    'token' => null
+                ],201);
+            }else{
+                return response([
+                    'status'=>false,
+                    'message'=>'Please verify your mobile.',
+                    'data'=>[]
+                ],422);
+            }
+    
+            return response([
+                'status'=>false,
+                'message'=>'Invalid credentials.',
+                'data'=>[]
+            ],422);
+        }
     }
 
-    public function singup(Request $request){
+    public function singup(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|unique:users,email',
-            'password' => 'required',
+            'country_code' => 'required',
+            'mobile_no' => 'required|unique:users,mobile_no',
+            'gender' => 'required',
+            'dob' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -83,10 +146,12 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => ($request->password)?Hash::make($request->password):NULL,
             'country_code' => $request->country_code,
             'mobile_no' => $request->mobile_no,
-            'profile' => NULL
+            'profile' => NULL,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
         ]);
 
         $token = Str::random(30);
@@ -104,6 +169,19 @@ class AuthController extends Controller
             'link'=> url('verify').'/'. $token.'?email=' .urlencode($email)
         ];
         ___mail_sender($email,$name,$template,$data,$subject);
+
+        $otp = 1111;
+        // $message = "Login OTP is ".rand(1111, 9999);
+
+        // $account_sid = env("TWILIO_SID");
+        // $auth_token = env("TWILIO_TOKEN");
+        // $twilio_number = env("TWILIO_FROM");
+
+        // $client = new Client($account_sid, $auth_token);
+        // $client->messages->create($request->country_code.''.$request->mobile_no, [
+        //     'from' => $twilio_number, 
+        //     'body' => $message
+        // ]);
 
         return response([
             'status'=>true,
@@ -187,7 +265,7 @@ class AuthController extends Controller
 
     public function verifyOTP(Request $request){
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
+            'mobile_no' => 'required',
             'otp' => 'required'
         ]);
 
@@ -200,29 +278,45 @@ class AuthController extends Controller
             ],422);
         }
 
-        $user = User::where(['email'=>$request->email])->first();
-        $otp = $request->otp;
-        if($user->otp==$otp){
-            $currentTime = date('Y-m-d H:i:s');
-            $timeDiff = getTimeDifference($user->otp_time,$currentTime);
-            if($timeDiff<=10){
-                User::where('email',$request->email)->update(['otp'=>null,'otp_time'=>null]);
-                return response([
-                    'status'=>true,
-                    'message'=>'OTP verified.',
-                    'data'=>[]
-                ],422);
+        if (str_contains($request->mobile_no, '@')) {
+            $user = User::where(['email'=>$request->mobile_no])->first();
+        }else{
+            $user = User::where(['mobile_no'=>$request->mobile_no])->first();
+        }
+
+        if($user){
+            $token = $user->createToken('usertoken')->plainTextToken;
+
+            $otp = $request->otp;
+            if($user->otp==$otp){
+                $currentTime = date('Y-m-d H:i:s');
+                $timeDiff = getTimeDifference($user->otp_time,$currentTime);
+                if($timeDiff<=10){
+                    User::where('id',$user->id)->update(['otp'=>null,'otp_time'=>null]);
+                    return response([
+                        'status'=>true,
+                        'message'=>'OTP verified.',
+                        'data'=>$user,
+                        'token'=>$token
+                    ],422);
+                }else{
+                    return response([
+                        'status'=>false,
+                        'message'=>'OTP expired. Please try again.',
+                        'data'=>[]
+                    ],422);
+                }
             }else{
                 return response([
                     'status'=>false,
-                    'message'=>'OTP expired. Please try again.',
+                    'message'=>'Wrong OTP enter.',
                     'data'=>[]
                 ],422);
             }
         }else{
             return response([
                 'status'=>false,
-                'message'=>'Wrong OTP enter.',
+                'message'=>'User not found',
                 'data'=>[]
             ],422);
         }
