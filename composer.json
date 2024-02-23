@@ -13,6 +13,7 @@
         "paragonie/random_compat": "2.*",
         "srmklive/paypal": "^3.0",
         "staudenmeir/eloquent-json-relations": "^1.8",
+        "twilio/sdk": "^7.15",
         "yajra/laravel-datatables-oracle": "^10.0"
     },
     "require-dev": {
