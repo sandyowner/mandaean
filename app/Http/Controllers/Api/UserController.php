@@ -39,9 +39,9 @@ class UserController extends Controller
             'email' => 'required|unique:users,email,'.$id,
             'country_code' => 'required',
             'mobile_no' => 'required|unique:users,mobile_no'.$id,
-            'password' => 'required',
-            'gender' => 'required',
-            'dob' => 'required',
+            // 'password' => 'required',
+            // 'gender' => 'required',
+            // 'dob' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -58,9 +58,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->country_code = $request->country_code;
         $user->mobile_no = $request->mobile_no;
-        $user->password = Hash::make($request->password);
-        $user->gender = $request->gender;
-        $user->dob = $request->dob;
+        // $user->password = Hash::make($request->password);
+        // $user->gender = $request->gender;
+        // $user->dob = $request->dob;
 
         if ($request->hasFile('profile'))
         {
