@@ -56,8 +56,12 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->country_code = $request->country_code;
-        $user->mobile_no = $request->mobile_no;
+        if($request->mobile_no){
+            $user->country_code = $request->country_code;
+        }
+        if($request->mobile_no){
+            $user->mobile_no = $request->mobile_no;
+        }
         // $user->password = Hash::make($request->password);
         // $user->gender = $request->gender;
         // $user->dob = $request->dob;
