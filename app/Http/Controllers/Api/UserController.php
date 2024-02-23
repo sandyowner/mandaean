@@ -38,7 +38,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$id,
             'country_code' => 'required',
-            'mobile_no' => 'required|unique:users,mobile_no'.$id,
+            'mobile_no' => 'required|unique:users,mobile_no,'.$id,
             // 'password' => 'required',
             // 'gender' => 'required',
             // 'dob' => 'required',
