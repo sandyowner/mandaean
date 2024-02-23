@@ -184,7 +184,7 @@ class AuthController extends Controller
         //     'body' => $message
         // ]);
 
-        User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s')]);
+        User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s'), 'mobile_verified_at' => date('Y-m-d H:i:s')]);
 
         return response([
             'status'=>true,
@@ -295,7 +295,7 @@ class AuthController extends Controller
                 $currentTime = date('Y-m-d H:i:s');
                 $timeDiff = getTimeDifference($user->otp_time,$currentTime);
                 if($timeDiff<=10){
-                    User::where('id',$user->id)->update(['otp'=>null, 'otp_time'=>null, 'mobile_verified_at'=>date('Y-m-d H:i:s')]);
+                    User::where('id',$user->id)->update(['otp'=>null, 'otp_time'=>null]);
                     return response([
                         'status'=>true,
                         'message'=>'OTP verified.',
