@@ -57,7 +57,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         if($request->mobile_no){
-            $user->country_code = $request->country_code;
+            $user->country_code = '+'.$request->country_code;
         }
         if($request->mobile_no){
             $user->mobile_no = $request->mobile_no;
