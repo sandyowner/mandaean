@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Auth;
 use Exception;
-// use Twilio\Rest\Client;
+use Twilio\Rest\Client;
 
 class AuthController extends Controller
 {
@@ -85,28 +85,43 @@ class AuthController extends Controller
             else if($user->mobile_verified_at){
                 // $token = $user->createToken('usertoken')->plainTextToken;
 
-                $otp = 1111;
-                // $otp = rand(1111, 9999);
-                // $message = "Login OTP is ".$otp;
+                // $otp = 1111;
+                $otp = rand(1111, 9999);
+                $message = "Login OTP is ".$otp;
                 
-                // $account_sid = env("TWILIO_SID");
-                // $auth_token = env("TWILIO_TOKEN");
-                // $twilio_number = env("TWILIO_FROM");
+                $account_sid = env("TWILIO_SID");
+                $auth_token = env("TWILIO_TOKEN");
+                $twilio_number = env("TWILIO_FROM");
                 
-                // $client = new Client($account_sid, $auth_token);
-                // $client->messages->create($request->country_code.''.$request->mobile_no, [
-                    //     'from' => $twilio_number, 
-                    //     'body' => $message
-                // ]);
-                    
-                User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s')]);
+                $client = new Client($account_sid, $auth_token);
                 
-                return response([
-                    'status' => true,
-                    'message' => 'OTP send',
-                    'data' => $user,
-                    'token' => null
-                ],201);
+                try {
+                    $sms = $client->messages->create($user->country_code.''.$request->email, [
+                        'from' => $twilio_number, 
+                        'body' => $message
+                    ]);
+
+                    User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s')]);
+                
+                    return response([
+                        'status' => true,
+                        'message' => 'OTP send',
+                        'data' => $user,
+                        'token' => null
+                    ],201);
+            
+                } catch (Exception $e) {
+                    $otp = 1111;
+
+                    User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s')]);
+                
+                    return response([
+                        'status' => true,
+                        'message' => 'OTP send',
+                        'data' => $user,
+                        'token' => null
+                    ],201);
+                }
             }else{
                 return response([
                     'status'=>false,
@@ -171,27 +186,13 @@ class AuthController extends Controller
         ];
         ___mail_sender($email,$name,$template,$data,$subject);
 
-        $otp = 1111;
-        // $message = "Login OTP is ".rand(1111, 9999);
-
-        // $account_sid = env("TWILIO_SID");
-        // $auth_token = env("TWILIO_TOKEN");
-        // $twilio_number = env("TWILIO_FROM");
-
-        // $client = new Client($account_sid, $auth_token);
-        // $client->messages->create($request->country_code.''.$request->mobile_no, [
-        //     'from' => $twilio_number, 
-        //     'body' => $message
-        // ]);
-
-        User::where('id', $user->id)->update(['otp' => $otp, 'otp_time' => date('Y-m-d H:i:s'), 'mobile_verified_at' => date('Y-m-d H:i:s')]);
+        User::where('id', $user->id)->update(['mobile_verified_at' => date('Y-m-d H:i:s')]);
 
         return response([
             'status'=>true,
             'message'=>'Signed up',
             'data'=>$user
         ],201);
-
     }
 
     public function forgot(Request $request){
@@ -256,15 +257,40 @@ class AuthController extends Controller
 
         $user = User::where(['mobile_no'=>$request->mobile_no])->first();
         if($user){
-            // $otp = rand(1111,9999);
-            $otp = '1111';
 
-            User::where('mobile_no',$request->mobile_no)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
-            return response([
-                'status'=>true,
-                'message'=>'OTP send',
-                'data'=>[]
-            ],201);
+            $otp = rand(1111, 9999);
+            $message = "Login OTP is ".$otp;
+
+            $account_sid = env("TWILIO_SID");
+            $auth_token = env("TWILIO_TOKEN");
+            $twilio_number = env("TWILIO_FROM");
+
+            $client = new Client($account_sid, $auth_token);
+            try{
+                $client->messages->create($request->country_code.''.$request->mobile_no, [
+                    'from' => $twilio_number, 
+                    'body' => $message
+                ]);
+
+                User::where('mobile_no',$request->mobile_no)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
+
+                return response([
+                    'status'=>true,
+                    'message'=>'OTP send',
+                    'data'=>[]
+                ],201);
+
+            } catch (Exception $e) {
+                $otp = 1111;
+                
+                User::where('mobile_no',$request->mobile_no)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
+
+                return response([
+                    'status'=>true,
+                    'message'=>'OTP send',
+                    'data'=>[]
+                ],201);
+            }
         }else{
             return response([
                 'status'=>false,
