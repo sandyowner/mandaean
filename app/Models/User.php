@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'country_code',
         'mobile_no',
+        'password',
         'profile',
         'otp_time',
         'dob',
