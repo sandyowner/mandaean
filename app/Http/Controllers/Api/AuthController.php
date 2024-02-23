@@ -240,9 +240,9 @@ class AuthController extends Controller
         }
     }
     
-    public function getOTP(Request $request){
+    public function resendOTP(Request $request){
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
+            'mobile_no' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -254,16 +254,24 @@ class AuthController extends Controller
             ],422);
         }
 
-        $user = User::where(['email'=>$request->email])->first();
-        // $otp = rand(1111,9999);
-        $otp = '1111';
+        $user = User::where(['mobile_no'=>$request->mobile_no])->first();
+        if($user){
+            // $otp = rand(1111,9999);
+            $otp = '1111';
 
-        User::where('email',$request->email)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
-        return response([
-            'status'=>true,
-            'message'=>'OTP send',
-            'data'=>[]
-        ],201);
+            User::where('mobile_no',$request->mobile_no)->update(['otp'=>$otp,'otp_time'=>date('Y-m-d H:i:s')]);
+            return response([
+                'status'=>true,
+                'message'=>'OTP send',
+                'data'=>[]
+            ],201);
+        }else{
+            return response([
+                'status'=>false,
+                'message'=>'User not found',
+                'data'=>[]
+            ],422);
+        }
     }
 
     public function verifyOTP(Request $request){

@@ -16,6 +16,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user){
+            $user->gender = ($user->gender)?ucfirst($user->gender):NULL;
             $user->profile = ($user->profile)?url('/').'/public/'.$user->profile:NULL;
             return response([
                 'status'=>true,

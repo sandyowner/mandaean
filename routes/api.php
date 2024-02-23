@@ -37,7 +37,7 @@ use App\Http\Controllers\Api\InquiryController;
 Route::post('signup', [AuthController::class,'singup']);
 Route::post('login', [AuthController::class,'login']);
 Route::post('forgot', [AuthController::class,'forgot']);
-Route::post('get-otp', [AuthController::class,'getOTP']);
+Route::post('resend-otp', [AuthController::class,'resendOTP']);
 Route::post('verify-otp', [AuthController::class,'verifyOTP']);
 Route::get('countries/insert', [ContainerController::class,'countriesInsert']);
 Route::get('countries', [ContainerController::class,'countries']);
