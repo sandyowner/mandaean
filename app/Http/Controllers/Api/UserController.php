@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use Validator;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,7 +37,11 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$id,
-            // 'mobile_no' => 'required|unique:users,mobile_no'.$id,
+            'country_code' => 'required',
+            'mobile_no' => 'required|unique:users,mobile_no'.$id,
+            'password' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -54,6 +58,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->country_code = $request->country_code;
         $user->mobile_no = $request->mobile_no;
+        $user->password = Hash::make($request->password);
+        $user->gender = $request->gender;
+        $user->dob = $request->dob;
 
         if ($request->hasFile('profile'))
         {
