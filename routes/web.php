@@ -63,6 +63,8 @@ Route::post('login-data', [LoginController::class, 'index']);
 Route::get('verify/{token}', [AuthController::class,'verify']);
 Route::get('forgot-password/{token}', [AuthController::class,'forgotPassword']);
 Route::post('forgot-password', [AuthController::class,'updatePassword']);
+Route::get('delete-account', [LoginController::class,'deleteAccount']);
+Route::post('delete-account-post', [LoginController::class,'deleteAccountPost']);
 
 Route::group(['middleware'=>['checklogin','preventBackHistory']],function()
 {
