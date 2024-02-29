@@ -146,8 +146,8 @@ class AuthController extends Controller
             'country_code' => 'required',
             'mobile_no' => 'required|unique:users,mobile_no',
             'password' => 'required',
-            'gender' => 'required',
-            'dob' => 'required',
+            // 'gender' => 'required',
+            // 'dob' => 'required',
         ]);
 
         if ($validator->fails()) {
