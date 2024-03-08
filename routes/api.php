@@ -41,32 +41,46 @@ Route::post('resend-otp', [AuthController::class,'resendOTP']);
 Route::post('verify-otp', [AuthController::class,'verifyOTP']);
 Route::get('countries/insert', [ContainerController::class,'countriesInsert']);
 Route::get('countries', [ContainerController::class,'countries']);
+
+//Content API
+Route::get('mandanism-list', [CategoryController::class,'MandanismList']);
+Route::get('mandanism-detail/{id}', [CategoryController::class,'MandanismDetail']);
+
+Route::get('latest-news-list', [CategoryController::class,'LatestNewsList']);
+Route::get('latest-news-detail/{id}', [CategoryController::class,'LatestNewsDetail']);
+
+Route::get('holy-book-list', [CategoryController::class,'HolyBookList']);
+
+Route::get('rituals-list', [CategoryController::class,'RitualsList']);
+Route::get('rituals-detail/{id}', [CategoryController::class,'RitualsDetail']);
+
+Route::get('prayer-list', [CategoryController::class,'PrayerList']);
+Route::get('prayer-detail/{id}', [CategoryController::class,'PrayerDetail']);
+
+Route::get('product-list', [ProductController::class,'ProductList']);
+Route::get('product-detail/{id}', [ProductController::class,'ProductDetail']);
+
+Route::get('program-list', [CategoryController::class,'ProgramList']);
+Route::get('program-detail/{id}', [CategoryController::class,'ProgramDetail']);
+
+Route::get('advertisment-list', [AdvertismentController::class, 'AdvertismentList']);
+
+Route::get('our-history', [CategoryController::class,'OurHistory']);
+Route::get('our-history-detail/{id}', [CategoryController::class,'OurHistoryDetail']);    
+Route::get('our-culture', [CategoryController::class,'OurCulture']);
+Route::get('our-culture-detail/{id}', [CategoryController::class,'OurCultureDetail']);
+Route::get('online-articles', [CategoryController::class,'OnlineArticles']);
+Route::get('online-article-detail/{id}', [CategoryController::class,'OnlineArticleDetail']);
+Route::get('online-videos', [CategoryController::class,'OnlineVideos']);
+Route::get('online-video-detail/{id}', [CategoryController::class,'OnlineVideoDetail']);
+
 Route::middleware('auth:sanctum')->group( function () {
     Route::post('profile', [UserController::class,'profile']);
     Route::post('update-profile', [UserController::class,'updateProfile']);
     Route::post('change-password', [UserController::class,'changePassword']);
     Route::post('delete-account', [UserController::class,'deleteAccount']);
     
-    Route::get('mandanism-list', [CategoryController::class,'MandanismList']);
-    Route::get('mandanism-detail/{id}', [CategoryController::class,'MandanismDetail']);
-    
-    Route::get('latest-news-list', [CategoryController::class,'LatestNewsList']);
-    Route::get('latest-news-detail/{id}', [CategoryController::class,'LatestNewsDetail']);
-    
-    Route::get('holy-book-list', [CategoryController::class,'HolyBookList']);
     Route::post('bookmark', [CategoryController::class,'Bookmark']);
-    
-    Route::get('rituals-list', [CategoryController::class,'RitualsList']);
-    Route::get('rituals-detail/{id}', [CategoryController::class,'RitualsDetail']);
-    
-    Route::get('prayer-list', [CategoryController::class,'PrayerList']);
-    Route::get('prayer-detail/{id}', [CategoryController::class,'PrayerDetail']);
-    
-    Route::get('product-list', [ProductController::class,'ProductList']);
-    Route::get('product-detail/{id}', [ProductController::class,'ProductDetail']);
-
-    Route::get('program-list', [CategoryController::class,'ProgramList']);
-    Route::get('program-detail/{id}', [CategoryController::class,'ProgramDetail']);
 
     Route::post('add-to-cart', [CartController::class, 'addToCart']);
     Route::get('get-cart', [CartController::class, 'getCart']);
@@ -79,8 +93,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('baptism-venue', [BaptismController::class, 'BaptismVenue']);
     Route::post('book-baptism', [BaptismController::class, 'BookBaptism']);
     Route::post('place-advertisment', [AdvertismentController::class, 'PlaceAdvertisment']);
-    Route::get('advertisment-list', [AdvertismentController::class, 'AdvertismentList']);
-    
+
     Route::get('notification-list', [NotificationController::class, 'NotificationList']);
     Route::post('read-notification', [NotificationController::class, 'ReadNotification']);
     Route::post('delete-notification', [NotificationController::class, 'DeleteNotification']);
@@ -100,15 +113,6 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('melvashe-find', [CalenderController::class, 'MelvasheFind']);
     Route::get('funeral', [FuneralController::class, 'Funeral']);
     Route::post('funeral-post', [FuneralController::class, 'FuneralPost']);
-
-    Route::get('our-history', [CategoryController::class,'OurHistory']);
-    Route::get('our-history-detail/{id}', [CategoryController::class,'OurHistoryDetail']);    
-    Route::get('our-culture', [CategoryController::class,'OurCulture']);
-    Route::get('our-culture-detail/{id}', [CategoryController::class,'OurCultureDetail']);
-    Route::get('online-articles', [CategoryController::class,'OnlineArticles']);
-    Route::get('online-article-detail/{id}', [CategoryController::class,'OnlineArticleDetail']);
-    Route::get('online-videos', [CategoryController::class,'OnlineVideos']);
-    Route::get('online-video-detail/{id}', [CategoryController::class,'OnlineVideoDetail']);
 
     Route::post('inquiry-now', [InquiryController::class, 'InquiryNow']);
 });
