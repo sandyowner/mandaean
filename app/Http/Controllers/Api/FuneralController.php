@@ -63,10 +63,10 @@ class FuneralController extends Controller
         $id = Auth::id();
 
         $data = new Funeral;
-        $data->coffin = $request->coffin;
-        $data->coffin_flower = $request->coffin_flower;
-        $data->transfers = $request->transfers;
-        $data->cremation = $request->cremation;
+        // $data->coffin = $request->coffin;
+        // $data->coffin_flower = $request->coffin_flower;
+        // $data->transfers = $request->transfers;
+        // $data->cremation = $request->cremation;
         $data->salutation = $request->salutation;
         $data->name = $request->name;
         $data->family_name = $request->family_name;
