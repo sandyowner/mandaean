@@ -37,9 +37,9 @@ class UsersController extends Controller
                         return '<img src="'.url('/').'/assets/images/profile.png" alt="image" />';
                     }
                 })
-                // ->editColumn('phone', function($row){
-                //     return $row->country_code.''.$row->mobile_no;
-                // })
+                ->editColumn('phone', function($row){
+                    return '+'.$row->country_code.' '.$row->mobile_no;
+                })
                 ->addColumn('action', function($row){
                     $editimg = asset('/').'public/assets/images/edit-round-line.png';
                     $btn = '<a href="'.route('users.edit',$row->id).'" title="Edit"><label class="badge badge-gradient-dark">Edit</label></a> ';
