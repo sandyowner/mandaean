@@ -87,7 +87,7 @@ class AuthController extends Controller
 
                 // $otp = 1111;
                 $otp = rand(1111, 9999);
-                $message = "Login OTP is ".$otp;
+                $message = "Your Mandaean Life verification code is ".$otp;
                 
                 $account_sid = env("TWILIO_SID");
                 $auth_token = env("TWILIO_TOKEN");
@@ -259,7 +259,7 @@ class AuthController extends Controller
         if($user){
 
             $otp = rand(1111, 9999);
-            $message = "Login OTP is ".$otp;
+            $message = "Your Mandaean Life verification code is ".$otp;
 
             $account_sid = env("TWILIO_SID");
             $auth_token = env("TWILIO_TOKEN");
