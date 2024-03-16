@@ -16,6 +16,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user){
+            $user->country_code = ($user->country_code)?'+'.$user->country_code:NULL;
             $user->gender = ($user->gender)?ucfirst($user->gender):NULL;
             $user->profile = ($user->profile)?url('/').'/public/'.$user->profile:NULL;
             return response([
@@ -57,7 +58,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         if($request->mobile_no){
-            $user->country_code = '+'.$request->country_code;
+            $user->country_code = $request->country_code;
         }
         if($request->mobile_no){
             $user->mobile_no = $request->mobile_no;

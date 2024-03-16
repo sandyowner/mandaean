@@ -74,7 +74,7 @@ class AuthController extends Controller
             ],422);
 
         }else{
-            $user = User::where('mobile_no',$request->email)->first();
+            $user = User::where(['mobile_no'=>$request->email,'country_code'=>$user->country_code])->first();
             if(!$user){
                 return response([
                     'status'=>false,
@@ -96,7 +96,7 @@ class AuthController extends Controller
                 $client = new Client($account_sid, $auth_token);
                 
                 try {
-                    $sms = $client->messages->create($user->country_code.''.$request->email, [
+                    $sms = $client->messages->create('+'.$user->country_code.''.$request->email, [
                         'from' => $twilio_number, 
                         'body' => $message
                     ]);
@@ -267,7 +267,7 @@ class AuthController extends Controller
 
             $client = new Client($account_sid, $auth_token);
             try{
-                $client->messages->create($request->country_code.''.$request->mobile_no, [
+                $client->messages->create('+'.$request->country_code.''.$request->mobile_no, [
                     'from' => $twilio_number, 
                     'body' => $message
                 ]);
